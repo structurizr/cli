@@ -16,6 +16,10 @@ The tool operates as follows:
 
 - You must have Java 8 or above installed, and available to use on your command line.
 - Build the tool from the source, or download the [structurizr-publish-1.0.1.jar](https://github.com/structurizr/publish/releases/download/v1.0.1/structurizr-publish-1.0.1.jar) file.
+ - You need a Structurizr workspace, and the following information from your dashboard (see [Help - Workspaces](https://structurizr.com/help/workspaces) for more information):
+    - Workspace ID
+    - API key
+    - API secret
 
 ## Usage
 
