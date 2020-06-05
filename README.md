@@ -4,11 +4,12 @@ This is a command line utility to publish Markdown/AsciiDoc documentation and AD
 
 ## Prerequisites
 
-You must have Java 8 or above installed, and available to use on your command line.
+- You must have Java 8 or above installed, and available to use on your command line.
+- Build the tool from the source, or download the [structurizr-publish-1.0.0.jar](https://github.com/structurizr/publish/releases/download/v1.0.0/structurizr-publish-1.0.0.jar) file.
 
 ## Usage
 
-You can either build the tool yourself, or download the pre-built binary.
+On the command line, in the same directory where you've placed the JAR file:
 
 ```
 java -jar structurizr-publish-1.0.0.jar
@@ -36,3 +37,5 @@ To publish a directory ADRs as decision records:
 ```
 java -jar structurizr-publish-1.0.0.jar -id 40120 -key 1a130d2b... -secret a9daaf3e... -adrs example/adrs
 ```
+
+The [example directory](https://github.com/structurizr/publish/tree/master/example)  has some example Markdown documentation and decision records. See [Financial Risk System - Documentation](https://structurizr.com/share/40120/documentation) and [Financial Risk System - Decisions](https://structurizr.com/share/40120/decisions) for the published version.
