@@ -5,6 +5,13 @@ This is a command line utility to publish Markdown/AsciiDoc documentation and AD
 - __Documentation__: The tool will scan a given directory and automatically import all Markdown and AsciiDoc files in that directory, alphabetically according to the filename. Each file must represent a separate documentation section, and the second level heading (```## Section Title``` in Markdown and ```== Section Title``` in AsciiDoc) will be used as the section name.
 - __ADRs__: The tool will scan a given directory and automatically import all Markdown and AsciiDoc files in that directory. The files must have been created by [adr-tools](https://github.com/npryce/adr-tools), or at least follow the same format.
 
+The tool operates as follows:
+
+1. Download the existing workspace.
+2. Clear all existing documentation and decisions.
+3. Import documentation and/or decisions into the workspace.
+4. Upload the new version of the workspace. 
+
 ## Prerequisites
 
 - You must have Java 8 or above installed, and available to use on your command line.
