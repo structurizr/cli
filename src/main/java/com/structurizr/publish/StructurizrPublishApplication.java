@@ -4,6 +4,7 @@ import com.structurizr.Workspace;
 import com.structurizr.api.StructurizrClient;
 import com.structurizr.documentation.AdrToolsImporter;
 import com.structurizr.documentation.AutomaticDocumentationTemplate;
+import com.structurizr.encryption.AesEncryptionStrategy;
 import com.structurizr.util.StringUtils;
 import org.apache.commons.cli.*;
 import org.springframework.boot.CommandLineRunner;
@@ -43,6 +44,10 @@ public class StructurizrPublishApplication implements CommandLineRunner {
 		option.setRequired(false);
 		options.addOption(option);
 
+		option = new Option("passphrase", "passphrase", true, "Client-side encryption passphrase");
+		option.setRequired(false);
+		options.addOption(option);
+
 		CommandLineParser parser = new DefaultParser();
 		HelpFormatter formatter = new HelpFormatter();
 
@@ -52,6 +57,7 @@ public class StructurizrPublishApplication implements CommandLineRunner {
 		String apiSecret = "";
 		String documentationPath = "";
 		String decisionsPath = "";
+		String passphrase = "";
 
 		try {
 			CommandLine cmd = parser.parse(options, args);
@@ -62,6 +68,7 @@ public class StructurizrPublishApplication implements CommandLineRunner {
 			apiSecret = cmd.getOptionValue("apiSecret");
 			documentationPath = cmd.getOptionValue("docs");
 			decisionsPath = cmd.getOptionValue("adrs");
+			passphrase = cmd.getOptionValue("passphrase");
 		} catch (ParseException e) {
 			System.out.println(e.getMessage());
 			formatter.printHelp("structurizr-publish", options);
@@ -73,7 +80,12 @@ public class StructurizrPublishApplication implements CommandLineRunner {
 		structurizrClient.setWorkspaceArchiveLocation(null);
 		structurizrClient.setMergeFromRemote(false);
 
+		if (!StringUtils.isNullOrEmpty(passphrase)) {
+			structurizrClient.setEncryptionStrategy(new AesEncryptionStrategy(passphrase));
+		}
+
 		Workspace workspace = structurizrClient.getWorkspace(workspaceId);
+		workspace.setRevision(null);
 
 		AutomaticDocumentationTemplate template = new AutomaticDocumentationTemplate(workspace);
 		workspace.getDocumentation().clear();
