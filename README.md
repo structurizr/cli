@@ -15,14 +15,14 @@ The tool operates as follows:
 ## Prerequisites
 
 - You must have Java 8 or above installed, and available to use on your command line.
-- Build the tool from the source, or download the [structurizr-publish-1.0.0.jar](https://github.com/structurizr/publish/releases/download/v1.0.0/structurizr-publish-1.0.0.jar) file.
+- Build the tool from the source, or download the [structurizr-publish-1.0.1.jar](https://github.com/structurizr/publish/releases/download/v1.0.1/structurizr-publish-1.0.1.jar) file.
 
 ## Usage
 
 On the command line, in the same directory where you've placed the JAR file:
 
 ```
-java -jar structurizr-publish-1.0.0.jar
+java -jar structurizr-publish-1.0.1.jar
 ```
 
 ## Parameters
@@ -33,19 +33,20 @@ java -jar structurizr-publish-1.0.0.jar
 - __-docs__: the path to the directory containing Markdown/AsciiDoc files to be published (optional)
 - __-adrs__: the path to the directory containing ADRs (optional)
 - __-url__: the Structurizr API URL (optional; defaults to https://api.structurizr.com)
+- __-passphrase__: the passphrase to use (optional; only required if client-side encryption enabled on the workspace)
 
 ## Examples
 
 To publish a directory of Markdown and/or AsciiDoc files as documentation:
 
 ```
-java -jar structurizr-publish-1.0.0.jar -id 40120 -key 1a130d2b... -secret a9daaf3e... -docs example/docs
+java -jar structurizr-publish-1.0.1.jar -id 40120 -key 1a130d2b... -secret a9daaf3e... -docs example/docs
 ```
 
 To publish a directory ADRs as decision records:
 
 ```
-java -jar structurizr-publish-1.0.0.jar -id 40120 -key 1a130d2b... -secret a9daaf3e... -adrs example/adrs
+java -jar structurizr-publish-1.0.1.jar -id 40120 -key 1a130d2b... -secret a9daaf3e... -adrs example/adrs
 ```
 
 The [example directory](https://github.com/structurizr/publish/tree/master/example)  has some example Markdown documentation and decision records. See [Financial Risk System - Documentation](https://structurizr.com/share/40120/documentation) and [Financial Risk System - Decisions](https://structurizr.com/share/40120/decisions) for the published version.
