@@ -1,6 +1,9 @@
 # structurizr-publish
 
-This is a command line utility to publish Markdown/AsciiDoc documentation and ADRs (created by [adr-tools](https://github.com/npryce/adr-tools)) to a Structurizr workspace (the cloud service or an on-premises installation).
+This is a command line utility to publish Markdown/AsciiDoc documentation and ADRs to a Structurizr workspace (the cloud service or an on-premises installation).
+
+- __Documentation__: The tool will scan a given directory and automatically import all Markdown and AsciiDoc files in that directory, alphabetically according to the filename. Each file must represent a separate documentation section, and the second level heading (```## Section Title``` in Markdown and ```== Section Title``` in AsciiDoc) will be used as the section name.
+- __ADRs__: The tool will scan a given directory and automatically import all Markdown and AsciiDoc files in that directory. The files must have been created by [adr-tools](https://github.com/npryce/adr-tools), or at least follow the same format.
 
 ## Prerequisites
 
