@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.structurizr'
-version = '1.0.1'
+version = '1.0.2'
 sourceCompatibility = '1.8'
 
 repositories {
@@ -20,7 +20,7 @@ dependencies {
 
 	compile 'commons-cli:commons-cli:1.4'
 	compile 'com.structurizr:structurizr-client:1.4.0'
-	compile 'com.structurizr:structurizr-adr-tools:1.3.5'
+	compile 'com.structurizr:structurizr-adr-tools:1.3.6'
 }
 
 test {
