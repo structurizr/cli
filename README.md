@@ -1,4 +1,4 @@
-# structurizr-publish
+# structurizr-cli
 
 This is a command line utility to publish Markdown/AsciiDoc documentation and ADRs to a Structurizr workspace (the cloud service or an on-premises installation).
 
