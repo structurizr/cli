@@ -1,0 +1,1 @@
+java -jar structurizr-cli-*.jar "$@"

@@ -25,3 +25,7 @@ hs_err_pid*
 .idea
 build
 out
+*.json
+*.puml
+*.wsd
+*.sh
