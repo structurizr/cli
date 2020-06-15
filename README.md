@@ -12,7 +12,7 @@ This is a command line utility for Structurizr, and supports the following funct
 ## Prerequisites
 
 - You must have Java 8 or above installed, and available to use on your command line.
-- Build the tool from the source, or download the [structurizr-cli-1.1.0.zip](https://github.com/structurizr/publish/releases/download/v1.1.0/structurizr-cli-1.1.0.zip) file.
+- Build the tool from the source, or download the [structurizr-cli](https://github.com/structurizr/cli/releases/download/v1.1.0-alpha/structurizr-cli-1.1.0-alpha.zip) ZIP file.
  - You need a Structurizr workspace, and the following information from your dashboard (see [Help - Workspaces](https://structurizr.com/help/workspaces) for more information):
     - Workspace ID
     - API key
