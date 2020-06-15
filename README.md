@@ -12,8 +12,8 @@ This is a command line utility for Structurizr, and supports the following funct
 ## Prerequisites
 
 - You must have Java 8 or above installed, and available to use on your command line.
-- Build the tool from the source, or download the [structurizr-cli](https://github.com/structurizr/cli/releases/download/v1.1.0-alpha/structurizr-cli-1.1.0-alpha.zip) ZIP file.
- - You need a Structurizr workspace, and the following information from your dashboard (see [Help - Workspaces](https://structurizr.com/help/workspaces) for more information):
+- Build the tool from the source, or download the [structurizr-cli](https://github.com/structurizr/cli/releases) ZIP file.
+ - To use the ```push``` and ```pull``` commands, you need a Structurizr workspace, and the following information from your dashboard (see [Help - Workspaces](https://structurizr.com/help/workspaces) for details):
     - Workspace ID
     - API key
     - API secret
@@ -28,18 +28,18 @@ java -jar structurizr-cli-*.jar <command> [options]
 
 Supported commands are:
 
-- push
-- pull
-- export
+- ```push```
+- ```pull```
+- ```export```
 
 ## push
 
-The push command allows you to push content to a Structurizr workspace (the cloud service or an on-premises installation). The tool operates as follows:
+The ```push``` command allows you to push content to a Structurizr workspace (the cloud service or an on-premises installation). The command operates as follows:
 
-1. Download the existing workspace.
-2. Clear all existing documentation and decisions.
+1. Pull the existing workspace, or parse the DSL file to create a new workspace.
+2. Clear existing documentation and decisions.
 3. Import documentation and/or decisions into the workspace.
-4. Upload the new version of the workspace. 
+4. Push the workspace. 
 
 ### Options
 
@@ -54,7 +54,7 @@ The push command allows you to push content to a Structurizr workspace (the clou
 
 ## pull
 
-The pull command allows you to pull content to a Structurizr workspace (the cloud service or an on-premises installation), as a JSON document.
+The ```pull``` command allows you to pull content from a Structurizr workspace (the cloud service or an on-premises installation), as a JSON document.
 
 ### Options
 
@@ -65,7 +65,7 @@ The pull command allows you to pull content to a Structurizr workspace (the clou
 
 ## export
 
-The export command allows you to export the views within a Structurizr workspace to a number of different formats.
+The ```export``` command allows you to export the views within a Structurizr workspace to a number of different formats.
 
 ### Options
 
