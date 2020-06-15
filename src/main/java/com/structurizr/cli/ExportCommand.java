@@ -2,6 +2,7 @@ package com.structurizr.cli;
 
 import com.structurizr.Workspace;
 import com.structurizr.api.StructurizrClient;
+import com.structurizr.dsl.StructurizrDslParser;
 import com.structurizr.io.plantuml.PlantUMLDiagram;
 import com.structurizr.io.plantuml.PlantUMLWriter;
 import com.structurizr.io.websequencediagrams.WebSequenceDiagramsWriter;
@@ -22,7 +23,7 @@ class ExportCommand {
     void run(String... args) throws Exception {
         Options options = new Options();
 
-        Option option = new Option("w", "workspace", true, "Path to Structurizr JSON workspace file");
+        Option option = new Option("w", "workspace", true, "Path to Structurizr workspace file (JSON or DSL)");
         option.setRequired(true);
         options.addOption(option);
 
@@ -50,9 +51,22 @@ class ExportCommand {
             System.exit(1);
         }
 
+        Workspace workspace;
+
         System.out.println("Exporting workspace from " + workspacePath.getCanonicalPath());
-        System.out.println(" - loading workspace from JSON");
-        Workspace workspace = WorkspaceUtils.loadWorkspaceFromJson(workspacePath);
+
+        if (workspacePath.getName().endsWith(".json")) {
+            System.out.println(" - loading workspace from JSON");
+            
+            workspace = WorkspaceUtils.loadWorkspaceFromJson(workspacePath);
+        } else {
+            System.out.println(" - loading workspace from DSL");
+            StructurizrDslParser structurizrDslParser = new StructurizrDslParser();
+            structurizrDslParser.parse(workspacePath);
+
+            workspace = structurizrDslParser.getWorkspace();
+        }
+
         workspaceId = workspace.getId();
 
         if (PLANTUML_FORMAT.equalsIgnoreCase(format)) {
@@ -63,7 +77,7 @@ class ExportCommand {
                 Collection<PlantUMLDiagram> diagrams = plantUMLWriter.toPlantUMLDiagrams(workspace);
 
                 for (PlantUMLDiagram diagram : diagrams) {
-                    File file = new File(workspacePath.getParent(), String.format("structurizr-%s-%s.puml", workspaceId, diagram.getKey()));
+                    File file = new File(workspacePath.getParent(), String.format("%s-%s.puml", prefix(workspaceId), diagram.getKey()));
                     writeToFile(file, diagram.getDefinition());
                 }
             }
@@ -74,7 +88,7 @@ class ExportCommand {
             } else {
                 for (DynamicView dynamicView : workspace.getViews().getDynamicViews()) {
                     String definition = webSequenceDiagramsWriter.toString(dynamicView);
-                    File file = new File(workspacePath.getParent(), String.format("structurizr-%s-%s.wsd", workspaceId, dynamicView.getKey()));
+                    File file = new File(workspacePath.getParent(), String.format("%s-%s.wsd", prefix(workspaceId), dynamicView.getKey()));
                     writeToFile(file, definition);
                 }
 
@@ -82,6 +96,14 @@ class ExportCommand {
         }
 
         System.out.println(" - finished");
+    }
+
+    private String prefix(long workspaceId) {
+        if (workspaceId > 0) {
+            return "structurizr-" + workspaceId;
+        } else {
+            return "structurizr";
+        }
     }
 
     private void writeToFile(File file, String content) throws Exception {
