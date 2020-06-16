@@ -1,6 +1,7 @@
 # export
 
-The ```export``` command allows you to export the views within a Structurizr workspace to a number of different formats. Files will be created in the current directory, one per view that has been exported.
+The ```export``` command allows you to export the views within a Structurizr workspace to a number of different formats.
+Files will be created in the same directory as the workspace, one per view that has been exported.
 
 ## Options
 
