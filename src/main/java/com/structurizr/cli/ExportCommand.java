@@ -74,6 +74,7 @@ class ExportCommand {
                 System.out.println(" - the workspace contains no views");
             } else {
                 PlantUMLWriter plantUMLWriter = new PlantUMLWriter();
+                plantUMLWriter.setUseSequenceDiagrams(true);
                 Collection<PlantUMLDiagram> diagrams = plantUMLWriter.toPlantUMLDiagrams(workspace);
 
                 for (PlantUMLDiagram diagram : diagrams) {
