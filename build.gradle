@@ -4,6 +4,10 @@ plugins {
 	id 'java'
 }
 
+springBoot {
+	buildInfo()
+}
+
 group = 'com.structurizr'
 version = '1.1.0-alpha'
 sourceCompatibility = '1.8'

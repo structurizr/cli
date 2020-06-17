@@ -1,8 +1,11 @@
 package com.structurizr.cli;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.info.BuildProperties;
+import org.springframework.context.ApplicationContext;
 
 import java.util.Arrays;
 
@@ -13,8 +16,14 @@ public class StructurizrCliApplication implements CommandLineRunner {
 	private static final String PULL_COMMAND = "pull";
 	private static final String EXPORT_COMMAND = "export";
 
+	@Autowired
+	private ApplicationContext context;
+
 	@Override
 	public void run(String... args) throws Exception {
+		String version = context.getBean(BuildProperties.class).getVersion();
+		System.out.println("Structurizr CLI v" + version);
+
 		if (args == null || args.length == 0) {
 			printUsageMessageAndExit();
 		}
