@@ -15,7 +15,11 @@ import org.apache.commons.cli.*;
 
 import java.io.File;
 
-class PullCommand {
+class PullCommand extends AbstractCommand {
+
+    PullCommand(String version) {
+        super(version);
+    }
 
     void run(String... args) throws Exception {
         Options options = new Options();
@@ -60,6 +64,7 @@ class PullCommand {
 
         System.out.println("Pulling workspace " + workspaceId + " from " + apiUrl);
         StructurizrClient structurizrClient = new StructurizrClient(apiUrl, apiKey, apiSecret);
+        structurizrClient.setAgent(getAgent());
         Workspace workspace = structurizrClient.getWorkspace(workspaceId);
 
         File file = new File("structurizr-" + workspaceId + "-workspace.json");

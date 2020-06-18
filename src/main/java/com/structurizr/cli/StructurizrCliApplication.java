@@ -29,11 +29,11 @@ public class StructurizrCliApplication implements CommandLineRunner {
 		}
 
 		if (PUSH_COMMAND.equalsIgnoreCase(args[0])) {
-			new PushCommand().run(Arrays.copyOfRange(args, 1, args.length));
+			new PushCommand(version).run(Arrays.copyOfRange(args, 1, args.length));
 		} else if (PULL_COMMAND.equalsIgnoreCase(args[0])) {
-			new PullCommand().run(Arrays.copyOfRange(args, 1, args.length));
+			new PullCommand(version).run(Arrays.copyOfRange(args, 1, args.length));
 		} else if (EXPORT_COMMAND.equalsIgnoreCase(args[0])) {
-			new ExportCommand().run(Arrays.copyOfRange(args, 1, args.length));
+			new ExportCommand(version).run(Arrays.copyOfRange(args, 1, args.length));
 		} else {
 			printUsageMessageAndExit();
 		}

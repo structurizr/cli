@@ -14,7 +14,11 @@ import org.apache.commons.cli.*;
 
 import java.io.File;
 
-class PushCommand {
+class PushCommand extends AbstractCommand {
+
+    PushCommand(String version) {
+        super(version);
+    }
 
     void run(String... args) throws Exception {
         Options options = new Options();
@@ -84,6 +88,7 @@ class PushCommand {
         System.out.println("Pushing workspace " + workspaceId + " to " + apiUrl);
 
         StructurizrClient structurizrClient = new StructurizrClient(apiUrl, apiKey, apiSecret);
+        structurizrClient.setAgent(getAgent());
         structurizrClient.setWorkspaceArchiveLocation(null);
 
         if (!StringUtils.isNullOrEmpty(passphrase)) {

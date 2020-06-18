@@ -15,10 +15,14 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.Collection;
 
-class ExportCommand {
+class ExportCommand extends AbstractCommand {
 
     private static final String PLANTUML_FORMAT = "plantuml";
     private static final String WEBSEQUENCEDIAGRAMS_FORMAT = "websequencediagrams";
+
+    ExportCommand(String version) {
+        super(version);
+    }
 
     void run(String... args) throws Exception {
         Options options = new Options();
