@@ -73,6 +73,8 @@ class ExportCommand extends AbstractCommand {
 
         workspaceId = workspace.getId();
 
+        addDefaultViewsAndStyles(workspace);
+
         if (PLANTUML_FORMAT.equalsIgnoreCase(format)) {
             if (workspace.getViews().isEmpty()) {
                 System.out.println(" - the workspace contains no views");
