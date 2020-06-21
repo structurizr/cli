@@ -35,3 +35,5 @@ Supported commands are:
 - [push](docs/push.md)
 - [pull](docs/pull.md)
 - [export](docs/export.md)
+
+The Structurizr CLI will create some default views and styles for you if you don't define them yourself. See [Defaults](docs/defaults) for more details.
