@@ -17,6 +17,7 @@ import java.util.Collection;
 
 class ExportCommand extends AbstractCommand {
 
+    private static final String JSON_FORMAT = "json";
     private static final String PLANTUML_FORMAT = "plantuml";
     private static final String WEBSEQUENCEDIAGRAMS_FORMAT = "websequencediagrams";
 
@@ -31,7 +32,7 @@ class ExportCommand extends AbstractCommand {
         option.setRequired(true);
         options.addOption(option);
 
-        option = new Option("f", "format", true, String.format("Export format: %s|%s", PLANTUML_FORMAT, WEBSEQUENCEDIAGRAMS_FORMAT));
+        option = new Option("f", "format", true, String.format("Export format: %s|%s|%s", PLANTUML_FORMAT, WEBSEQUENCEDIAGRAMS_FORMAT, JSON_FORMAT));
         option.setRequired(true);
         options.addOption(option);
 
@@ -75,7 +76,11 @@ class ExportCommand extends AbstractCommand {
 
         addDefaultViewsAndStyles(workspace);
 
-        if (PLANTUML_FORMAT.equalsIgnoreCase(format)) {
+        if (JSON_FORMAT.equalsIgnoreCase(format)) {
+            File file = new File(workspacePath.getParent(), String.format("%s.json", prefix(workspaceId)));
+            System.out.println(" - writing " + file.getCanonicalPath());
+            WorkspaceUtils.saveWorkspaceToJson(workspace, file);
+        } else if (PLANTUML_FORMAT.equalsIgnoreCase(format)) {
             if (workspace.getViews().isEmpty()) {
                 System.out.println(" - the workspace contains no views");
             } else {
@@ -100,6 +105,8 @@ class ExportCommand extends AbstractCommand {
                 }
 
             }
+        } else {
+            System.out.println(" - unknown output format: " + format);
         }
 
         System.out.println(" - finished");
