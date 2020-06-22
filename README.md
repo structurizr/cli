@@ -22,6 +22,10 @@ __This repository is supported by Structurizr Limited__, as a part of the Struct
     - API key
     - API secret
 
+## Getting started
+
+For a quick tutorial, see the [getting started](docs/getting-started.md) guide. 
+
 ## Usage
 
 On the command line, in the same directory where you've placed the JAR file:
