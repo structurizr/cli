@@ -3,6 +3,8 @@ package com.structurizr.cli;
 import com.structurizr.Workspace;
 import com.structurizr.api.StructurizrClient;
 import com.structurizr.dsl.StructurizrDslParser;
+import com.structurizr.io.mermaid.MermaidDiagram;
+import com.structurizr.io.mermaid.MermaidWriter;
 import com.structurizr.io.plantuml.PlantUMLDiagram;
 import com.structurizr.io.plantuml.PlantUMLWriter;
 import com.structurizr.io.websequencediagrams.WebSequenceDiagramsWriter;
@@ -20,6 +22,7 @@ class ExportCommand extends AbstractCommand {
     private static final String JSON_FORMAT = "json";
     private static final String PLANTUML_FORMAT = "plantuml";
     private static final String WEBSEQUENCEDIAGRAMS_FORMAT = "websequencediagrams";
+    private static final String MERMAID_FORMAT = "mermaid";
 
     ExportCommand(String version) {
         super(version);
@@ -32,7 +35,7 @@ class ExportCommand extends AbstractCommand {
         option.setRequired(true);
         options.addOption(option);
 
-        option = new Option("f", "format", true, String.format("Export format: %s|%s|%s", PLANTUML_FORMAT, WEBSEQUENCEDIAGRAMS_FORMAT, JSON_FORMAT));
+        option = new Option("f", "format", true, String.format("Export format: %s|%s|%s|%s", PLANTUML_FORMAT, WEBSEQUENCEDIAGRAMS_FORMAT, MERMAID_FORMAT, JSON_FORMAT));
         option.setRequired(true);
         options.addOption(option);
 
@@ -90,6 +93,19 @@ class ExportCommand extends AbstractCommand {
 
                 for (PlantUMLDiagram diagram : diagrams) {
                     File file = new File(workspacePath.getParent(), String.format("%s-%s.puml", prefix(workspaceId), diagram.getKey()));
+                    writeToFile(file, diagram.getDefinition());
+                }
+            }
+        } else if (MERMAID_FORMAT.equalsIgnoreCase(format)) {
+            if (workspace.getViews().isEmpty()) {
+                System.out.println(" - the workspace contains no views");
+            } else {
+                MermaidWriter mermaidWriter = new MermaidWriter();
+                //mermaidWriter.setUseSequenceDiagrams(true);
+                Collection<MermaidDiagram> diagrams = mermaidWriter.toMermaidDiagrams(workspace);
+
+                for (MermaidDiagram diagram : diagrams) {
+                    File file = new File(workspacePath.getParent(), String.format("%s-%s.mmd", prefix(workspaceId), diagram.getKey()));
                     writeToFile(file, diagram.getDefinition());
                 }
             }

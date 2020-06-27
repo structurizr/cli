@@ -6,7 +6,7 @@ Files will be created in the same directory as the workspace, one per view that 
 ## Options
 
 - __-workspace__: The path to the workspace JSON/DSL file (required)
-- __-format__: plantuml|websequencediagrams|json (required)
+- __-format__: plantuml|mermaid|websequencediagrams|json (required)
 
 ## Examples
 
@@ -14,6 +14,12 @@ To export all views in a JSON workspace to PlantUML format:
 
 ```
 java -jar structurizr-cli-*.jar export -workspace myworkspace.json -format plantuml
+```
+
+To export all views in a JSON workspace to Mermaid format:
+
+```
+java -jar structurizr-cli-*.jar export -workspace myworkspace.json -format mermaid
 ```
 
 To export all dynamic views in a DSL workspace to WebSequenceDiagrams format:
