@@ -95,6 +95,14 @@ class ExportCommand extends AbstractCommand {
                     File file = new File(workspacePath.getParent(), String.format("%s-%s.puml", prefix(workspaceId), diagram.getKey()));
                     writeToFile(file, diagram.getDefinition());
                 }
+
+                plantUMLWriter.setUseSequenceDiagrams(true);
+                for (DynamicView dynamicView : workspace.getViews().getDynamicViews()) {
+                    String definition = plantUMLWriter.toString(dynamicView);
+
+                    File file = new File(workspacePath.getParent(), String.format("%s-%s-sequence.puml", prefix(workspaceId), dynamicView.getKey()));
+                    writeToFile(file, definition);
+                }
             }
         } else if (MERMAID_FORMAT.equalsIgnoreCase(format)) {
             if (workspace.getViews().isEmpty()) {
