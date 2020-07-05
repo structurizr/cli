@@ -1,5 +1,6 @@
 package com.structurizr.cli;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.structurizr.Workspace;
 import com.structurizr.api.StructurizrClient;
 import com.structurizr.dsl.StructurizrDslParser;
@@ -10,7 +11,14 @@ import com.structurizr.io.plantuml.PlantUMLWriter;
 import com.structurizr.io.websequencediagrams.WebSequenceDiagramsWriter;
 import com.structurizr.util.WorkspaceUtils;
 import com.structurizr.view.DynamicView;
+import com.structurizr.view.ElementStyle;
+import com.structurizr.view.RelationshipStyle;
 import org.apache.commons.cli.*;
+import org.apache.hc.client5.http.classic.methods.HttpGet;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apache.hc.core5.http.io.entity.EntityUtils;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -77,6 +85,7 @@ class ExportCommand extends AbstractCommand {
 
         workspaceId = workspace.getId();
 
+        includeStylesFromThemes(workspace);
         addDefaultViewsAndStyles(workspace);
 
         if (JSON_FORMAT.equalsIgnoreCase(format)) {
@@ -150,6 +159,33 @@ class ExportCommand extends AbstractCommand {
         BufferedWriter writer = new BufferedWriter(new FileWriter(file));
         writer.write(content);
         writer.close();
+    }
+
+    private void includeStylesFromThemes(Workspace workspace) throws Exception {
+        if (workspace.getViews().getConfiguration().getThemes() != null) {
+            for (String url : workspace.getViews().getConfiguration().getThemes()) {
+                CloseableHttpClient httpClient = HttpClients.createSystem();
+                HttpGet httpGet = new HttpGet(url);
+
+                CloseableHttpResponse response = httpClient.execute(httpGet);
+                if (response.getCode() == 200) {
+                    String json = EntityUtils.toString(response.getEntity());
+
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    Theme theme = objectMapper.readValue(json, Theme.class);
+
+                    for (ElementStyle elementStyle : theme.getElements()) {
+                        workspace.getViews().getConfiguration().getStyles().add(elementStyle);
+                    }
+
+                    for (RelationshipStyle relationshipStyle : theme.getRelationships()) {
+                        workspace.getViews().getConfiguration().getStyles().add(relationshipStyle);
+                    }
+                }
+
+                httpClient.close();
+            }
+        }
     }
 
 }
