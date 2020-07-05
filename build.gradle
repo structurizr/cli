@@ -45,5 +45,6 @@ task buildZip(type: Zip) {
 	}
 	from ('etc') {
 		include 'structurizr.sh'
+		include 'structurizr.bat'
 	}
 }
