@@ -9,6 +9,7 @@ import com.structurizr.io.mermaid.MermaidWriter;
 import com.structurizr.io.plantuml.PlantUMLDiagram;
 import com.structurizr.io.plantuml.PlantUMLWriter;
 import com.structurizr.io.websequencediagrams.WebSequenceDiagramsWriter;
+import com.structurizr.util.ThemeUtils;
 import com.structurizr.util.WorkspaceUtils;
 import com.structurizr.view.DynamicView;
 import com.structurizr.view.ElementStyle;
@@ -23,9 +24,12 @@ import org.apache.hc.core5.http.io.entity.EntityUtils;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Collection;
 
 class ExportCommand extends AbstractCommand {
+
+    private static final int HTTP_OK_STATUS = 200;
 
     private static final String JSON_FORMAT = "json";
     private static final String PLANTUML_FORMAT = "plantuml";
@@ -39,7 +43,7 @@ class ExportCommand extends AbstractCommand {
     void run(String... args) throws Exception {
         Options options = new Options();
 
-        Option option = new Option("w", "workspace", true, "Path to Structurizr workspace file (JSON or DSL)");
+        Option option = new Option("w", "workspace", true, "Path or URL to the workspace JSON/DSL file");
         option.setRequired(true);
         options.addOption(option);
 
@@ -50,6 +54,7 @@ class ExportCommand extends AbstractCommand {
         CommandLineParser commandLineParser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
 
+        String workspacePathAsString = null;
         File workspacePath = null;
         long workspaceId = 1;
         String format = "";
@@ -57,7 +62,7 @@ class ExportCommand extends AbstractCommand {
         try {
             CommandLine cmd = commandLineParser.parse(options, args);
 
-            workspacePath = new File(cmd.getOptionValue("workspace"));
+            workspacePathAsString = cmd.getOptionValue("workspace");
             format = cmd.getOptionValue("format");
 
         } catch (ParseException e) {
@@ -69,23 +74,39 @@ class ExportCommand extends AbstractCommand {
 
         Workspace workspace;
 
-        System.out.println("Exporting workspace from " + workspacePath.getCanonicalPath());
+        System.out.println("Exporting workspace from " + workspacePathAsString);
 
-        if (workspacePath.getName().endsWith(".json")) {
+        if (workspacePathAsString.endsWith(".json")) {
             System.out.println(" - loading workspace from JSON");
+
+            if (workspacePathAsString.startsWith("http://") || workspacePathAsString.startsWith("https")) {
+                String json = readFromUrl(workspacePathAsString);
+                workspace = WorkspaceUtils.fromJson(json);
+                workspacePath = new File(".");
+            } else {
+                workspacePath = new File(workspacePathAsString);
+                workspace = WorkspaceUtils.loadWorkspaceFromJson(workspacePath);
+            }
             
-            workspace = WorkspaceUtils.loadWorkspaceFromJson(workspacePath);
         } else {
             System.out.println(" - loading workspace from DSL");
             StructurizrDslParser structurizrDslParser = new StructurizrDslParser();
-            structurizrDslParser.parse(workspacePath);
+
+            if (workspacePathAsString.startsWith("http://") || workspacePathAsString.startsWith("https")) {
+                String dsl = readFromUrl(workspacePathAsString);
+                structurizrDslParser.parse(dsl);
+                workspacePath = new File(".");
+            } else {
+                workspacePath = new File(workspacePathAsString);
+                structurizrDslParser.parse(workspacePath);
+            }
 
             workspace = structurizrDslParser.getWorkspace();
         }
 
         workspaceId = workspace.getId();
 
-        includeStylesFromThemes(workspace);
+        ThemeUtils.loadStylesFromThemes(workspace);
         addDefaultViewsAndStyles(workspace);
 
         if (JSON_FORMAT.equalsIgnoreCase(format)) {
@@ -161,31 +182,19 @@ class ExportCommand extends AbstractCommand {
         writer.close();
     }
 
-    private void includeStylesFromThemes(Workspace workspace) throws Exception {
-        if (workspace.getViews().getConfiguration().getThemes() != null) {
-            for (String url : workspace.getViews().getConfiguration().getThemes()) {
-                CloseableHttpClient httpClient = HttpClients.createSystem();
-                HttpGet httpGet = new HttpGet(url);
+    private String readFromUrl(String url) {
+        try (CloseableHttpClient httpClient = HttpClients.createSystem()) {
+            HttpGet httpGet = new HttpGet(url);
+            CloseableHttpResponse response = httpClient.execute(httpGet);
 
-                CloseableHttpResponse response = httpClient.execute(httpGet);
-                if (response.getCode() == 200) {
-                    String json = EntityUtils.toString(response.getEntity());
-
-                    ObjectMapper objectMapper = new ObjectMapper();
-                    Theme theme = objectMapper.readValue(json, Theme.class);
-
-                    for (ElementStyle elementStyle : theme.getElements()) {
-                        workspace.getViews().getConfiguration().getStyles().add(elementStyle);
-                    }
-
-                    for (RelationshipStyle relationshipStyle : theme.getRelationships()) {
-                        workspace.getViews().getConfiguration().getStyles().add(relationshipStyle);
-                    }
-                }
-
-                httpClient.close();
+            if (response.getCode() == HTTP_OK_STATUS) {
+                return EntityUtils.toString(response.getEntity());
             }
+        } catch (Exception ioe) {
+            ioe.printStackTrace();
         }
+
+        return "";
     }
 
 }

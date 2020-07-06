@@ -5,7 +5,7 @@ Files will be created in the same directory as the workspace, one per view that 
 
 ## Options
 
-- __-workspace__: The path to the workspace JSON/DSL file (required)
+- __-workspace__: The path or URL to the workspace JSON/DSL file (required)
 - __-format__: plantuml|mermaid|websequencediagrams|json (required)
 
 ## Examples
