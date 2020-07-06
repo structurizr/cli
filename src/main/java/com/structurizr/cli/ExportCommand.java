@@ -8,6 +8,7 @@ import com.structurizr.io.mermaid.MermaidDiagram;
 import com.structurizr.io.mermaid.MermaidWriter;
 import com.structurizr.io.plantuml.PlantUMLDiagram;
 import com.structurizr.io.plantuml.PlantUMLWriter;
+import com.structurizr.io.plantuml.StructurizrPlantUMLWriter;
 import com.structurizr.io.websequencediagrams.WebSequenceDiagramsWriter;
 import com.structurizr.util.ThemeUtils;
 import com.structurizr.util.WorkspaceUtils;
@@ -117,8 +118,8 @@ class ExportCommand extends AbstractCommand {
             if (workspace.getViews().isEmpty()) {
                 System.out.println(" - the workspace contains no views");
             } else {
-                PlantUMLWriter plantUMLWriter = new PlantUMLWriter();
-                plantUMLWriter.setUseSequenceDiagrams(true);
+                StructurizrPlantUMLWriter plantUMLWriter = new StructurizrPlantUMLWriter();
+                plantUMLWriter.setUseSequenceDiagrams(false);
                 Collection<PlantUMLDiagram> diagrams = plantUMLWriter.toPlantUMLDiagrams(workspace);
 
                 for (PlantUMLDiagram diagram : diagrams) {
@@ -139,12 +140,20 @@ class ExportCommand extends AbstractCommand {
                 System.out.println(" - the workspace contains no views");
             } else {
                 MermaidWriter mermaidWriter = new MermaidWriter();
-                //mermaidWriter.setUseSequenceDiagrams(true);
+                mermaidWriter.setUseSequenceDiagrams(false);
                 Collection<MermaidDiagram> diagrams = mermaidWriter.toMermaidDiagrams(workspace);
 
                 for (MermaidDiagram diagram : diagrams) {
                     File file = new File(workspacePath.getParent(), String.format("%s-%s.mmd", prefix(workspaceId), diagram.getKey()));
                     writeToFile(file, diagram.getDefinition());
+                }
+
+                mermaidWriter.setUseSequenceDiagrams(true);
+                for (DynamicView dynamicView : workspace.getViews().getDynamicViews()) {
+                    String definition = mermaidWriter.toString(dynamicView);
+
+                    File file = new File(workspacePath.getParent(), String.format("%s-%s-sequence.mmd", prefix(workspaceId), dynamicView.getKey()));
+                    writeToFile(file, definition);
                 }
             }
         } else if (WEBSEQUENCEDIAGRAMS_FORMAT.equalsIgnoreCase(format)) {
