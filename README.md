@@ -30,8 +30,16 @@ For a quick tutorial, see the [getting started](docs/getting-started.md) guide.
 
 On the command line, in the same directory where you've placed the JAR file:
 
+### macOS/Linux
+
 ```
-java -jar structurizr-cli-*.jar <command> [options]
+./structurizr.sh <command> [options]
+```
+
+### Windows
+
+```
+structurizr <command> [options]
 ```
 
 Supported commands are:
