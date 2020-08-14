@@ -15,7 +15,7 @@ __This repository is supported by Structurizr Limited__, as a part of the Struct
 	
 ## Prerequisites
 
-- You must have Java 8 or above installed, and available to use on your command line (__please note that the CLI does not work with Java versions 11.0.1-11.0.3__).
+- You must have Java 8 or above installed, and available to use on your command line (__please note that the CLI does not work with Java versions 11.0.0-11.0.3__).
 - Build the tool from the source (```gradlew build```), or download the prebuilt [structurizr-cli](https://github.com/structurizr/cli/releases) ZIP file.
  - To use the ```push``` and ```pull``` commands, you need a Structurizr workspace, and the following information from your dashboard (see [Help - Workspaces](https://structurizr.com/help/workspaces) for details):
     - Workspace ID
