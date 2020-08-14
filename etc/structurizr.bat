@@ -1,2 +1,2 @@
 @echo off
-java -jar structurizr-cli-1.3.1.jar %*
+java -jar structurizr-cli-1.4.0.jar %*

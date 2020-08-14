@@ -9,7 +9,7 @@ This GitHub repository contains the Structurizr CLI - a command line utility for
 	- Markdown/AsciiDoc documentation
 	- Architecture Decision Records (ADRs)
 - __Pull__ workspace content as JSON
-- __Export__ diagrams to PlantUML, Mermaid, and WebSequenceDiagrams
+- __Export__ diagrams to PlantUML, Mermaid, WebSequenceDiagrams, and Ilograph
 
 __This repository is supported by Structurizr Limited__, as a part of the Structurizr service.
 	

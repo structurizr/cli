@@ -1,20 +1,16 @@
 package com.structurizr.cli;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.structurizr.Workspace;
-import com.structurizr.api.StructurizrClient;
 import com.structurizr.dsl.StructurizrDslParser;
+import com.structurizr.io.ilograph.IlographWriter;
 import com.structurizr.io.mermaid.MermaidDiagram;
 import com.structurizr.io.mermaid.MermaidWriter;
 import com.structurizr.io.plantuml.PlantUMLDiagram;
-import com.structurizr.io.plantuml.PlantUMLWriter;
 import com.structurizr.io.plantuml.StructurizrPlantUMLWriter;
 import com.structurizr.io.websequencediagrams.WebSequenceDiagramsWriter;
 import com.structurizr.util.ThemeUtils;
 import com.structurizr.util.WorkspaceUtils;
 import com.structurizr.view.DynamicView;
-import com.structurizr.view.ElementStyle;
-import com.structurizr.view.RelationshipStyle;
 import org.apache.commons.cli.*;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
@@ -25,7 +21,6 @@ import org.apache.hc.core5.http.io.entity.EntityUtils;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Collection;
 
 class ExportCommand extends AbstractCommand {
@@ -36,6 +31,7 @@ class ExportCommand extends AbstractCommand {
     private static final String PLANTUML_FORMAT = "plantuml";
     private static final String WEBSEQUENCEDIAGRAMS_FORMAT = "websequencediagrams";
     private static final String MERMAID_FORMAT = "mermaid";
+    private static final String ILOGRAPH_FORMAT = "ilograph";
 
     ExportCommand(String version) {
         super(version);
@@ -166,8 +162,11 @@ class ExportCommand extends AbstractCommand {
                     File file = new File(workspacePath.getParent(), String.format("%s-%s.wsd", prefix(workspaceId), dynamicView.getKey()));
                     writeToFile(file, definition);
                 }
-
             }
+        } else if (ILOGRAPH_FORMAT.equalsIgnoreCase(format)) {
+            String ilographDefinition = new IlographWriter().toString(workspace);
+            File file = new File(workspacePath.getParent(), String.format("%s.idl", prefix(workspaceId)));
+            writeToFile(file, ilographDefinition);
         } else {
             System.out.println(" - unknown output format: " + format);
         }
