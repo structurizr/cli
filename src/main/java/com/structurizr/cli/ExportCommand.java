@@ -44,7 +44,7 @@ class ExportCommand extends AbstractCommand {
         option.setRequired(true);
         options.addOption(option);
 
-        option = new Option("f", "format", true, String.format("Export format: %s|%s|%s|%s", PLANTUML_FORMAT, WEBSEQUENCEDIAGRAMS_FORMAT, MERMAID_FORMAT, JSON_FORMAT));
+        option = new Option("f", "format", true, String.format("Export format: %s|%s|%s|%s|%s", PLANTUML_FORMAT, WEBSEQUENCEDIAGRAMS_FORMAT, MERMAID_FORMAT, ILOGRAPH_FORMAT, JSON_FORMAT));
         option.setRequired(true);
         options.addOption(option);
 
