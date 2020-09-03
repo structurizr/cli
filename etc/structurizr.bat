@@ -1,2 +1,4 @@
 @echo off
-java -jar structurizr-cli-1.4.0.jar %*
+setlocal
+set SCRIPT_DIR=%~dp0
+java -jar "%SCRIPT_DIR%structurizr-cli-1.4.0.jar" %*
