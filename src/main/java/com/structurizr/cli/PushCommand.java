@@ -11,6 +11,7 @@ import com.structurizr.model.DeploymentNode;
 import com.structurizr.model.SoftwareSystem;
 import com.structurizr.model.Tags;
 import com.structurizr.util.StringUtils;
+import com.structurizr.util.WorkspaceUtils;
 import com.structurizr.view.*;
 import org.apache.commons.cli.*;
 
@@ -43,7 +44,7 @@ class PushCommand extends AbstractCommand {
         option.setRequired(true);
         options.addOption(option);
 
-        option = new Option("workspace", "workspace", true, "Path to Structurizr DSL file(s)");
+        option = new Option("workspace", "workspace", true, "Path to Structurizr JSON file/DSL file(s)");
         option.setRequired(false);
         options.addOption(option);
 
@@ -111,10 +112,16 @@ class PushCommand extends AbstractCommand {
 
             System.out.println(" - creating new workspace");
             System.out.println(" - parsing model and views from " + path.getCanonicalPath());
-            StructurizrDslParser structurizrDslParser = new StructurizrDslParser();
-            structurizrDslParser.parse(path);
 
-            workspace = structurizrDslParser.getWorkspace();
+            if (workspacePath.endsWith(".json")) {
+                workspace = WorkspaceUtils.loadWorkspaceFromJson(path);
+            } else {
+                StructurizrDslParser structurizrDslParser = new StructurizrDslParser();
+                structurizrDslParser.parse(path);
+
+                workspace = structurizrDslParser.getWorkspace();
+            }
+
             structurizrClient.setMergeFromRemote(true);
 
             addDefaultViewsAndStyles(workspace);

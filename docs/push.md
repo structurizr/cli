@@ -12,7 +12,7 @@ The ```push``` command allows you to push content to a Structurizr workspace (th
 - __-id__: The workspace ID (required)
 - __-key__: The workspace API key (required)
 - __-secret__: The workspace API secret (required)
-- __-workspace__: The path to the file or directory containing a definition of the workspace (model and views) in the Structurizr DSL format
+- __-workspace__: The path to the workspace JSON file/DSL file(s) (required)
 - __-docs__: The path to the directory containing Markdown/AsciiDoc files to be published (optional)
 - __-adrs__: The path to the directory containing ADRs (optional)
 - __-url__: The Structurizr API URL (optional; defaults to ```https://api.structurizr.com```)
