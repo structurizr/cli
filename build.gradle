@@ -43,6 +43,8 @@ task buildZip(type: Zip) {
 	}
 	from ('.') {
 		include 'README.md'
+		include 'docs/*'
+		include 'docs/images/*'
 	}
 	from ('etc') {
 		include 'structurizr.sh'
