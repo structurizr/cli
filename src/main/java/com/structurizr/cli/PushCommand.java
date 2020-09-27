@@ -138,6 +138,7 @@ class PushCommand extends AbstractCommand {
         }
 
         AutomaticDocumentationTemplate template = new AutomaticDocumentationTemplate(workspace);
+        template.setRecursive(true);
 
         if (!StringUtils.isNullOrEmpty(documentationPath)) {
             File path = new File(documentationPath);
