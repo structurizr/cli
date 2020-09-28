@@ -48,6 +48,10 @@ class ExportCommand extends AbstractCommand {
         option.setRequired(true);
         options.addOption(option);
 
+        option = new Option("o", "output", true, "Path to an output directory");
+        option.setRequired(false);
+        options.addOption(option);
+
         CommandLineParser commandLineParser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
 
@@ -55,12 +59,14 @@ class ExportCommand extends AbstractCommand {
         File workspacePath = null;
         long workspaceId = 1;
         String format = "";
+        String outputPath = null;
 
         try {
             CommandLine cmd = commandLineParser.parse(options, args);
 
             workspacePathAsString = cmd.getOptionValue("workspace");
             format = cmd.getOptionValue("format");
+            outputPath = cmd.getOptionValue("output");
 
         } catch (ParseException e) {
             System.out.println(e.getMessage());
@@ -106,8 +112,14 @@ class ExportCommand extends AbstractCommand {
         ThemeUtils.loadStylesFromThemes(workspace);
         addDefaultViewsAndStyles(workspace);
 
+        if (outputPath == null) {
+            outputPath = workspacePath.getParent();
+        }
+        File outputDir = new File(outputPath);
+        outputDir.mkdirs();
+
         if (JSON_FORMAT.equalsIgnoreCase(format)) {
-            File file = new File(workspacePath.getParent(), String.format("%s.json", prefix(workspaceId)));
+            File file = new File(outputPath, String.format("%s.json", prefix(workspaceId)));
             System.out.println(" - writing " + file.getCanonicalPath());
             WorkspaceUtils.saveWorkspaceToJson(workspace, file);
         } else if (PLANTUML_FORMAT.equalsIgnoreCase(format)) {
@@ -119,7 +131,7 @@ class ExportCommand extends AbstractCommand {
                 Collection<PlantUMLDiagram> diagrams = plantUMLWriter.toPlantUMLDiagrams(workspace);
 
                 for (PlantUMLDiagram diagram : diagrams) {
-                    File file = new File(workspacePath.getParent(), String.format("%s-%s.puml", prefix(workspaceId), diagram.getKey()));
+                    File file = new File(outputPath, String.format("%s-%s.puml", prefix(workspaceId), diagram.getKey()));
                     writeToFile(file, diagram.getDefinition());
                 }
 
@@ -127,7 +139,7 @@ class ExportCommand extends AbstractCommand {
                 for (DynamicView dynamicView : workspace.getViews().getDynamicViews()) {
                     String definition = plantUMLWriter.toString(dynamicView);
 
-                    File file = new File(workspacePath.getParent(), String.format("%s-%s-sequence.puml", prefix(workspaceId), dynamicView.getKey()));
+                    File file = new File(outputPath, String.format("%s-%s-sequence.puml", prefix(workspaceId), dynamicView.getKey()));
                     writeToFile(file, definition);
                 }
             }
@@ -140,7 +152,7 @@ class ExportCommand extends AbstractCommand {
                 Collection<MermaidDiagram> diagrams = mermaidWriter.toMermaidDiagrams(workspace);
 
                 for (MermaidDiagram diagram : diagrams) {
-                    File file = new File(workspacePath.getParent(), String.format("%s-%s.mmd", prefix(workspaceId), diagram.getKey()));
+                    File file = new File(outputPath, String.format("%s-%s.mmd", prefix(workspaceId), diagram.getKey()));
                     writeToFile(file, diagram.getDefinition());
                 }
 
@@ -148,7 +160,7 @@ class ExportCommand extends AbstractCommand {
                 for (DynamicView dynamicView : workspace.getViews().getDynamicViews()) {
                     String definition = mermaidWriter.toString(dynamicView);
 
-                    File file = new File(workspacePath.getParent(), String.format("%s-%s-sequence.mmd", prefix(workspaceId), dynamicView.getKey()));
+                    File file = new File(outputPath, String.format("%s-%s-sequence.mmd", prefix(workspaceId), dynamicView.getKey()));
                     writeToFile(file, definition);
                 }
             }
@@ -159,13 +171,13 @@ class ExportCommand extends AbstractCommand {
             } else {
                 for (DynamicView dynamicView : workspace.getViews().getDynamicViews()) {
                     String definition = webSequenceDiagramsWriter.toString(dynamicView);
-                    File file = new File(workspacePath.getParent(), String.format("%s-%s.wsd", prefix(workspaceId), dynamicView.getKey()));
+                    File file = new File(outputPath, String.format("%s-%s.wsd", prefix(workspaceId), dynamicView.getKey()));
                     writeToFile(file, definition);
                 }
             }
         } else if (ILOGRAPH_FORMAT.equalsIgnoreCase(format)) {
             String ilographDefinition = new IlographWriter().toString(workspace);
-            File file = new File(workspacePath.getParent(), String.format("%s.idl", prefix(workspaceId)));
+            File file = new File(outputPath, String.format("%s.idl", prefix(workspaceId)));
             writeToFile(file, ilographDefinition);
         } else {
             System.out.println(" - unknown output format: " + format);
