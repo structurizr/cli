@@ -6,7 +6,7 @@ The Structurizr DSL provides a way to define a software architecture model as te
 
 Download the Structurizr CLI from the [releases page](https://github.com/structurizr/cli/releases), and unzip. You will need Java (version 8+) installed, and available to use from your command line (__please note that the CLI does not work with Java versions 11.0.0-11.0.3__).
 
-Alternatively the Structurizr CLI can be installed on Windows via [scoop](https://scoop.sh/). See [Windows installation](install-windows.md).
+Alternatively the Structurizr CLI can be installed on Windows via [scoop](https://scoop.sh/) (see [Windows installation](install-windows.md)) and on macOS via [Homebrew](https://brew.sh/) (see [macOS installation](install-macos.md)).
 
 ## 2. Create a software architecture model with the DSL
 
