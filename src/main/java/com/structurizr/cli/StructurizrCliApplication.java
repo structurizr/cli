@@ -22,24 +22,28 @@ public class StructurizrCliApplication implements CommandLineRunner {
 	private ApplicationContext context;
 
 	@Override
-	public void run(String... args) throws Exception {
-		String version = context.getBean(BuildProperties.class).getVersion();
-		System.out.println("Structurizr CLI v" + version);
+	public void run(String... args) {
+		try {
+			String version = context.getBean(BuildProperties.class).getVersion();
+			System.out.println("Structurizr CLI v" + version);
 
-		checkJavaVersion();
+			checkJavaVersion();
 
-		if (args == null || args.length == 0) {
-			printUsageMessageAndExit();
-		}
+			if (args == null || args.length == 0) {
+				printUsageMessageAndExit();
+			}
 
-		if (PUSH_COMMAND.equalsIgnoreCase(args[0])) {
-			new PushCommand(version).run(Arrays.copyOfRange(args, 1, args.length));
-		} else if (PULL_COMMAND.equalsIgnoreCase(args[0])) {
-			new PullCommand(version).run(Arrays.copyOfRange(args, 1, args.length));
-		} else if (EXPORT_COMMAND.equalsIgnoreCase(args[0])) {
-			new ExportCommand(version).run(Arrays.copyOfRange(args, 1, args.length));
-		} else {
-			printUsageMessageAndExit();
+			if (PUSH_COMMAND.equalsIgnoreCase(args[0])) {
+				new PushCommand(version).run(Arrays.copyOfRange(args, 1, args.length));
+			} else if (PULL_COMMAND.equalsIgnoreCase(args[0])) {
+				new PullCommand(version).run(Arrays.copyOfRange(args, 1, args.length));
+			} else if (EXPORT_COMMAND.equalsIgnoreCase(args[0])) {
+				new ExportCommand(version).run(Arrays.copyOfRange(args, 1, args.length));
+			} else {
+				printUsageMessageAndExit();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 

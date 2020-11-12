@@ -5,9 +5,9 @@ workspace "Amazon Web Services Example" "An example AWS deployment architecture.
             database = container "Database" "Stores information regarding the veterinarians, the clients, and their pets." "Relational database schema" "Database"
         }
 
-        webApplication -> database "Reads from and writes to", "JDBC/SSL"
+        webApplication -> database "Reads from and writes to" "JDBC/SSL"
 
-        deploymentEnvironment {
+        deploymentEnvironment "Live" {
             deploymentNode "Amazon Web Services" "" "" "Amazon Web Services - Cloud" {
                 deploymentNode "US-East-1" "" "" "Amazon Web Services - Region" {
                     route53 = infrastructureNode "Route 53" "" "" "Amazon Web Services - Route 53"
@@ -32,11 +32,11 @@ workspace "Amazon Web Services Example" "An example AWS deployment architecture.
             elb -> webApplicationInstance "Forwards requests to" "HTTPS"
         }
     }
-         
+
     views {
-        deployment springPetClinic "Default" "AmazonWebServicesDeployment" {
+        deployment springPetClinic "Live" "AmazonWebServicesDeployment" {
             include *
-            autoLayout lr 400
+            autolayout lr
         }
 
         styles {
@@ -52,6 +52,6 @@ workspace "Amazon Web Services Example" "An example AWS deployment architecture.
             }
         }
 
-        themes https://raw.githubusercontent.com/structurizr/themes/master/amazon-web-services/theme.json
+        themes https://static.structurizr.com/themes/amazon-web-services-2020.04.30/theme.json
     }
 }
