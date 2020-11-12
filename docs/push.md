@@ -20,7 +20,7 @@ The ```push``` command allows you to push content to a Structurizr workspace (th
 
 ## Documentation
 
-When the ```-docs``` option is used,  the ```push``` command will import all Markdown and AsciiDoc files in this directory, alphabetically according to the filename. Each file must represent a separate documentation section, and the second level heading (```## Section Title``` in Markdown and ```== Section Title``` in AsciiDoc) will be used as the section name.
+When the ```-docs``` option is used,  the ```push``` command will import all Markdown and AsciiDoc files in this directory (and sub-directories), alphabetically according to the filename. Each file must represent a separate documentation section, and the second level heading (```## Section Title``` in Markdown and ```== Section Title``` in AsciiDoc) will be used as the section name.
 
 ## Architecture Decision Records (ADRs)
 
