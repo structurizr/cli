@@ -44,6 +44,7 @@ public class StructurizrCliApplication implements CommandLineRunner {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.exit(1);
 		}
 	}
 
