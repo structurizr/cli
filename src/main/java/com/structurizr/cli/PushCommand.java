@@ -83,10 +83,15 @@ class PushCommand extends AbstractCommand {
             documentationPath = cmd.getOptionValue("docs");
             decisionsPath = cmd.getOptionValue("adrs");
             passphrase = cmd.getOptionValue("passphrase");
+
+            if (StringUtils.isNullOrEmpty(workspacePath) && StringUtils.isNullOrEmpty(documentationPath) && StringUtils.isNullOrEmpty(decisionsPath)) {
+                System.out.println("One of -workspace, -docs, or -adrs must be specified");
+                formatter.printHelp("push", options);
+                System.exit(1);
+            }
         } catch (ParseException e) {
             System.out.println(e.getMessage());
             formatter.printHelp("push", options);
-
             System.exit(1);
         }
 
