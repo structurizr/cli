@@ -113,8 +113,9 @@ class ExportCommand extends AbstractCommand {
         addDefaultViewsAndStyles(workspace);
 
         if (outputPath == null) {
-            outputPath = workspacePath.getParent();
+            outputPath = new File(workspacePath.getCanonicalPath()).getParent();
         }
+        
         File outputDir = new File(outputPath);
         outputDir.mkdirs();
 
