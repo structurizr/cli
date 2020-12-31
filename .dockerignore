@@ -1,0 +1,10 @@
+docs
+LICENSE
+*.env
+.git
+.gitignore
+Dockerfile
+*.md
+test
+site
+examples
