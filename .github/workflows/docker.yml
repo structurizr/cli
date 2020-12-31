@@ -1,7 +1,9 @@
 name: CI to Docker hub
 on:
   push:
-    branches: [ master, dockerize ]
+    branches:
+      - master
+      - dockerize
 
 jobs:
   build:
