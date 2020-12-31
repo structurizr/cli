@@ -1,2 +1,4 @@
 #!/bin/sh -f
-docker run --rm -v ${PWD}:/workdir leopoldodonnell/structurizr-cli $@
+REGISTRY=leopoldodonnell
+TAG=latest
+docker run --rm -v ${PWD}:/workdir ${REGISTRY}/structurizr-cli:${TAG} $@
