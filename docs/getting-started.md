@@ -98,9 +98,13 @@ This DSL definition:
 - create a System Context view for the software system
 - creates some element styles that will be applied when rendering the diagram
 
-Please note that the Structurizr CLI will create some default views and styles for you if you don't define them yourself in the DSL. See [Defaults](docs/defaults.md) for more details.
+Please note that the Structurizr CLI will create some default views and styles for you if you don't define them yourself in the DSL. See [Defaults](defaults.md) for more details.
 
-## 3. Upload to Structurizr
+## 3. Render with Structurizr, or export to other diagram formats
+
+You can now either render your diagrams with the Structurizr cloud service/on-premises installation, or render your diagrams with another tool (e.g. PlantUML, Mermaid, etc).
+
+### 3a. Upload and render with the Structurizr cloud service/on-premises installation
 
 If you've not done so, follow [Structurizr - Getting started](https://structurizr.com/help/getting-started) to sign up for a free Structurizr account, and create a workspace. To upload your workspace to the Structurizr cloud service/on-premises installation, you will need your workspace ID, API key and secret. See [Structurizr - Workspaces](https://structurizr.com/help/workspaces) for information about finding these.
 
@@ -113,7 +117,7 @@ Open a terminal, and issue the following command to upload the workspace (you sh
 or
 
 ```
-structurizr.bat push -id WORKSPACE_ID -key KEY -secret SECRET -workspace WORKSPACE_FILE
+structurizr push -id WORKSPACE_ID -key KEY -secret SECRET -workspace WORKSPACE_FILE
 ```
 
 - WORKSPACE_ID: your workspace ID
@@ -121,8 +125,22 @@ structurizr.bat push -id WORKSPACE_ID -key KEY -secret SECRET -workspace WORKSPA
 - API_SECRET: your API secret
 - WORKSPACE_FILE: the name of your workspace DSL file
 
-## 4. Open the workspace in Structurizr
-
 You can now sign in to your Structurizr account, and open the workspace from [your dashboard](https://structurizr.com/dashboard). Your workspace should now contain a diagram like this:
 
 ![Getting started](images/getting-started.png)
+
+### 3b. Export and render to other diagram formats
+
+Alternatively, you can export the views defined in your DSL workspace definition to a number of other formats, for rendering with other tools. You do not need a Structurizr account to do this. For example, to export the views to PlantUML format:
+
+```
+./structurizr.sh export -workspace WORKSPACE_FILE -format plantuml
+```
+
+or
+
+```
+structurizr  export -workspace WORKSPACE_FILE -format plantuml
+```
+
+This will create one PlantUML definition per view. See [export](export.md) for more details.
