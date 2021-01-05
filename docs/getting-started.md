@@ -42,7 +42,7 @@ scoop update structurizr-cli
 
 ### Docker
 
-The Structurizr CLI can be built into a Docker container. See [structurizr-cli-docker](https://github.com/leopoldodonnell/structurizr-cli-docker) for details.
+The Structurizr CLI can be built into a Docker container. See [leopoldodonnell/structurizr-cli-docker](https://github.com/leopoldodonnell/structurizr-cli-docker) or [aidmax/structurizr-cli-docker](https://github.com/aidmax/structurizr-cli-docker) for details.
 
 ### Build from source
 
