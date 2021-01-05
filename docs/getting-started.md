@@ -1,6 +1,6 @@
 # Getting started
 
-The Structurizr DSL provides a way to define a software architecture model as text, using a domain specific language (DSL). The [Structurizr CLI](https://github.com/structurizr/cli) (command line interface) provides tooling to parse DSL workspace definitions, upload them to the Structurizr cloud service/on-premises installation, and [export diagrams to other formats](export.md) (e.g. PlantUML, Mermaid, and WebSequenceDiagrams).
+The Structurizr CLI provides tooling to parse [Structurizr DSL](https://github.com/structurizr/dsl) workspace definitions, upload them to the Structurizr cloud service/on-premises installation, and [export diagrams to other formats](export.md) (e.g. PlantUML, Mermaid, and WebSequenceDiagrams).
 
 ## 1. Download and install the Structurizr CLI
 
