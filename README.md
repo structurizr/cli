@@ -2,12 +2,9 @@
 
 # Structurizr command line interface (CLI)
 
-This GitHub repository contains the Structurizr CLI - a command line utility for Structurizr, and supports the following commands/functionality:
+This GitHub repository contains the Structurizr CLI - a command line utility for Structurizr, designed to be used in conjunction with the [Structurizr DSL](https://github.com/structurizr/dsl), and supports the following commands/functionality:
 
-- [__push__](docs/push.md) content to a Structurizr workspace (the cloud service or an on-premises installation)
-	- A model and views defined using the [Structurizr DSL](https://github.com/structurizr/dsl)
-	- Markdown/AsciiDoc documentation
-	- Architecture Decision Records (ADRs)
+- [__push__](docs/push.md) content to the Structurizr cloud service/on-premises installation
 - [__pull__](docs/push.md) workspace content as JSON
 - [__export__](docs/export.md) diagrams to PlantUML, Mermaid, WebSequenceDiagrams, and Ilograph
 
