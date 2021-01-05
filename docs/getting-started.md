@@ -104,7 +104,7 @@ Please note that the Structurizr CLI will create some default views and styles f
 
 You can now either render your diagrams with the Structurizr cloud service/on-premises installation, or render your diagrams with another tool (e.g. PlantUML, Mermaid, etc).
 
-### 3a. Upload and render with the Structurizr cloud service/on-premises installation
+### Upload and render with the Structurizr cloud service/on-premises installation
 
 If you've not done so, follow [Structurizr - Getting started](https://structurizr.com/help/getting-started) to sign up for a free Structurizr account, and create a workspace. To upload your workspace to the Structurizr cloud service/on-premises installation, you will need your workspace ID, API key and secret. See [Structurizr - Workspaces](https://structurizr.com/help/workspaces) for information about finding these.
 
@@ -129,7 +129,7 @@ You can now sign in to your Structurizr account, and open the workspace from [yo
 
 ![Getting started](images/getting-started.png)
 
-### 3b. Export and render to other diagram formats
+### Export and render to other diagram formats
 
 Alternatively, you can export the views defined in your DSL workspace definition to a number of other formats, for rendering with other tools. You do not need a Structurizr account to do this. For example, to export the views to PlantUML format:
 
