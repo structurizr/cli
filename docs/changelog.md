@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.7.0 (unreleased)
+
+- Removes the dynamic view restrictions related to adding containers/components outside the scoped software system/container
+- Enhanced the rules relating to whether elements can be added to a view or not
+- Enhanced the logic to merge layout information of elements on views
+
 ## 1.6.0 (30th November 2020)
 
 - Adds support for [implicit relationship source elements](https://github.com/structurizr/dsl/blob/master/docs/language-reference.md#relationship) (defining relationships inside an element block)
