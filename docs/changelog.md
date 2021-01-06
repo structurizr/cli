@@ -15,12 +15,12 @@
 
 ## 1.5.1 (23rd November 2020)
 
-- Bug fixes (#13, #15, #16)
+- Resolves issues #13, #15, and #16
 
 ## 1.5.0 (12th November 2020)
 
- - Importing documentation and associating it with the workspace or a software system - [`!docs`](https://github.com/structurizr/dsl/blob/master/docs/language-reference.md#documentation)
+- Importing documentation and associating it with the workspace or a software system - [`!docs`](https://github.com/structurizr/dsl/blob/master/docs/language-reference.md#documentation)
 - Importing ADRs and associating them with the workspace or a software system - [`!adrs`](https://github.com/structurizr/dsl/blob/master/docs/language-reference.md#architecture-decision-records-adrs)
- - A title property on views - [`title`](https://github.com/structurizr/dsl/blob/master/docs/language-reference.md#title)
- - Adding perspectives to elements/relationships - [`perspectives`](https://github.com/structurizr/dsl/blob/master/docs/language-reference.md#perspectives)
- - Preventing implied relationships from being created - [`impliedRelationships`](https://github.com/structurizr/dsl/blob/master/docs/language-reference.md#impliedrelationships)
+- A title property on views - [`title`](https://github.com/structurizr/dsl/blob/master/docs/language-reference.md#title)
+- Adding perspectives to elements/relationships - [`perspectives`](https://github.com/structurizr/dsl/blob/master/docs/language-reference.md#perspectives)
+- Preventing implied relationships from being created - [`impliedRelationships`](https://github.com/structurizr/dsl/blob/master/docs/language-reference.md#impliedrelationships)
