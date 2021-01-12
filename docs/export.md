@@ -10,12 +10,20 @@ If output directory is not specified, files will be created in the same director
 - __-format__: plantuml|mermaid|websequencediagrams|ilograph|json (required)
 - __-output__: Relative or absolute path to an output directory (optional)
 
+The PlantUML export format can also be specified with a sub-format: `plantuml/structurizr` (default), `plantuml/basic`, and `plantuml/c4plantuml`.
+
 ## Examples
 
 To export all views in a JSON workspace to PlantUML format under folder named 'diagrams':
 
 ```
 java -jar structurizr-cli-*.jar export -workspace myworkspace.json -format plantuml -output diagrams
+```
+
+To export all views in a JSON workspace to PlantUML format, using C4-PlantUML, under folder named 'diagrams':
+
+```
+java -jar structurizr-cli-*.jar export -workspace myworkspace.json -format plantuml/c4plantuml -output diagrams
 ```
 
 To export all views in a JSON workspace to Mermaid format:

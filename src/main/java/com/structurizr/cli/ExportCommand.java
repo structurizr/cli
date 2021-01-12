@@ -5,8 +5,7 @@ import com.structurizr.dsl.StructurizrDslParser;
 import com.structurizr.io.ilograph.IlographWriter;
 import com.structurizr.io.mermaid.MermaidDiagram;
 import com.structurizr.io.mermaid.MermaidWriter;
-import com.structurizr.io.plantuml.PlantUMLDiagram;
-import com.structurizr.io.plantuml.StructurizrPlantUMLWriter;
+import com.structurizr.io.plantuml.*;
 import com.structurizr.io.websequencediagrams.WebSequenceDiagramsWriter;
 import com.structurizr.util.ThemeUtils;
 import com.structurizr.util.WorkspaceUtils;
@@ -29,6 +28,9 @@ class ExportCommand extends AbstractCommand {
 
     private static final String JSON_FORMAT = "json";
     private static final String PLANTUML_FORMAT = "plantuml";
+    private static final String PLANTUML_C4PLANTUML_SUBFORMAT = "c4plantuml";
+    private static final String PLANTUML_BASIC_SUBFORMAT = "basic";
+    private static final String PLANTUML_STRUCTURIZR_SUBFORMAT = "structurizr";
     private static final String WEBSEQUENCEDIAGRAMS_FORMAT = "websequencediagrams";
     private static final String MERMAID_FORMAT = "mermaid";
     private static final String ILOGRAPH_FORMAT = "ilograph";
@@ -65,7 +67,7 @@ class ExportCommand extends AbstractCommand {
             CommandLine cmd = commandLineParser.parse(options, args);
 
             workspacePathAsString = cmd.getOptionValue("workspace");
-            format = cmd.getOptionValue("format");
+            format = cmd.getOptionValue("format").toLowerCase();
             outputPath = cmd.getOptionValue("output");
 
         } catch (ParseException e) {
@@ -123,11 +125,30 @@ class ExportCommand extends AbstractCommand {
             File file = new File(outputPath, String.format("%s.json", prefix(workspaceId)));
             System.out.println(" - writing " + file.getCanonicalPath());
             WorkspaceUtils.saveWorkspaceToJson(workspace, file);
-        } else if (PLANTUML_FORMAT.equalsIgnoreCase(format)) {
+        } else if (format.startsWith(PLANTUML_FORMAT)) {
+            PlantUMLWriter plantUMLWriter;
+
+            String[] tokens = format.split("/");
+            String subformat = PLANTUML_STRUCTURIZR_SUBFORMAT;
+            if (tokens.length == 2) {
+                subformat = tokens[1];
+            }
+
+            switch (subformat) {
+                case PLANTUML_C4PLANTUML_SUBFORMAT:
+                    plantUMLWriter = new C4PlantUMLWriter();
+                    break;
+                case PLANTUML_BASIC_SUBFORMAT:
+                    plantUMLWriter = new BasicPlantUMLWriter();
+                    break;
+                default:
+                    plantUMLWriter = new StructurizrPlantUMLWriter();
+                    break;
+            }
+
             if (workspace.getViews().isEmpty()) {
                 System.out.println(" - the workspace contains no views");
             } else {
-                StructurizrPlantUMLWriter plantUMLWriter = new StructurizrPlantUMLWriter();
                 plantUMLWriter.setUseSequenceDiagrams(false);
                 Collection<PlantUMLDiagram> diagrams = plantUMLWriter.toPlantUMLDiagrams(workspace);
 

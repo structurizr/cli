@@ -3,6 +3,7 @@
 ## 1.8.0 (unreleased)
 
 - Adds support for locking and unlocking Structurizr workspaces.
+- Adds support for other PlantUML writers (issue #23).
 
 ## 1.7.0 (6th January 2021)
 
