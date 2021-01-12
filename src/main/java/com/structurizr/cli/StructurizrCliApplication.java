@@ -16,6 +16,8 @@ public class StructurizrCliApplication implements CommandLineRunner {
 
 	private static final String PUSH_COMMAND = "push";
 	private static final String PULL_COMMAND = "pull";
+	private static final String LOCK_COMMAND = "lock";
+	private static final String UNLOCK_COMMAND = "unlock";
 	private static final String EXPORT_COMMAND = "export";
 
 	@Autowired
@@ -37,6 +39,10 @@ public class StructurizrCliApplication implements CommandLineRunner {
 				new PushCommand(version).run(Arrays.copyOfRange(args, 1, args.length));
 			} else if (PULL_COMMAND.equalsIgnoreCase(args[0])) {
 				new PullCommand(version).run(Arrays.copyOfRange(args, 1, args.length));
+			} else if (LOCK_COMMAND.equalsIgnoreCase(args[0])) {
+				new LockCommand(version).run(Arrays.copyOfRange(args, 1, args.length));
+			} else if (UNLOCK_COMMAND.equalsIgnoreCase(args[0])) {
+				new UnlockCommand(version).run(Arrays.copyOfRange(args, 1, args.length));
 			} else if (EXPORT_COMMAND.equalsIgnoreCase(args[0])) {
 				new ExportCommand(version).run(Arrays.copyOfRange(args, 1, args.length));
 			} else {
@@ -49,7 +55,7 @@ public class StructurizrCliApplication implements CommandLineRunner {
 	}
 
 	private void printUsageMessageAndExit() {
-		System.out.println("Usage: structurizr push|pull|export [options]");
+		System.out.println("Usage: structurizr push|pull|lock|unlock|export [options]");
 		System.exit(1);
 	}
 

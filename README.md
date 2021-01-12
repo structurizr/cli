@@ -6,6 +6,8 @@ This GitHub repository contains the Structurizr CLI - a command line utility for
 
 - [__push__](docs/push.md) content to the Structurizr cloud service/on-premises installation
 - [__pull__](docs/push.md) workspace content as JSON
+- [__lock__](docs/lock.md) a workspace
+- [__unlock__](docs/unlock.md) a workspace
 - [__export__](docs/export.md) diagrams to PlantUML, Mermaid, WebSequenceDiagrams, and Ilograph
 
 ## Getting started

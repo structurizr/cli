@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.8.0 (unreleased)
+
+- Adds support for locking and unlocking Structurizr workspaces.
+
 ## 1.7.0 (6th January 2021)
 
 - Removes the dynamic view restrictions related to adding containers/components outside the scoped software system/container
