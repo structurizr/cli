@@ -6,18 +6,11 @@ import com.structurizr.documentation.AdrToolsImporter;
 import com.structurizr.documentation.AutomaticDocumentationTemplate;
 import com.structurizr.dsl.StructurizrDslParser;
 import com.structurizr.encryption.AesEncryptionStrategy;
-import com.structurizr.model.Container;
-import com.structurizr.model.DeploymentNode;
-import com.structurizr.model.SoftwareSystem;
-import com.structurizr.model.Tags;
 import com.structurizr.util.StringUtils;
 import com.structurizr.util.WorkspaceUtils;
-import com.structurizr.view.*;
 import org.apache.commons.cli.*;
 
 import java.io.File;
-import java.util.HashSet;
-import java.util.Set;
 
 class PushCommand extends AbstractCommand {
 
@@ -60,6 +53,10 @@ class PushCommand extends AbstractCommand {
         option.setRequired(false);
         options.addOption(option);
 
+        option = new Option("merge", "mergeFromRemote", true, "Whether to merge layout information from the remote workspace");
+        option.setRequired(false);
+        options.addOption(option);
+
         CommandLineParser commandLineParser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
 
@@ -71,6 +68,7 @@ class PushCommand extends AbstractCommand {
         String documentationPath = "";
         String decisionsPath = "";
         String passphrase = "";
+        boolean mergeFromRemote = true;
 
         try {
             CommandLine cmd = commandLineParser.parse(options, args);
@@ -83,6 +81,7 @@ class PushCommand extends AbstractCommand {
             documentationPath = cmd.getOptionValue("docs");
             decisionsPath = cmd.getOptionValue("adrs");
             passphrase = cmd.getOptionValue("passphrase");
+            mergeFromRemote = Boolean.parseBoolean(cmd.getOptionValue("merge", "true"));
 
             if (StringUtils.isNullOrEmpty(workspacePath) && StringUtils.isNullOrEmpty(documentationPath) && StringUtils.isNullOrEmpty(decisionsPath)) {
                 System.out.println("One of -workspace, -docs, or -adrs must be specified");
@@ -120,6 +119,7 @@ class PushCommand extends AbstractCommand {
 
             if (workspacePath.endsWith(".json")) {
                 workspace = WorkspaceUtils.loadWorkspaceFromJson(path);
+                workspace.setRevision(null);
             } else {
                 StructurizrDslParser structurizrDslParser = new StructurizrDslParser();
                 structurizrDslParser.parse(path);
@@ -127,7 +127,8 @@ class PushCommand extends AbstractCommand {
                 workspace = structurizrDslParser.getWorkspace();
             }
 
-            structurizrClient.setMergeFromRemote(true);
+            System.out.println(" - merge layout from remote: " + mergeFromRemote);
+            structurizrClient.setMergeFromRemote(mergeFromRemote);
 
             addDefaultViewsAndStyles(workspace);
         } else {
