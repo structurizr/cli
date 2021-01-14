@@ -122,7 +122,8 @@ class ExportCommand extends AbstractCommand {
         outputDir.mkdirs();
 
         if (JSON_FORMAT.equalsIgnoreCase(format)) {
-            File file = new File(outputPath, String.format("%s.json", prefix(workspaceId)));
+            String filename = workspacePath.getName().substring(0, workspacePath.getName().lastIndexOf('.'));
+            File file = new File(outputPath, String.format("%s.json", filename));
             System.out.println(" - writing " + file.getCanonicalPath());
             WorkspaceUtils.saveWorkspaceToJson(workspace, file);
         } else if (format.startsWith(PLANTUML_FORMAT)) {
