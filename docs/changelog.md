@@ -1,9 +1,11 @@
 # Changelog
 
-## 1.8.0 (unreleased)
+## 1.8.0 (28th January 2021)
 
 - Adds support for locking and unlocking Structurizr workspaces.
 - Adds support for other PlantUML writers (issue #23).
+- Added a mergeFromRemote option to the push command, to control whether layout information is merged or not.
+- Bug fixes.
 
 ## 1.7.0 (6th January 2021)
 
