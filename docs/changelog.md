@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.8.1 (4th February 2021)
+
+- Bug fixes.
+
 ## 1.8.0 (28th January 2021)
 
 - Adds support for locking and unlocking Structurizr workspaces.
