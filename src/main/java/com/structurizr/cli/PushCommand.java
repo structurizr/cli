@@ -106,9 +106,11 @@ class PushCommand extends AbstractCommand {
         }
 
         Workspace workspace;
+        File archivePath = new File(".");
 
         if (!StringUtils.isNullOrEmpty(workspacePath)) {
             File path = new File(workspacePath);
+            archivePath = path.getParentFile();
             if (!path.exists()) {
                 System.out.println(" - workspace path " + workspacePath + " does not exist");
                 System.exit(1);
@@ -179,6 +181,9 @@ class PushCommand extends AbstractCommand {
             AdrToolsImporter adrToolsImporter = new AdrToolsImporter(workspace, path);
             adrToolsImporter.importArchitectureDecisionRecords();
         }
+
+        structurizrClient.setWorkspaceArchiveLocation(archivePath);
+        System.out.println(" - storing previous version of workspace in " + structurizrClient.getWorkspaceArchiveLocation());
 
         System.out.println(" - pushing workspace");
         structurizrClient.putWorkspace(workspaceId, workspace);
