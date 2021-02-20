@@ -12,6 +12,7 @@ If you don't define any views yourself, the Structurizr CLI will automatically c
 - A Component view will be created for each container that has one or more components. All components belonging to the container in scope will be added to the view, along with all people, software systems and containers (belonging to the software system in scope) directly connected to those components.
 - A Deployment View will be created for each combination of deployment environment and software system that includes one or more container instances. If a deployment environment doesn't have any container instances, a Deployment View will created for that deployment environment if it has infrastructure nodes.
 
+
 As an example, the following DSL fragment will generate six views as follows:
 
 - System Landscape view
@@ -58,6 +59,8 @@ workspace {
 
 }
 ```
+
+All of these views will have autolayout enabled. If you do not want this behaviour, you will need to manually define your views.
 
 ## Styles
 
