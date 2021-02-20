@@ -1,6 +1,7 @@
 package com.structurizr.cli;
 
 import com.structurizr.Workspace;
+import com.structurizr.dsl.StructurizrDslFormatter;
 import com.structurizr.dsl.StructurizrDslParser;
 import com.structurizr.io.ilograph.IlographWriter;
 import com.structurizr.io.mermaid.MermaidDiagram;
@@ -27,6 +28,7 @@ class ExportCommand extends AbstractCommand {
     private static final int HTTP_OK_STATUS = 200;
 
     private static final String JSON_FORMAT = "json";
+    private static final String DSL_FORMAT = "dsl";
     private static final String PLANTUML_FORMAT = "plantuml";
     private static final String PLANTUML_C4PLANTUML_SUBFORMAT = "c4plantuml";
     private static final String PLANTUML_BASIC_SUBFORMAT = "basic";
@@ -46,7 +48,7 @@ class ExportCommand extends AbstractCommand {
         option.setRequired(true);
         options.addOption(option);
 
-        option = new Option("f", "format", true, String.format("Export format: %s|%s|%s|%s|%s", PLANTUML_FORMAT, WEBSEQUENCEDIAGRAMS_FORMAT, MERMAID_FORMAT, ILOGRAPH_FORMAT, JSON_FORMAT));
+        option = new Option("f", "format", true, String.format("Export format: %s|%s|%s|%s|%s|%s", PLANTUML_FORMAT, WEBSEQUENCEDIAGRAMS_FORMAT, MERMAID_FORMAT, ILOGRAPH_FORMAT, JSON_FORMAT, DSL_FORMAT));
         option.setRequired(true);
         options.addOption(option);
 
@@ -111,8 +113,11 @@ class ExportCommand extends AbstractCommand {
 
         workspaceId = workspace.getId();
 
-        ThemeUtils.loadStylesFromThemes(workspace);
-        addDefaultViewsAndStyles(workspace);
+        if (!JSON_FORMAT.equalsIgnoreCase(format) && !DSL_FORMAT.equalsIgnoreCase(format)) {
+            // only inline the theme amd create default views if the user wants a diagram export
+            ThemeUtils.loadStylesFromThemes(workspace);
+            addDefaultViewsAndStyles(workspace);
+        }
 
         if (outputPath == null) {
             outputPath = new File(workspacePath.getCanonicalPath()).getParent();
@@ -126,6 +131,14 @@ class ExportCommand extends AbstractCommand {
             File file = new File(outputPath, String.format("%s.json", filename));
             System.out.println(" - writing " + file.getCanonicalPath());
             WorkspaceUtils.saveWorkspaceToJson(workspace, file);
+        } else if (DSL_FORMAT.equalsIgnoreCase(format)) {
+            String filename = workspacePath.getName().substring(0, workspacePath.getName().lastIndexOf('.'));
+            File file = new File(outputPath, String.format("%s.dsl", filename));
+
+            StructurizrDslFormatter structurizrDslFormatter = new StructurizrDslFormatter();
+            String dsl = structurizrDslFormatter.format(WorkspaceUtils.toJson(workspace, false));
+
+            writeToFile(file, dsl);
         } else if (format.startsWith(PLANTUML_FORMAT)) {
             PlantUMLWriter plantUMLWriter;
 

@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.8.2 (unreleased)
+
+- Adds support for exporting a (JSON) workspace to Structurizr DSL format.
+
 ## 1.8.1 (4th February 2021)
 
 - Bug fixes.
