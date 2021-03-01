@@ -40,9 +40,9 @@ And to upgrade:
 scoop update structurizr-cli
 ```
 
-### Docker
+### Docker, dev containers, etc
 
-The Structurizr CLI can be built into a Docker container. See [leopoldodonnell/structurizr-cli-docker](https://github.com/leopoldodonnell/structurizr-cli-docker) or [aidmax/structurizr-cli-docker](https://github.com/aidmax/structurizr-cli-docker) for details.
+The Structurizr CLI can be built into a container, to avoid installing it locally. See [leopoldodonnell/structurizr-cli-docker](https://github.com/leopoldodonnell/structurizr-cli-docker) or [aidmax/structurizr-cli-docker](https://github.com/aidmax/structurizr-cli-docker) for some Docker examples. Alternatively, if you're using Visual Studio, take a look at [evilpilaf/structurizr-remotecontainer](https://github.com/evilpilaf/structurizr-remotecontainer).
 
 ### Build from source
 
