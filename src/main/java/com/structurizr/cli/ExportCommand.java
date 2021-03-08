@@ -41,7 +41,7 @@ class ExportCommand extends AbstractCommand {
         option.setRequired(true);
         options.addOption(option);
 
-        option = new Option("f", "format", true, String.format("Export format: %s|%s|%s|%s|%s|%s", PLANTUML_FORMAT, WEBSEQUENCEDIAGRAMS_FORMAT, MERMAID_FORMAT, ILOGRAPH_FORMAT, JSON_FORMAT, DSL_FORMAT));
+        option = new Option("f", "format", true, String.format("Export format: %s[/%s|%s|%s]|%s|%s|%s|%s|%s", PLANTUML_FORMAT, PLANTUML_STRUCTURIZR_SUBFORMAT, PLANTUML_BASIC_SUBFORMAT, PLANTUML_C4PLANTUML_SUBFORMAT, WEBSEQUENCEDIAGRAMS_FORMAT, MERMAID_FORMAT, ILOGRAPH_FORMAT, JSON_FORMAT, DSL_FORMAT));
         option.setRequired(true);
         options.addOption(option);
 
@@ -67,6 +67,7 @@ class ExportCommand extends AbstractCommand {
 
         } catch (ParseException e) {
             System.out.println(e.getMessage());
+            formatter.setWidth(150);
             formatter.printHelp("export", options);
 
             System.exit(1);
