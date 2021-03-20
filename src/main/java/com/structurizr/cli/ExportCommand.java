@@ -8,9 +8,9 @@ import com.structurizr.io.mermaid.MermaidDiagram;
 import com.structurizr.io.mermaid.MermaidWriter;
 import com.structurizr.io.plantuml.*;
 import com.structurizr.io.websequencediagrams.WebSequenceDiagramsWriter;
-import com.structurizr.util.ThemeUtils;
 import com.structurizr.util.WorkspaceUtils;
 import com.structurizr.view.DynamicView;
+import com.structurizr.view.ThemeUtils;
 import org.apache.commons.cli.*;
 
 import java.io.BufferedWriter;
@@ -109,7 +109,7 @@ class ExportCommand extends AbstractCommand {
 
         if (!JSON_FORMAT.equalsIgnoreCase(format) && !DSL_FORMAT.equalsIgnoreCase(format)) {
             // only inline the theme amd create default views if the user wants a diagram export
-            ThemeUtils.loadStylesFromThemes(workspace);
+            ThemeUtils.loadThemes(workspace);
             addDefaultViewsAndStyles(workspace);
         }
 
