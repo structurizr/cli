@@ -3,6 +3,7 @@
 ## 1.8.2 (unreleased)
 
 - Adds support for exporting a (JSON) workspace to Structurizr DSL format.
+- Adds a `validate` command.
 
 ## 1.8.1 (4th February 2021)
 
