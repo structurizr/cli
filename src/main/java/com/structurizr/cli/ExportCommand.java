@@ -134,7 +134,7 @@ class ExportCommand extends AbstractCommand {
 
             writeToFile(file, dsl);
         } else if (format.startsWith(PLANTUML_FORMAT)) {
-            PlantUMLWriter plantUMLWriter;
+            PlantUMLWriter plantUMLWriter = null;
 
             String[] tokens = format.split("/");
             String subformat = PLANTUML_STRUCTURIZR_SUBFORMAT;
@@ -149,10 +149,15 @@ class ExportCommand extends AbstractCommand {
                 case PLANTUML_BASIC_SUBFORMAT:
                     plantUMLWriter = new BasicPlantUMLWriter();
                     break;
-                default:
+                case PLANTUML_STRUCTURIZR_SUBFORMAT:
                     plantUMLWriter = new StructurizrPlantUMLWriter();
                     break;
+                default:
+                    System.out.println(" - unknown PlantUML subformat: " + subformat);
+                    System.exit(1);
             }
+
+            System.out.println(" - using " + plantUMLWriter.getClass().getSimpleName());
 
             if (workspace.getViews().isEmpty()) {
                 System.out.println(" - the workspace contains no views");
