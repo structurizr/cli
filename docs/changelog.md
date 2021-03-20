@@ -5,7 +5,7 @@
 - Adds support for exporting a JSON workspace to Structurizr DSL format.
 - Adds support for adding individual infrastructure nodes, software system instances, and container instances to a deployment view.
 - Adds support for removing software system instances from deployment views.
-- Adds support for "deployment groups", providing a way to scope how software system/container instance relationships are replicated when added to deployment nodes. __breaking change__
+- Adds support for "deployment groups", providing a way to scope how software system/container instance relationships are replicated when added to deployment nodes.
 - Adds support for including/excluding elements on static views based upon tags (https://github.com/structurizr/dsl/issues/35).
 - Adds a `validate` command.
 - Improved support for themes (e.g. when exporting to PlantUML), which now works the same as described at [Structurizr - Themes](https://structurizr.com/help/themes).
