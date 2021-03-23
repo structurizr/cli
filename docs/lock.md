@@ -14,4 +14,4 @@ The ```lock``` command allows you to lock a Structurizr workspace (the cloud ser
 To lock a Structurizr workspace:
 
 ```
-java -jar structurizr-cli-*.jar lock -id 40120 -key 1a130d2b... -secret a9daaf3e...```
+./structurizr.sh lock -id 123456 -key 1a130d2b... -secret a9daaf3e...```

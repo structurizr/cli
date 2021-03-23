@@ -17,30 +17,30 @@ The PlantUML export format can also be specified with a sub-format: `plantuml/st
 To export all views in a JSON workspace to PlantUML format under folder named 'diagrams':
 
 ```
-java -jar structurizr-cli-*.jar export -workspace myworkspace.json -format plantuml -output diagrams
+./structurizr.sh export -workspace workspace.json -format plantuml -output diagrams
 ```
 
 To export all views in a JSON workspace to PlantUML format, using C4-PlantUML, under folder named 'diagrams':
 
 ```
-java -jar structurizr-cli-*.jar export -workspace myworkspace.json -format plantuml/c4plantuml -output diagrams
+./structurizr.sh export -workspace workspace.json -format plantuml/c4plantuml -output diagrams
 ```
 
 To export all views in a JSON workspace to Mermaid format:
 
 ```
-java -jar structurizr-cli-*.jar export -workspace myworkspace.json -format mermaid
+./structurizr.sh export -workspace workspace.json -format mermaid
 ```
 
 To export all dynamic views in a DSL workspace to WebSequenceDiagrams format:
 
 ```
-java -jar structurizr-cli-*.jar export -workspace myworkspace.dsl -format websequencediagrams
+./structurizr.sh export -workspace workspace.dsl -format websequencediagrams
 ```
 
 To export a DSL workspace to the JSON workspace format:
 
 ```
-java -jar structurizr-cli-*.jar export -workspace myworkspace.dsl -format json
+./structurizr.sh export -workspace workspace.dsl -format json
 ```
 

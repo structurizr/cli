@@ -11,4 +11,5 @@ The ```validate``` command allows you to validate a JSON/DSL workspace definitio
 To validate a JSON workspace definition:
 
 ```
-java -jar structurizr-cli-*.jar validate -workspace myworkspace.json
+./structurizr.sh validate -workspace workspace.json
+```

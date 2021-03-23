@@ -14,4 +14,5 @@ The ```unlock``` command allows you to unlock a Structurizr workspace (the cloud
 To unlock a Structurizr workspace:
 
 ```
-java -jar structurizr-cli-*.jar unlock -id 40120 -key 1a130d2b... -secret a9daaf3e...```
+./structurizr.sh unlock -id 123456 -key 1a130d2b... -secret a9daaf3e...
+```

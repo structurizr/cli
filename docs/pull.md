@@ -14,4 +14,5 @@ The ```pull``` command allows you to pull content from a Structurizr workspace (
 To pull the content of a Structurizr workspace:
 
 ```
-java -jar structurizr-cli-*.jar pull -id 40120 -key 1a130d2b... -secret a9daaf3e...```
+./structurizr.sh pull -id 123456 -key 1a130d2b... -secret a9daaf3e...
+```

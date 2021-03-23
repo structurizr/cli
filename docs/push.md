@@ -2,10 +2,12 @@
 
 The ```push``` command allows you to push content to a Structurizr workspace (the cloud service or an on-premises installation). The command operates as follows:
 
-1. Pull the existing workspace, OR parse the specified DSL file to create a new workspace.
-2. Clear existing documentation and decisions from the workspace.
-3. Import documentation and/or decisions into the workspace.
-4. Push the workspace. 
+1. Create a workspace to operate on:
+	1. If `-workspace` is specified, the CLI will parse the specified DSL/JSON file.
+	2. If `-workspace` is not specified, the CLI will pull the existing version of the workspace via the web API, removing any existing documentation and decisions.
+3. If `-docs` is specified, that documentation is added to the workspace.
+4. If `-adrs` is specified, those decisions are added to the workspace.
+4. Push the workspace via the web API.
 
 ## Options
 
@@ -29,14 +31,21 @@ When the ```-adrs``` option is used, the ```push``` command will import all Mark
 
 ## Examples
 
+To push a new version of a workspace defined using the DSL:
+
+```
+./structurizr.sh push -id 123456 -key 1a130d2b... -secret a9daaf3e... -workspace workspace.dsl
+```
+
+
 To push a directory of Markdown and/or AsciiDoc files as documentation to an existing Structurizr workspace:
 
 ```
-java -jar structurizr-cli-*.jar push -id 40120 -key 1a130d2b... -secret a9daaf3e... -docs docs
+./structurizr.sh push -id 123456 -key 1a130d2b... -secret a9daaf3e... -docs docs
 ```
 
 To push a directory of ADRs as decision records to an existing Structurizr workspace:
 
 ```
-java -jar structurizr-cli-*.jar push -id 40120 -key 1a130d2b... -secret a9daaf3e... -adrs adrs
+./structurizr.sh push -id 123456 -key 1a130d2b... -secret a9daaf3e... -adrs adrs
 ```
