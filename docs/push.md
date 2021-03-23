@@ -2,7 +2,7 @@
 
 The ```push``` command allows you to push content to a Structurizr workspace (the cloud service or an on-premises installation). The command operates as follows:
 
-1. Pull the existing workspace, OR parse the specified DSL file to create a new workspace.
+1. Push the existing workspace, OR parse the specified DSL file to create a new workspace.
 2. Clear existing documentation and decisions from the workspace.
 3. Import documentation and/or decisions into the workspace.
 4. Push the workspace. 
