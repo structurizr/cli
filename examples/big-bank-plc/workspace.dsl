@@ -5,10 +5,10 @@ workspace "Big Bank plc" "This is an example workspace to illustrate the key fea
 
         enterprise "Big Bank plc" {
             supportStaff = person "Customer Service Staff" "Customer service staff within the bank." "Bank Staff"
-            backoffice = person "Back Office Staff" "Administration and support staff within the bank."
+            backoffice = person "Back Office Staff" "Administration and support staff within the bank." "Bank Staff"
 
             mainframe = softwaresystem "Mainframe Banking System" "Stores all of the core banking information about customers, accounts, transactions, etc." "Existing System"
-            email = softwaresystem "E-mail System" "The internal Microsoft Exchange e-mail system" "Existing System"
+            email = softwaresystem "E-mail System" "The internal Microsoft Exchange e-mail system." "Existing System"
             atm = softwaresystem "ATM" "Allows customers to withdraw cash." "Existing System"
 
             internetBankingSystem = softwaresystem "Internet Banking System" "Allows customers to view information about their bank accounts, and make payments." {
@@ -29,7 +29,7 @@ workspace "Big Bank plc" "This is an example workspace to illustrate the key fea
         }
 
         # relationships between people and software systems
-        uses = customer -> internetBankingSystem "Views account balances, and makes payments using"
+        customer -> internetBankingSystem "Views account balances, and makes payments using"
         internetBankingSystem -> mainframe "Gets account information from, and makes payments using"
         internetBankingSystem -> email "Sends e-mail using"
         email -> customer "Sends e-mails to"
@@ -77,6 +77,12 @@ workspace "Big Bank plc" "This is an example workspace to illustrate the key fea
                     }
                 }
             }
+            deploymentNode "Big Bank plc" "" "Big Bank plc data center" "" {
+                deploymentNode "bigbank-dev001" "" "" "" {
+                    softwareSystemInstance mainframe
+                }
+            }
+
         }
 
         deploymentEnvironment "Live" {
@@ -111,6 +117,9 @@ workspace "Big Bank plc" "This is an example workspace to illustrate the key fea
                         liveSecondaryDatabaseInstance = containerInstance database "Failover"
                     }
                 }
+                deploymentNode "bigbank-prod001" "" "" "" {
+                    softwareSystemInstance mainframe
+                }
             }
 
             primaryDatabaseServer -> secondaryDatabaseServer "Replicates data to"
@@ -125,55 +134,68 @@ workspace "Big Bank plc" "This is an example workspace to illustrate the key fea
 
         systemcontext internetBankingSystem "SystemContext" {
             include *
-            animationStep internetBankingSystem
-            animationStep customer
-            animationStep mainframe
-            animationStep email
+            animation {
+                internetBankingSystem
+                customer
+                mainframe
+                email
+            }
             autoLayout
         }
 
         container internetBankingSystem "Containers" {
             include *
-            animationStep customer mainframe email
-            animationStep webApplication
-            animationStep singlePageApplication
-            animationStep mobileApp
-            animationStep apiApplication
-            animationStep database
+            animation {
+                customer mainframe email
+                webApplication
+                singlePageApplication
+                mobileApp
+                apiApplication
+                database
+            }
             autoLayout
         }
 
         component apiApplication "Components" {
             include *
-            animationStep singlePageApplication mobileApp database email mainframe
-            animationStep signinController securityComponent
-            animationStep accountsSummaryController mainframeBankingSystemFacade
-            animationStep resetPasswordController emailComponent
+            animation {
+                singlePageApplication mobileApp database email mainframe
+                signinController securityComponent
+                accountsSummaryController mainframeBankingSystemFacade
+                resetPasswordController emailComponent
+            }
             autoLayout
         }
 
         dynamic apiApplication "SignIn" "Summarises how the sign in feature works in the single-page application." {
             singlePageApplication -> signinController "Submits credentials to"
-            signinController -> securityComponent "Calls isAuthenticated() on"
+            signinController -> securityComponent "Validates credentials using"
             securityComponent -> database "select * from users where username = ?"
+            database -> securityComponent "Returns user data to"
+            securityComponent -> signinController "Returns true if the hashed password matches"
+            signinController -> singlePageApplication "Sends back an authentication token to"
             autoLayout
         }
 
         deployment internetBankingSystem "Development" "DevelopmentDeployment" {
             include *
-            animationStep developerSinglePageApplicationInstance
-            animationStep developerWebApplicationInstance developerApiApplicationInstance
-            animationStep developerDatabaseInstance
+            animation {
+                developerSinglePageApplicationInstance
+                developerWebApplicationInstance developerApiApplicationInstance
+                developerDatabaseInstance
+            }
             autoLayout
         }
 
         deployment internetBankingSystem "Live" "LiveDeployment" {
             include *
-            animationStep liveSinglePageApplicationInstance
-            animationStep liveMobileAppInstance
-            animationStep liveWebApplicationInstance liveApiApplicationInstance
-            animationStep livePrimaryDatabaseInstance
-            animationStep liveSecondaryDatabaseInstance
+            animation {
+                liveSinglePageApplicationInstance
+                liveMobileAppInstance
+                liveWebApplicationInstance liveApiApplicationInstance
+                livePrimaryDatabaseInstance
+                liveSecondaryDatabaseInstance
+            }
             autoLayout
         }
 
