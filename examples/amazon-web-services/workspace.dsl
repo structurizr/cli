@@ -52,6 +52,6 @@ workspace "Amazon Web Services Example" "An example AWS deployment architecture.
             }
         }
 
-        themes https://static.structurizr.com/themes/amazon-web-services-2020.04.30/theme.json
+        themes "https://static.structurizr.com/themes/amazon-web-services-2020.04.30/theme.json"
     }
 }
