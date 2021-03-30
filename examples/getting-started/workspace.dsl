@@ -2,13 +2,13 @@ workspace "Getting Started" "This is a model of my software system." {
 
     model {
         user = person "User" "A user of my software system."
-        softwareSystem = softwareSystem "Software System" "My software system."
+        mySystem = softwareSystem "Software System" "My software system."
 
-        user -> softwareSystem "Uses"
+        user -> mySystem "Uses"
     }
 
     views {
-        systemContext softwareSystem "SystemContext" "An example of a System Context diagram." {
+        systemContext mySystem "SystemContext" "An example of a System Context diagram." {
             include *
             autoLayout
         }
@@ -19,7 +19,7 @@ workspace "Getting Started" "This is a model of my software system." {
                 color #ffffff
             }
             element "Person" {
-                shape person
+                shape Person
                 background #08427b
                 color #ffffff
             }
