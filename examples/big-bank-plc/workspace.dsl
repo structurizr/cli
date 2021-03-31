@@ -24,8 +24,10 @@ workspace "Big Bank plc" "This is an example workspace to illustrate the key fea
                     emailComponent = component "E-mail Component" "Sends e-mails to users." "Spring Bean"
                 }
                 database = container "Database" "Stores user registration information, hashed authentication credentials, access logs, etc." "Oracle Database Schema" "Database"
-            }
 
+                !docs docs
+                !adrs adrs
+            }
         }
 
         # relationships between people and software systems
