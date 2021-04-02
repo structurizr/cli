@@ -4,6 +4,8 @@ The ```export``` command allows you to export the views within a Structurizr wor
 Files will be created one per view that has been exported.
 If output directory is not specified, files will be created in the same directory as the workspace.
 
+Please note that some export formats do not support all of the available shapes/features - see [Structurizr - Rendering tools](https://structurizr.org/#rendering) for a comparison.
+
 ## Options
 
 - __-workspace__: The path or URL to the workspace JSON file/DSL file(s) (required)
