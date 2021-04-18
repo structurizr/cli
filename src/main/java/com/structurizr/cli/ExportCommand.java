@@ -16,6 +16,8 @@ import org.apache.commons.cli.*;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.Collection;
 
 class ExportCommand extends AbstractCommand {
@@ -232,7 +234,7 @@ class ExportCommand extends AbstractCommand {
     private void writeToFile(File file, String content) throws Exception {
         System.out.println(" - writing " + file.getCanonicalPath());
 
-        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+        BufferedWriter writer = Files.newBufferedWriter(file.toPath(), StandardCharsets.UTF_8);
         writer.write(content);
         writer.close();
     }
