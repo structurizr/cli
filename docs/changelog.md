@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.10.0 (27th April 2021)
+
+- Adds support for a DOT export.
+- Improvements to PlantUML and Mermaid and exporters (e.g. support for groups and "external" software system/container boundaries).
+- Adds a 'Diamond' shape.
+
 ## 1.9.0 (20th March 2021)
 
 - Adds support for exporting a JSON workspace to Structurizr DSL format.

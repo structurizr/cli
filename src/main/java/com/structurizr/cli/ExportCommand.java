@@ -3,11 +3,14 @@ package com.structurizr.cli;
 import com.structurizr.Workspace;
 import com.structurizr.dsl.StructurizrDslFormatter;
 import com.structurizr.dsl.StructurizrDslParser;
-import com.structurizr.io.ilograph.IlographWriter;
-import com.structurizr.io.mermaid.MermaidDiagram;
-import com.structurizr.io.mermaid.MermaidWriter;
-import com.structurizr.io.plantuml.*;
-import com.structurizr.io.websequencediagrams.WebSequenceDiagramsWriter;
+import com.structurizr.io.Diagram;
+import com.structurizr.io.dot.DOTExporter;
+import com.structurizr.io.ilograph.IlographExporter;
+import com.structurizr.io.mermaid.MermaidDiagramExporter;
+import com.structurizr.io.plantuml.AbstractPlantUMLExporter;
+import com.structurizr.io.plantuml.C4PlantUMLExporter;
+import com.structurizr.io.plantuml.StructurizrPlantUMLExporter;
+import com.structurizr.io.websequencediagrams.WebSequenceDiagramsExporter;
 import com.structurizr.util.WorkspaceUtils;
 import com.structurizr.view.DynamicView;
 import com.structurizr.view.ThemeUtils;
@@ -26,10 +29,10 @@ class ExportCommand extends AbstractCommand {
     private static final String DSL_FORMAT = "dsl";
     private static final String PLANTUML_FORMAT = "plantuml";
     private static final String PLANTUML_C4PLANTUML_SUBFORMAT = "c4plantuml";
-    private static final String PLANTUML_BASIC_SUBFORMAT = "basic";
     private static final String PLANTUML_STRUCTURIZR_SUBFORMAT = "structurizr";
     private static final String WEBSEQUENCEDIAGRAMS_FORMAT = "websequencediagrams";
     private static final String MERMAID_FORMAT = "mermaid";
+    private static final String DOT_FORMAT = "dot";
     private static final String ILOGRAPH_FORMAT = "ilograph";
 
     ExportCommand(String version) {
@@ -43,7 +46,7 @@ class ExportCommand extends AbstractCommand {
         option.setRequired(true);
         options.addOption(option);
 
-        option = new Option("f", "format", true, String.format("Export format: %s[/%s|%s|%s]|%s|%s|%s|%s|%s", PLANTUML_FORMAT, PLANTUML_STRUCTURIZR_SUBFORMAT, PLANTUML_BASIC_SUBFORMAT, PLANTUML_C4PLANTUML_SUBFORMAT, WEBSEQUENCEDIAGRAMS_FORMAT, MERMAID_FORMAT, ILOGRAPH_FORMAT, JSON_FORMAT, DSL_FORMAT));
+        option = new Option("f", "format", true, String.format("Export format: %s[/%s|%s]|%s|%s|%s|%s|%s|%s", PLANTUML_FORMAT, PLANTUML_STRUCTURIZR_SUBFORMAT, PLANTUML_C4PLANTUML_SUBFORMAT, WEBSEQUENCEDIAGRAMS_FORMAT, MERMAID_FORMAT, DOT_FORMAT, ILOGRAPH_FORMAT, JSON_FORMAT, DSL_FORMAT));
         option.setRequired(true);
         options.addOption(option);
 
@@ -136,7 +139,7 @@ class ExportCommand extends AbstractCommand {
 
             writeToFile(file, dsl);
         } else if (format.startsWith(PLANTUML_FORMAT)) {
-            PlantUMLWriter plantUMLWriter = null;
+            AbstractPlantUMLExporter plantUMLExporter = null;
 
             String[] tokens = format.split("/");
             String subformat = PLANTUML_STRUCTURIZR_SUBFORMAT;
@@ -146,74 +149,74 @@ class ExportCommand extends AbstractCommand {
 
             switch (subformat) {
                 case PLANTUML_C4PLANTUML_SUBFORMAT:
-                    plantUMLWriter = new C4PlantUMLWriter();
-                    break;
-                case PLANTUML_BASIC_SUBFORMAT:
-                    plantUMLWriter = new BasicPlantUMLWriter();
+                    plantUMLExporter = new C4PlantUMLExporter();
                     break;
                 case PLANTUML_STRUCTURIZR_SUBFORMAT:
-                    plantUMLWriter = new StructurizrPlantUMLWriter();
+                    plantUMLExporter = new StructurizrPlantUMLExporter();
                     break;
                 default:
                     System.out.println(" - unknown PlantUML subformat: " + subformat);
                     System.exit(1);
             }
 
-            System.out.println(" - using " + plantUMLWriter.getClass().getSimpleName());
+            System.out.println(" - using " + plantUMLExporter.getClass().getSimpleName());
 
             if (workspace.getViews().isEmpty()) {
                 System.out.println(" - the workspace contains no views");
             } else {
-                plantUMLWriter.setUseSequenceDiagrams(false);
-                Collection<PlantUMLDiagram> diagrams = plantUMLWriter.toPlantUMLDiagrams(workspace);
+                plantUMLExporter.setUseSequenceDiagrams(false);
+                Collection<Diagram> diagrams = plantUMLExporter.export(workspace);
 
-                for (PlantUMLDiagram diagram : diagrams) {
+                for (Diagram diagram : diagrams) {
                     File file = new File(outputPath, String.format("%s-%s.puml", prefix(workspaceId), diagram.getKey()));
                     writeToFile(file, diagram.getDefinition());
                 }
 
-                plantUMLWriter.setUseSequenceDiagrams(true);
+                plantUMLExporter.setUseSequenceDiagrams(true);
                 for (DynamicView dynamicView : workspace.getViews().getDynamicViews()) {
-                    String definition = plantUMLWriter.toString(dynamicView);
+                    Diagram diagram = plantUMLExporter.export(dynamicView);
 
                     File file = new File(outputPath, String.format("%s-%s-sequence.puml", prefix(workspaceId), dynamicView.getKey()));
-                    writeToFile(file, definition);
+                    writeToFile(file, diagram.getDefinition());
                 }
             }
         } else if (MERMAID_FORMAT.equalsIgnoreCase(format)) {
             if (workspace.getViews().isEmpty()) {
                 System.out.println(" - the workspace contains no views");
             } else {
-                MermaidWriter mermaidWriter = new MermaidWriter();
-                mermaidWriter.setUseSequenceDiagrams(false);
-                Collection<MermaidDiagram> diagrams = mermaidWriter.toMermaidDiagrams(workspace);
+                MermaidDiagramExporter mermaidDiagramExporter = new MermaidDiagramExporter();
+                Collection<Diagram> diagrams = mermaidDiagramExporter.export(workspace);
 
-                for (MermaidDiagram diagram : diagrams) {
+                for (Diagram diagram : diagrams) {
                     File file = new File(outputPath, String.format("%s-%s.mmd", prefix(workspaceId), diagram.getKey()));
                     writeToFile(file, diagram.getDefinition());
                 }
-
-                mermaidWriter.setUseSequenceDiagrams(true);
-                for (DynamicView dynamicView : workspace.getViews().getDynamicViews()) {
-                    String definition = mermaidWriter.toString(dynamicView);
-
-                    File file = new File(outputPath, String.format("%s-%s-sequence.mmd", prefix(workspaceId), dynamicView.getKey()));
-                    writeToFile(file, definition);
-                }
             }
         } else if (WEBSEQUENCEDIAGRAMS_FORMAT.equalsIgnoreCase(format)) {
-            WebSequenceDiagramsWriter webSequenceDiagramsWriter = new WebSequenceDiagramsWriter();
+            WebSequenceDiagramsExporter webSequenceDiagramsExporter = new WebSequenceDiagramsExporter();
             if (workspace.getViews().getDynamicViews().isEmpty()) {
                 System.out.println(" - the workspace contains no dynamic views");
             } else {
                 for (DynamicView dynamicView : workspace.getViews().getDynamicViews()) {
-                    String definition = webSequenceDiagramsWriter.toString(dynamicView);
+                    Diagram diagram = webSequenceDiagramsExporter.export(dynamicView);
                     File file = new File(outputPath, String.format("%s-%s.wsd", prefix(workspaceId), dynamicView.getKey()));
-                    writeToFile(file, definition);
+                    writeToFile(file, diagram.getDefinition());
+                }
+            }
+        } else if (DOT_FORMAT.equalsIgnoreCase(format)) {
+            if (workspace.getViews().isEmpty()) {
+                System.out.println(" - the workspace contains no views");
+            } else {
+                DOTExporter dotExporter = new DOTExporter();
+                Collection<Diagram> diagrams = dotExporter.export(workspace);
+
+                for (Diagram diagram : diagrams) {
+                    File file = new File(outputPath, String.format("%s-%s.dot", prefix(workspaceId), diagram.getKey()));
+                    writeToFile(file, diagram.getDefinition());
                 }
             }
         } else if (ILOGRAPH_FORMAT.equalsIgnoreCase(format)) {
-            String ilographDefinition = new IlographWriter().toString(workspace);
+            String ilographDefinition = new IlographExporter().export(workspace);
             File file = new File(outputPath, String.format("%s.idl", prefix(workspaceId)));
             writeToFile(file, ilographDefinition);
         } else {
