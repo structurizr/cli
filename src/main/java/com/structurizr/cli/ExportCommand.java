@@ -140,6 +140,7 @@ class ExportCommand extends AbstractCommand {
             writeToFile(file, dsl);
         } else if (format.startsWith(PLANTUML_FORMAT)) {
             AbstractPlantUMLExporter plantUMLExporter = null;
+            boolean useSequenceDiagrams = true;
 
             String[] tokens = format.split("/");
             String subformat = PLANTUML_STRUCTURIZR_SUBFORMAT;
@@ -150,9 +151,11 @@ class ExportCommand extends AbstractCommand {
             switch (subformat) {
                 case PLANTUML_C4PLANTUML_SUBFORMAT:
                     plantUMLExporter = new C4PlantUMLExporter();
+                    useSequenceDiagrams = false;
                     break;
                 case PLANTUML_STRUCTURIZR_SUBFORMAT:
                     plantUMLExporter = new StructurizrPlantUMLExporter();
+                    useSequenceDiagrams = true;
                     break;
                 default:
                     System.out.println(" - unknown PlantUML subformat: " + subformat);
@@ -172,12 +175,14 @@ class ExportCommand extends AbstractCommand {
                     writeToFile(file, diagram.getDefinition());
                 }
 
-                plantUMLExporter.setUseSequenceDiagrams(true);
-                for (DynamicView dynamicView : workspace.getViews().getDynamicViews()) {
-                    Diagram diagram = plantUMLExporter.export(dynamicView);
+                if (useSequenceDiagrams) {
+                    plantUMLExporter.setUseSequenceDiagrams(true);
+                    for (DynamicView dynamicView : workspace.getViews().getDynamicViews()) {
+                        Diagram diagram = plantUMLExporter.export(dynamicView);
 
-                    File file = new File(outputPath, String.format("%s-%s-sequence.puml", prefix(workspaceId), dynamicView.getKey()));
-                    writeToFile(file, diagram.getDefinition());
+                        File file = new File(outputPath, String.format("%s-%s-sequence.puml", prefix(workspaceId), dynamicView.getKey()));
+                        writeToFile(file, diagram.getDefinition());
+                    }
                 }
             }
         } else if (MERMAID_FORMAT.equalsIgnoreCase(format)) {
