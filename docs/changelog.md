@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.11.0 (unreleased)
+
+- Adds a `-archive` option to the `push` command (determines whether to store the previous version of the remote workspace).
+
 ## 1.10.1 (29th April 2021)
 
 - Prevents the sequence diagram variant of dynamic views from being created when exporting as `plantuml/c4plantuml`, as C4-PlantUML doesn't "natively" support a sequence diagram (issue #39).

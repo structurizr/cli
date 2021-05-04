@@ -20,6 +20,7 @@ The ```push``` command allows you to push content to a Structurizr workspace (th
 - __-url__: The Structurizr API URL (optional; defaults to ```https://api.structurizr.com```)
 - __-passphrase__: The passphrase to use (optional; only required if client-side encryption enabled on the workspace)
 - __-merge__: Whether to merge layout information from the remote workspace (optional; defaults to `true`)
+- __-archive__: Whether to store the previous version of the remote workspace (optional; default to `true`)
 
 ## Documentation
 

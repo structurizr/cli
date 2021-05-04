@@ -57,6 +57,10 @@ class PushCommand extends AbstractCommand {
         option.setRequired(false);
         options.addOption(option);
 
+        option = new Option("archive", "archive", true, "Stores the previous version of the remote workspace");
+        option.setRequired(false);
+        options.addOption(option);
+
         CommandLineParser commandLineParser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
 
@@ -69,6 +73,7 @@ class PushCommand extends AbstractCommand {
         String decisionsPath = "";
         String passphrase = "";
         boolean mergeFromRemote = true;
+        boolean archive = true;
 
         try {
             CommandLine cmd = commandLineParser.parse(options, args);
@@ -82,6 +87,7 @@ class PushCommand extends AbstractCommand {
             decisionsPath = cmd.getOptionValue("adrs");
             passphrase = cmd.getOptionValue("passphrase");
             mergeFromRemote = Boolean.parseBoolean(cmd.getOptionValue("merge", "true"));
+            archive = Boolean.parseBoolean(cmd.getOptionValue("archive", "true"));
 
             if (StringUtils.isNullOrEmpty(workspacePath) && StringUtils.isNullOrEmpty(documentationPath) && StringUtils.isNullOrEmpty(decisionsPath)) {
                 System.out.println("One of -workspace, -docs, or -adrs must be specified");
@@ -182,8 +188,10 @@ class PushCommand extends AbstractCommand {
             adrToolsImporter.importArchitectureDecisionRecords();
         }
 
-        structurizrClient.setWorkspaceArchiveLocation(archivePath);
-        System.out.println(" - storing previous version of workspace in " + structurizrClient.getWorkspaceArchiveLocation());
+        if (archive) {
+            structurizrClient.setWorkspaceArchiveLocation(archivePath);
+            System.out.println(" - storing previous version of workspace in " + structurizrClient.getWorkspaceArchiveLocation());
+        }
 
         System.out.println(" - pushing workspace");
         structurizrClient.putWorkspace(workspaceId, workspace);
