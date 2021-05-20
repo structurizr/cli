@@ -20,6 +20,7 @@ public class StructurizrCliApplication implements CommandLineRunner {
 	private static final String UNLOCK_COMMAND = "unlock";
 	private static final String EXPORT_COMMAND = "export";
 	private static final String VALIDATE_COMMAND = "validate";
+	private static final String LIST_COMMAND = "list";
 
 	@Autowired
 	private ApplicationContext context;
@@ -28,8 +29,6 @@ public class StructurizrCliApplication implements CommandLineRunner {
 	public void run(String... args) {
 		try {
 			String version = context.getBean(BuildProperties.class).getVersion();
-			System.out.println("Structurizr CLI v" + version);
-
 			checkJavaVersion();
 
 			if (args == null || args.length == 0) {
@@ -48,6 +47,8 @@ public class StructurizrCliApplication implements CommandLineRunner {
 				new ExportCommand(version).run(Arrays.copyOfRange(args, 1, args.length));
 			} else if (VALIDATE_COMMAND.equalsIgnoreCase(args[0])) {
 				new ValidateCommand(version).run(Arrays.copyOfRange(args, 1, args.length));
+			} else if (LIST_COMMAND.equalsIgnoreCase(args[0])) {
+				new ListCommand(version).run(Arrays.copyOfRange(args, 1, args.length));
 			} else {
 				printUsageMessageAndExit();
 			}
@@ -58,7 +59,9 @@ public class StructurizrCliApplication implements CommandLineRunner {
 	}
 
 	private void printUsageMessageAndExit() {
-		System.out.println("Usage: structurizr push|pull|lock|unlock|export|validate [options]");
+		String version = context.getBean(BuildProperties.class).getVersion();
+		System.out.println("Structurizr CLI v" + version);
+		System.out.println("Usage: structurizr push|pull|lock|unlock|export|validate|list [options]");
 		System.exit(1);
 	}
 
