@@ -61,33 +61,3 @@ workspace {
 ```
 
 All of these views will have autolayout enabled. If you do not want this behaviour, you will need to manually define your views.
-
-## Styles
-
-If you don't define any styles or themes, the following styles will be added for you.
-
-```
-element "Element" {
-    shape roundedbox
-}
-element "Software System" {
-    background #1168bd
-    color #ffffff
-}
-element "Container" {
-    background #438dd5
-    color #ffffff
-}
-element "Component" {
-    background #85bbf0
-    color #000000
-}
-element "Person" {
-    background #08427b
-    color #ffffff
-    shape person
-}
-element "Infrastructure Node" {
-    background #ffffff
-}
-```

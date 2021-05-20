@@ -98,7 +98,7 @@ This DSL definition:
 - create a System Context view for the software system
 - creates some element styles that will be applied when rendering the diagram
 
-Please note that the Structurizr CLI will create some default views and styles for you if you don't define them yourself in the DSL. See [Defaults](defaults.md) for more details.
+Please note that the Structurizr CLI will create some default views for you if you don't define them yourself in the DSL. See [Defaults](defaults.md) for more details.
 
 ## 3. Render with Structurizr, or export to other diagram formats
 

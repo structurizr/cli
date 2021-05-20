@@ -35,8 +35,7 @@ abstract class AbstractCommand {
 
         Styles styles = workspace.getViews().getConfiguration().getStyles();
         if (styles.getElements().isEmpty() && styles.getRelationships().isEmpty() && workspace.getViews().getConfiguration().getThemes() == null) {
-            System.out.println(" - no styles or themes defined; creating default styles");
-            styles.addDefaultStyles();
+            System.out.println(" - no styles or themes defined; use the \"default\" theme to add some default styles");
         }
     }
 
