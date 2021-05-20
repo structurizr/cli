@@ -26,6 +26,7 @@ import java.util.Collection;
 class ExportCommand extends AbstractCommand {
 
     private static final String JSON_FORMAT = "json";
+    private static final String THEME_FORMAT = "theme";
     private static final String DSL_FORMAT = "dsl";
     private static final String PLANTUML_FORMAT = "plantuml";
     private static final String PLANTUML_C4PLANTUML_SUBFORMAT = "c4plantuml";
@@ -46,7 +47,7 @@ class ExportCommand extends AbstractCommand {
         option.setRequired(true);
         options.addOption(option);
 
-        option = new Option("f", "format", true, String.format("Export format: %s[/%s|%s]|%s|%s|%s|%s|%s|%s", PLANTUML_FORMAT, PLANTUML_STRUCTURIZR_SUBFORMAT, PLANTUML_C4PLANTUML_SUBFORMAT, WEBSEQUENCEDIAGRAMS_FORMAT, MERMAID_FORMAT, DOT_FORMAT, ILOGRAPH_FORMAT, JSON_FORMAT, DSL_FORMAT));
+        option = new Option("f", "format", true, String.format("Export format: %s[/%s|%s]|%s|%s|%s|%s|%s|%s|%s", PLANTUML_FORMAT, PLANTUML_STRUCTURIZR_SUBFORMAT, PLANTUML_C4PLANTUML_SUBFORMAT, WEBSEQUENCEDIAGRAMS_FORMAT, MERMAID_FORMAT, DOT_FORMAT, ILOGRAPH_FORMAT, JSON_FORMAT, DSL_FORMAT, THEME_FORMAT));
         option.setRequired(true);
         options.addOption(option);
 
@@ -130,6 +131,11 @@ class ExportCommand extends AbstractCommand {
             File file = new File(outputPath, String.format("%s.json", filename));
             System.out.println(" - writing " + file.getCanonicalPath());
             WorkspaceUtils.saveWorkspaceToJson(workspace, file);
+        } else if (THEME_FORMAT.equalsIgnoreCase(format)) {
+            String filename = workspacePath.getName().substring(0, workspacePath.getName().lastIndexOf('.'));
+            File file = new File(outputPath, String.format("%s-theme.json", filename));
+            System.out.println(" - writing " + file.getCanonicalPath());
+            ThemeUtils.toJson(workspace, file);
         } else if (DSL_FORMAT.equalsIgnoreCase(format)) {
             String filename = workspacePath.getName().substring(0, workspacePath.getName().lastIndexOf('.'));
             File file = new File(outputPath, String.format("%s.dsl", filename));

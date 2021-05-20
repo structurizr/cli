@@ -9,7 +9,7 @@ Please note that some export formats do not support all of the available shapes/
 ## Options
 
 - __-workspace__: The path or URL to the workspace JSON file/DSL file(s) (required)
-- __-format__: plantuml|mermaid|websequencediagrams|dot|ilograph|json|dsl (required)
+- __-format__: plantuml|mermaid|websequencediagrams|dot|ilograph|json|dsl|theme (required)
 - __-output__: Relative or absolute path to an output directory (optional)
 
 The PlantUML export format can also be specified with a sub-format: `plantuml/structurizr` (default) or `plantuml/c4plantuml`.

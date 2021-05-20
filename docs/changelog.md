@@ -4,6 +4,7 @@
 
 - Adds a `-archive` option to the `push` command (determines whether to store the previous version of the remote workspace).
 - Default styles are no longer added; use the `default` theme to add some default styles instead.
+- Adds a `theme` format to the [export](export.md) command to export the theme from the specified workspace.
 
 ## 1.10.1 (29th April 2021)
 
