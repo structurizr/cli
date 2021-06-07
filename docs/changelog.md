@@ -1,11 +1,19 @@
 # Changelog
 
-## 1.11.0 (unreleased)
+## 1.11.0 (7th June 2021)
 
-- Default styles are no longer added; use the `default` theme to add some default styles instead.
-- Adds a `-archive` option to the [push](push.md) command to determine whether to store the previous version of the remote workspace.
-- Adds a [list](list.md) command to list the element within a workspace.
-- Adds a `theme` format to the [export](export.md) command to export the theme from the specified workspace.
+- CLI: __Breaking change__: Default styles are no longer added; use the `default` theme to add some default styles instead.
+- CLI: Adds a `-archive` option to the [push](push.md) command to determine whether to store the previous version of the remote workspace.
+- CLI: Adds a [list](list.md) command to list the elements within a workspace.
+- CLI: Adds a `theme` format to the [export](export.md) command to export the theme from the specified workspace.
+- CLI: Adds a `animation` option to the [export](export.md) command to export animation frames (PlantUML formats only).
+- DSL: __Breaking change__: Relationship expressions (e.g. * -> *) now need to be surrounded in double quotes.
+- DSL: Support parallel activities in dynamic view.
+- DSL: Adds a `tags` keyword for adding tags to elements/relationships.
+- DSL: Adds a `theme` keyword for adding a single theme.
+- DSL: Adds support to `!include` from a HTTPS URL.
+- DSL: Adds support for referencing groups by identifier.
+- DSL: Adds support for extending a workspace.
 
 ## 1.10.1 (29th April 2021)
 

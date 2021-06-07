@@ -18,7 +18,6 @@ import org.apache.commons.cli.*;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Collection;
@@ -55,6 +54,10 @@ class ExportCommand extends AbstractCommand {
         option.setRequired(false);
         options.addOption(option);
 
+        option = new Option("a", "animation", true, "Export animation (default: false)");
+        option.setRequired(false);
+        options.addOption(option);
+
         CommandLineParser commandLineParser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
 
@@ -62,6 +65,7 @@ class ExportCommand extends AbstractCommand {
         File workspacePath = null;
         long workspaceId = 1;
         String format = "";
+        boolean animation = false;
         String outputPath = null;
 
         try {
@@ -69,6 +73,7 @@ class ExportCommand extends AbstractCommand {
 
             workspacePathAsString = cmd.getOptionValue("workspace");
             format = cmd.getOptionValue("format").toLowerCase();
+            animation = Boolean.parseBoolean(cmd.getOptionValue("animation", "false"));
             outputPath = cmd.getOptionValue("output");
 
         } catch (ParseException e) {
@@ -179,6 +184,15 @@ class ExportCommand extends AbstractCommand {
                 for (Diagram diagram : diagrams) {
                     File file = new File(outputPath, String.format("%s-%s.puml", prefix(workspaceId), diagram.getKey()));
                     writeToFile(file, diagram.getDefinition());
+
+                    if (!diagram.getFrames().isEmpty()) {
+                        int index = 1;
+                        for (Diagram frame : diagram.getFrames()) {
+                            file = new File(outputPath, String.format("%s-%s-%s.puml", prefix(workspaceId), diagram.getKey(), index));
+                            writeToFile(file, frame.getDefinition());
+                            index++;
+                        }
+                    }
                 }
 
                 if (useSequenceDiagrams) {
