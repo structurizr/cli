@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.12.0 (30th June 2021)
+
+- DSL: Adds an `!identifiers` keyword to specify whether element identifiers should be `flat` (default) or `hierarchical`.
+- DSL: Adds support for a `this` identifier when defining relationships inside element definitions.
+- DSL: Fixes links between ADRs.
+
 ## 1.11.0 (7th June 2021)
 
 - CLI: __Breaking change__: Default styles are no longer added; use the `default` theme to add some default styles instead.

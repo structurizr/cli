@@ -1,5 +1,6 @@
 package com.structurizr.cli;
 
+import com.structurizr.dsl.StructurizrDslParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -61,6 +62,12 @@ public class StructurizrCliApplication implements CommandLineRunner {
 	private void printUsageMessageAndExit() {
 		String version = context.getBean(BuildProperties.class).getVersion();
 		System.out.println("Structurizr CLI v" + version);
+		try {
+			System.out.println("Structurizr DSL v" + Class.forName(StructurizrDslParser.class.getCanonicalName()).getPackage().getImplementationVersion());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		System.out.println("Usage: structurizr push|pull|lock|unlock|export|validate|list [options]");
 		System.exit(1);
 	}
