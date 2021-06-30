@@ -37,7 +37,7 @@ class PushCommand extends AbstractCommand {
         option.setRequired(true);
         options.addOption(option);
 
-        option = new Option("workspace", "workspace", true, "Path to Structurizr JSON file/DSL file(s)");
+        option = new Option("w", "workspace", true, "Path to Structurizr JSON file/DSL file(s)");
         option.setRequired(false);
         options.addOption(option);
 
