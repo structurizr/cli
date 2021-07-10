@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.12.1 (unreleased)
+
+- Fixes issue #46 (CLI was ignoring `animation` flag when exporting to PlantUML).
+
 ## 1.12.0 (30th June 2021)
 
 - DSL: Adds an `!identifiers` keyword to specify whether element identifiers should be `flat` (default) or `hierarchical`.

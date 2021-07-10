@@ -185,7 +185,7 @@ class ExportCommand extends AbstractCommand {
                     File file = new File(outputPath, String.format("%s-%s.puml", prefix(workspaceId), diagram.getKey()));
                     writeToFile(file, diagram.getDefinition());
 
-                    if (!diagram.getFrames().isEmpty()) {
+                    if (!diagram.getFrames().isEmpty() && animation) {
                         int index = 1;
                         for (Diagram frame : diagram.getFrames()) {
                             file = new File(outputPath, String.format("%s-%s-%s.puml", prefix(workspaceId), diagram.getKey(), index));
