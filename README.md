@@ -9,6 +9,7 @@ This GitHub repository contains the Structurizr CLI - a command line utility for
 - [__lock__](docs/lock.md) a workspace
 - [__unlock__](docs/unlock.md) a workspace
 - [__export__](docs/export.md) diagrams to PlantUML, Mermaid, WebSequenceDiagrams, DOT, and Ilograph
+- [__list__](docs/list.md) lists the elements within a workspace
 - [__validate__](docs/validate.md) a JSON/DSL workspace definition
 
 ## Getting started
