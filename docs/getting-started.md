@@ -6,6 +6,23 @@ The Structurizr CLI provides tooling to parse [Structurizr DSL](https://github.c
 
 There are a number of ways to download/install the Structurizr CLI.
 
+### Docker, dev containers, etc
+
+A prebuilt Docker image is available at Docker Hub. To use it, for example:
+
+```
+docker pull structurizr/cli:latest
+docker run -it --rm -v $PWD:/usr/local/structurizr structurizr/cli <parameters>
+```
+
+In this example, `$PWD` will mount the current local directory as the CLI working directory (`/usr/local/structurizr` in the Docker container).
+
+Alternative containers are available via:
+
+- [leopoldodonnell/structurizr-cli-docker](https://github.com/leopoldodonnell/structurizr-cli-docker)
+- [aidmax/structurizr-cli-docker](https://github.com/aidmax/structurizr-cli-docker)
+- [evilpilaf/structurizr-remotecontainer](https://github.com/evilpilaf/structurizr-remotecontainer)
+
 ### Local installation
 
 Download the Structurizr CLI from the [releases page](https://github.com/structurizr/cli/releases), and unzip. You will need Java (version 8+) installed, and available to use from your command line (__please note that the CLI does not work with Java versions 11.0.0-11.0.3__).
@@ -39,10 +56,6 @@ And to upgrade:
 ```
 scoop update structurizr-cli
 ```
-
-### Docker, dev containers, etc
-
-The Structurizr CLI can be built into a container, to avoid installing it locally. See [leopoldodonnell/structurizr-cli-docker](https://github.com/leopoldodonnell/structurizr-cli-docker) or [aidmax/structurizr-cli-docker](https://github.com/aidmax/structurizr-cli-docker) for some Docker examples. Alternatively, if you're using Visual Studio, take a look at [evilpilaf/structurizr-remotecontainer](https://github.com/evilpilaf/structurizr-remotecontainer).
 
 ### Build from source
 
@@ -140,7 +153,7 @@ Alternatively, you can export the views defined in your DSL workspace definition
 or
 
 ```
-structurizr  export -workspace WORKSPACE_FILE -format plantuml
+structurizr export -workspace WORKSPACE_FILE -format plantuml
 ```
 
 This will create one PlantUML definition per view. See [export](export.md) for more details.

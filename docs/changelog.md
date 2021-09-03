@@ -1,10 +1,10 @@
 # Changelog
 
-## 1.13.0 (unreleased)
+## 1.13.0 (3rd September 2021)
 
 - CLI: Fixes issue #46 (CLI was ignoring `animation` flag when exporting to PlantUML).
 - CLI: Distribution/packaging changed to better support DSL scripts and plugins.
-- DSL: See changelog for [1.13.0](https://github.com/structurizr/dsl/releases/tag/v1.13.0)
+- DSL: See changelog for [v1.13.0](https://github.com/structurizr/dsl/releases/tag/v1.13.0)
 
 ## 1.12.0 (30th June 2021)
 
