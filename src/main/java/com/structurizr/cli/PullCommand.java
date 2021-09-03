@@ -17,8 +17,7 @@ import java.io.File;
 
 class PullCommand extends AbstractCommand {
 
-    PullCommand(String version) {
-        super(version);
+    PullCommand() {
     }
 
     void run(String... args) throws Exception {

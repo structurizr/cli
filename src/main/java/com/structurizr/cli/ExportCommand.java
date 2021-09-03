@@ -35,8 +35,7 @@ class ExportCommand extends AbstractCommand {
     private static final String DOT_FORMAT = "dot";
     private static final String ILOGRAPH_FORMAT = "ilograph";
 
-    ExportCommand(String version) {
-        super(version);
+    ExportCommand() {
     }
 
     void run(String... args) throws Exception {

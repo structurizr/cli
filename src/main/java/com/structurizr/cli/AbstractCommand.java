@@ -16,14 +16,11 @@ abstract class AbstractCommand {
 
     private static final int HTTP_OK_STATUS = 200;
 
-    private String version;
-
-    AbstractCommand(String version) {
-        this.version = version;
+    AbstractCommand() {
     }
 
     String getAgent() {
-        return "structurizr-cli/" + version;
+        return "structurizr-cli/" + getClass().getPackage().getImplementationVersion();
 
     }
 

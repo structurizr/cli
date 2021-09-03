@@ -13,8 +13,7 @@ class ListCommand extends AbstractCommand {
     private static final String ELEMENT_TYPE = "element";
     private static final Comparator<Element> ELEMENT_COMPARATOR = Comparator.comparing(Element::getName);
 
-    ListCommand(String version) {
-        super(version);
+    ListCommand() {
     }
 
     void run(String... args) throws Exception {

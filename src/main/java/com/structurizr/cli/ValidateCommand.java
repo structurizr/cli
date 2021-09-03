@@ -8,8 +8,7 @@ import java.io.File;
 
 class ValidateCommand extends AbstractCommand {
 
-    ValidateCommand(String version) {
-        super(version);
+    ValidateCommand() {
     }
 
     void run(String... args) throws Exception {

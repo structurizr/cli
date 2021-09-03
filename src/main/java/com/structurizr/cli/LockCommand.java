@@ -5,8 +5,7 @@ import org.apache.commons.cli.*;
 
 class LockCommand extends AbstractCommand {
 
-    LockCommand(String version) {
-        super(version);
+    LockCommand() {
     }
 
     void run(String... args) throws Exception {

@@ -1,19 +1,12 @@
 package com.structurizr.cli;
 
 import com.structurizr.dsl.StructurizrDslParser;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.info.BuildProperties;
-import org.springframework.context.ApplicationContext;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-@SpringBootApplication
-public class StructurizrCliApplication implements CommandLineRunner {
+public class StructurizrCliApplication {
 
 	private static final String PUSH_COMMAND = "push";
 	private static final String PULL_COMMAND = "pull";
@@ -23,13 +16,8 @@ public class StructurizrCliApplication implements CommandLineRunner {
 	private static final String VALIDATE_COMMAND = "validate";
 	private static final String LIST_COMMAND = "list";
 
-	@Autowired
-	private ApplicationContext context;
-
-	@Override
 	public void run(String... args) {
 		try {
-			String version = context.getBean(BuildProperties.class).getVersion();
 			checkJavaVersion();
 
 			if (args == null || args.length == 0) {
@@ -37,19 +25,19 @@ public class StructurizrCliApplication implements CommandLineRunner {
 			}
 
 			if (PUSH_COMMAND.equalsIgnoreCase(args[0])) {
-				new PushCommand(version).run(Arrays.copyOfRange(args, 1, args.length));
+				new PushCommand().run(Arrays.copyOfRange(args, 1, args.length));
 			} else if (PULL_COMMAND.equalsIgnoreCase(args[0])) {
-				new PullCommand(version).run(Arrays.copyOfRange(args, 1, args.length));
+				new PullCommand().run(Arrays.copyOfRange(args, 1, args.length));
 			} else if (LOCK_COMMAND.equalsIgnoreCase(args[0])) {
-				new LockCommand(version).run(Arrays.copyOfRange(args, 1, args.length));
+				new LockCommand().run(Arrays.copyOfRange(args, 1, args.length));
 			} else if (UNLOCK_COMMAND.equalsIgnoreCase(args[0])) {
-				new UnlockCommand(version).run(Arrays.copyOfRange(args, 1, args.length));
+				new UnlockCommand().run(Arrays.copyOfRange(args, 1, args.length));
 			} else if (EXPORT_COMMAND.equalsIgnoreCase(args[0])) {
-				new ExportCommand(version).run(Arrays.copyOfRange(args, 1, args.length));
+				new ExportCommand().run(Arrays.copyOfRange(args, 1, args.length));
 			} else if (VALIDATE_COMMAND.equalsIgnoreCase(args[0])) {
-				new ValidateCommand(version).run(Arrays.copyOfRange(args, 1, args.length));
+				new ValidateCommand().run(Arrays.copyOfRange(args, 1, args.length));
 			} else if (LIST_COMMAND.equalsIgnoreCase(args[0])) {
-				new ListCommand(version).run(Arrays.copyOfRange(args, 1, args.length));
+				new ListCommand().run(Arrays.copyOfRange(args, 1, args.length));
 			} else {
 				printUsageMessageAndExit();
 			}
@@ -60,7 +48,7 @@ public class StructurizrCliApplication implements CommandLineRunner {
 	}
 
 	private void printUsageMessageAndExit() {
-		String version = context.getBean(BuildProperties.class).getVersion();
+		String version = getClass().getPackage().getImplementationVersion();
 		System.out.println("Structurizr CLI v" + version);
 		try {
 			System.out.println("Structurizr DSL v" + Class.forName(StructurizrDslParser.class.getCanonicalName()).getPackage().getImplementationVersion());
@@ -90,7 +78,7 @@ public class StructurizrCliApplication implements CommandLineRunner {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(StructurizrCliApplication.class, args);
+		new StructurizrCliApplication().run(args);
 	}
 
 }

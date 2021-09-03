@@ -14,8 +14,7 @@ import java.io.File;
 
 class PushCommand extends AbstractCommand {
 
-    PushCommand(String version) {
-        super(version);
+    PushCommand() {
     }
 
     void run(String... args) throws Exception {

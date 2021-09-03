@@ -5,8 +5,7 @@ import org.apache.commons.cli.*;
 
 class UnlockCommand extends AbstractCommand {
 
-    UnlockCommand(String version) {
-        super(version);
+    UnlockCommand() {
     }
 
     void run(String... args) throws Exception {
