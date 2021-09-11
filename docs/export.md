@@ -13,7 +13,11 @@ Please note that some export formats do not support all of the available shapes/
 - __-animation__: Export animation frames (optional; default false)
 - __-output__: Relative or absolute path to an output directory (optional)
 
-The PlantUML export format can also be specified with a sub-format: `plantuml/structurizr` (default) or `plantuml/c4plantuml`.
+
+## Notes
+
+- PlantUML: The PlantUML export format can also be specified with a sub-format: `plantuml/structurizr` (default) or `plantuml/c4plantuml`.
+- Mermaid: Your Mermaid configuration will need to include `"securityLevel": "loose"` to render the diagrams correctly. See [Mermaid - Configuration - securityLevel](https://mermaid-js.github.io/mermaid/#/./Setup?id=securitylevel) for more details.
 
 ## Examples
 
