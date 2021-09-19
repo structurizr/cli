@@ -9,7 +9,6 @@
 - CLI: Adds support for C4-PlantUML `SHOW_LEGEND()`.
 - CLI: Identifiers in PlantUML exports are now based upon element names, rather than internal IDs.
 
-
 ## 1.13.0 (3rd September 2021)
 
 - CLI: Fixes issue #46 (CLI was ignoring `animation` flag when exporting to PlantUML).
