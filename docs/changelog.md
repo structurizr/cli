@@ -1,10 +1,20 @@
 # Changelog
 
+## 1.14.0 (19th September 2021)
+
+- DSL: __Breaking change__: Adds support for software system/container instances in multiple deployment groups.
+- DSL: Fixes an issue where internal software systems/people are not included by the DSL formatter when the enterprise is not set.
+- DSL: The DSL formatter now removes empty tokens at the end of lines.
+- DSL: Adds support for recognising escaped newlines (\n) in tokens.
+- CLI: Adds support for C4-PlantUML `SHOW_LEGEND()`.
+- CLI: Identifiers in PlantUML exports are now based upon element names, rather than internal IDs.
+
+
 ## 1.13.0 (3rd September 2021)
 
 - CLI: Fixes issue #46 (CLI was ignoring `animation` flag when exporting to PlantUML).
 - CLI: Distribution/packaging changed to better support DSL scripts and plugins.
-- DSL: See changelog for [v1.13.0](https://github.com/structurizr/dsl/releases/tag/v1.13.0)
+- DSL: See changelog for [structurizr-dsl v1.13.0](https://github.com/structurizr/dsl/releases/tag/v1.13.0)
 
 ## 1.12.0 (30th June 2021)
 
