@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.15.0 (2nd October 2021)
+
+- DSL: Adds support for specifying element style icons and the branding logo as a HTTPS/HTTP URL.
+- DSL: Adds support for relationships from deployment nodes to infrastructure nodes.
+- DSL: Fixes an issue where `this` didn't work when defining relationships inside deployment/infrastructure nodes.
+- DSL: Removes the restriction that `include *` must be on a line of its own inside view definitions.
+
 ## 1.14.0 (19th September 2021)
 
 - DSL: __Breaking change__: Adds support for software system/container instances in multiple deployment groups.
