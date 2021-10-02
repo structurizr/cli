@@ -60,6 +60,10 @@ abstract class AbstractCommand {
             }
 
             workspace = structurizrDslParser.getWorkspace();
+
+            if (workspace == null) {
+                throw new StructurizrCliException("No workspace definition was found - please check your DSL");
+            }
         }
 
         return workspace;
