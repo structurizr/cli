@@ -1,12 +1,13 @@
 # Changelog
 
-## 1.16.0 (unreleased)
 
 - DSL: Adds the implied relationships functionality for custom elements.
 - DSL: The "add default elements" feature (`include *`) will now also add any connected custom elements.
 - DSL: Adds better support for custom elements when using element expressions.
 - DSL: Adds a `description` keyword for setting the description on elements.
 - DSL: Adds a `technology` keyword for setting the technology on containers, components, deployment nodes, and infrastructure nodes.
+- Exports: Adds support for hyperlinked elements via the StructurizrPlantUML and C4-PlantUML exporters.
+- Exports: Adds support for styling groups via an element style named `Group' (for all groups) or `Group:Name` (for the "Name" group).
 
 ## 1.15.0 (2nd October 2021)
 
