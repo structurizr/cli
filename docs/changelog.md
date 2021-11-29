@@ -1,5 +1,6 @@
 # Changelog
 
+## 1.16.0 (29th November 2021)
 
 - DSL: Adds the implied relationships functionality for custom elements.
 - DSL: The "add default elements" feature (`include *`) will now also add any connected custom elements.
