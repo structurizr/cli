@@ -177,7 +177,7 @@ class ExportCommand extends AbstractCommand {
             if (workspace.getViews().isEmpty()) {
                 System.out.println(" - the workspace contains no views");
             } else {
-                plantUMLExporter.setUseSequenceDiagrams(false);
+                workspace.getViews().getConfiguration().addProperty(StructurizrPlantUMLExporter.PLANTUML_SEQUENCE_DIAGRAMS_PROPERTY, "false");
                 Collection<Diagram> diagrams = plantUMLExporter.export(workspace);
 
                 for (Diagram diagram : diagrams) {
@@ -195,7 +195,7 @@ class ExportCommand extends AbstractCommand {
                 }
 
                 if (useSequenceDiagrams) {
-                    plantUMLExporter.setUseSequenceDiagrams(true);
+                    workspace.getViews().getConfiguration().addProperty(StructurizrPlantUMLExporter.PLANTUML_SEQUENCE_DIAGRAMS_PROPERTY, "true");
                     for (DynamicView dynamicView : workspace.getViews().getDynamicViews()) {
                         Diagram diagram = plantUMLExporter.export(dynamicView);
 

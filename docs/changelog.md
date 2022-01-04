@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.17.0 (4th January 2022)
+
+- DSL: Adds support for extending deployment environments via the `!ref` keyword.
+- DSL: Adds support for extending relationships via the `!ref` keyword.
+- DSL: Fixes a bug where tab characters cause parsing errors.
+- DSL: Adds support for different relationship line styles (solid, dashed, dotted).
+- DSL: Adds support for name/value properties on the view set.
+- CLI: Fixes a bug when exporting views to PlantUML formats, when there are newline characters in element names/descriptions/technologies and relationship descriptions/technologies.
+- CLI: The C4-PlantUML export now includes tags.
+- CLI: Adds support for customizing PlantUML exports via view set properties (plantuml.title, plantuml.includes, etc).
+
 ## 1.16.0 (29th November 2021)
 
 - DSL: Adds the implied relationships functionality for custom elements.
