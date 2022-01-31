@@ -1,1 +1,0 @@
-url https://structurizr.com/share/36141/diagrams#SystemContext
