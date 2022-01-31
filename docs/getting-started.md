@@ -101,7 +101,7 @@ workspace "Getting Started" "This is a model of my software system." {
 }
 ```
 
-Save this file into the unzipped CLI directory.
+Save this file into the current directorry directory as `workspace.dsl`.
 
 This DSL definition:
 
@@ -121,7 +121,7 @@ You can now either render your diagrams with the Structurizr cloud service/on-pr
 
 If you've not done so, follow [Structurizr - Getting started](https://structurizr.com/help/getting-started) to sign up for a free Structurizr account, and create a workspace. To upload your workspace to the Structurizr cloud service/on-premises installation, you will need your workspace ID, API key and secret. See [Structurizr - Workspaces](https://structurizr.com/help/workspaces) for information about finding these.
 
-Open a terminal, and issue the following command to upload the workspace (you should change to the unzipped CLI directory, or have it on your path):
+Open a terminal, and issue the following command to upload the workspace (ensure you have it on your path):
 
 ```
 ./structurizr.sh push -id WORKSPACE_ID -key KEY -secret SECRET -workspace WORKSPACE_FILE
