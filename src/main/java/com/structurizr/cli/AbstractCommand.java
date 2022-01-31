@@ -51,7 +51,7 @@ abstract class AbstractCommand {
         } else {
             StructurizrDslParser structurizrDslParser = new StructurizrDslParser();
 
-            if (workspacePathAsString.startsWith("http://") || workspacePathAsString.startsWith("https")) {
+            if (workspacePathAsString.startsWith("http://") || workspacePathAsString.startsWith("https://")) {
                 String dsl = readFromUrl(workspacePathAsString);
                 structurizrDslParser.parse(dsl);
             } else {
