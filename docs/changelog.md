@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.18.0 (20th February 2022)
+
+- Core: Updated to 1.11.0 - [changelog](https://github.com/structurizr/java/releases/tag/v1.11.0).
+- DSL: Updated to 1.18.0 - [changelog](https://github.com/structurizr/dsl/releases/tag/v1.18.0).
+- Export: Updated to 1.4.0 - [changelog](https://github.com/structurizr/export/releases/tag/v1.4.0).
+
 ## 1.17.0 (4th January 2022)
 
 - DSL: Adds support for extending deployment environments via the `!ref` keyword.
