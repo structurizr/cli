@@ -7,11 +7,11 @@ to a Structurizr cloud service workspace
 :
 
 ```
-./structurizr.sh push -id <id> -key <key> -secret <secret> -workspace examples/big-bank-plc/internet-banking-system.dsl
+./structurizr.sh push -id <id> -key <key> -secret <secret> -workspace examples/big-bank-plc/internet-banking-system/workspace.dsl
 ```
 
 And to export all of the views to PlantUML format:
 
 ```
-./structurizr.sh export -workspace examples/big-bank-plc/internet-banking-system.dsl -format plantuml
+./structurizr.sh export -workspace examples/big-bank-plc/internet-banking-system/workspace.dsl -format plantuml
 ```
