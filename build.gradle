@@ -58,7 +58,6 @@ task buildZip(type: Zip) {
 		include 'README.md'
 		include 'docs/*'
 		include 'docs/images/*'
-		include 'examples/**'
 	}
 	from ('etc') {
 		include 'structurizr.sh'
