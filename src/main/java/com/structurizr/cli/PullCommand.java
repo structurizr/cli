@@ -2,15 +2,7 @@ package com.structurizr.cli;
 
 import com.structurizr.Workspace;
 import com.structurizr.api.StructurizrClient;
-import com.structurizr.documentation.AdrToolsImporter;
-import com.structurizr.documentation.AutomaticDocumentationTemplate;
-import com.structurizr.dsl.StructurizrDslParser;
-import com.structurizr.encryption.AesEncryptionStrategy;
-import com.structurizr.model.Container;
-import com.structurizr.model.SoftwareSystem;
-import com.structurizr.util.StringUtils;
 import com.structurizr.util.WorkspaceUtils;
-import com.structurizr.view.*;
 import org.apache.commons.cli.*;
 
 import java.io.File;

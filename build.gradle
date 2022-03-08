@@ -4,7 +4,7 @@ plugins {
 
 description = 'Structurizr CLI'
 group = 'com.structurizr'
-version = '1.18.0'
+version = '1.19.0'
 sourceCompatibility = '1.8'
 
 repositories {

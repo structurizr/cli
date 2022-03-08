@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.19.0 (unreleased)
+
+- CLI: Removes the ability to push documentation/ADRs via the `push` command - please use the Structurizr DSL instead.
+
 ## 1.18.0 (20th February 2022)
 
 - Core: Updated to 1.11.0 - [changelog](https://github.com/structurizr/java/releases/tag/v1.11.0).

@@ -2,8 +2,6 @@ package com.structurizr.cli;
 
 import com.structurizr.Workspace;
 import com.structurizr.api.StructurizrClient;
-import com.structurizr.documentation.AdrToolsImporter;
-import com.structurizr.documentation.AutomaticDocumentationTemplate;
 import com.structurizr.dsl.StructurizrDslParser;
 import com.structurizr.encryption.AesEncryptionStrategy;
 import com.structurizr.util.StringUtils;
@@ -68,8 +66,6 @@ class PushCommand extends AbstractCommand {
         String apiKey = "";
         String apiSecret = "";
         String workspacePath = "";
-        String documentationPath = "";
-        String decisionsPath = "";
         String passphrase = "";
         boolean mergeFromRemote = true;
         boolean archive = true;
@@ -82,14 +78,12 @@ class PushCommand extends AbstractCommand {
             apiKey = cmd.getOptionValue("apiKey");
             apiSecret = cmd.getOptionValue("apiSecret");
             workspacePath = cmd.getOptionValue("workspace");
-            documentationPath = cmd.getOptionValue("docs");
-            decisionsPath = cmd.getOptionValue("adrs");
             passphrase = cmd.getOptionValue("passphrase");
             mergeFromRemote = Boolean.parseBoolean(cmd.getOptionValue("merge", "true"));
             archive = Boolean.parseBoolean(cmd.getOptionValue("archive", "true"));
 
-            if (StringUtils.isNullOrEmpty(workspacePath) && StringUtils.isNullOrEmpty(documentationPath) && StringUtils.isNullOrEmpty(decisionsPath)) {
-                System.out.println("One of -workspace, -docs, or -adrs must be specified");
+            if (StringUtils.isNullOrEmpty(workspacePath)) {
+                System.out.println("-workspace must be specified");
                 formatter.printHelp("push", options);
                 System.exit(1);
             }
@@ -113,79 +107,30 @@ class PushCommand extends AbstractCommand {
         Workspace workspace;
         File archivePath = new File(".");
 
-        if (!StringUtils.isNullOrEmpty(workspacePath)) {
-            File path = new File(workspacePath);
-            archivePath = path.getParentFile();
-            if (!path.exists()) {
-                System.out.println(" - workspace path " + workspacePath + " does not exist");
-                System.exit(1);
-            }
+        File path = new File(workspacePath);
+        archivePath = path.getParentFile();
+        if (!path.exists()) {
+            System.out.println(" - workspace path " + workspacePath + " does not exist");
+            System.exit(1);
+        }
 
-            System.out.println(" - creating new workspace");
-            System.out.println(" - parsing model and views from " + path.getCanonicalPath());
+        System.out.println(" - creating new workspace");
+        System.out.println(" - parsing model and views from " + path.getCanonicalPath());
 
-            if (workspacePath.endsWith(".json")) {
-                workspace = WorkspaceUtils.loadWorkspaceFromJson(path);
-                workspace.setRevision(null);
-            } else {
-                StructurizrDslParser structurizrDslParser = new StructurizrDslParser();
-                structurizrDslParser.parse(path);
-
-                workspace = structurizrDslParser.getWorkspace();
-            }
-
-            System.out.println(" - merge layout from remote: " + mergeFromRemote);
-            structurizrClient.setMergeFromRemote(mergeFromRemote);
-
-            addDefaultViewsAndStyles(workspace);
-        } else {
-            System.out.println(" - pulling existing workspace " + workspaceId + " from " + apiUrl);
-            workspace = structurizrClient.getWorkspace(workspaceId);
+        if (workspacePath.endsWith(".json")) {
+            workspace = WorkspaceUtils.loadWorkspaceFromJson(path);
             workspace.setRevision(null);
-            structurizrClient.setMergeFromRemote(false);
+        } else {
+            StructurizrDslParser structurizrDslParser = new StructurizrDslParser();
+            structurizrDslParser.parse(path);
 
-            if (!StringUtils.isNullOrEmpty(documentationPath) || !StringUtils.isNullOrEmpty(decisionsPath)) {
-                System.out.println(" - clearing documentation and decisions in workspace");
-                workspace.getDocumentation().clear();
-            }
+            workspace = structurizrDslParser.getWorkspace();
         }
 
-        AutomaticDocumentationTemplate template = new AutomaticDocumentationTemplate(workspace);
-        template.setRecursive(true);
+        System.out.println(" - merge layout from remote: " + mergeFromRemote);
+        structurizrClient.setMergeFromRemote(mergeFromRemote);
 
-        if (!StringUtils.isNullOrEmpty(documentationPath)) {
-            File path = new File(documentationPath);
-            if (!path.exists()) {
-                System.out.println(" - documentation path " + documentationPath + " does not exist");
-                System.exit(1);
-            }
-
-            if (!path.isDirectory()) {
-                System.out.println(" - documentation path " + documentationPath + " is not a directory");
-                System.exit(1);
-            }
-
-            System.out.println(" - importing documentation from " + path.getCanonicalPath());
-            template.addSections(path);
-            template.addImages(path);
-        }
-
-        if (!StringUtils.isNullOrEmpty(decisionsPath)) {
-            File path = new File(decisionsPath);
-            if (!path.exists()) {
-                System.out.println(" - decisions path " + decisionsPath + " does not exist");
-                System.exit(1);
-            }
-
-            if (!path.isDirectory()) {
-                System.out.println(" - decisions path " + decisionsPath + " is not a directory");
-                System.exit(1);
-            }
-
-            System.out.println(" - importing ADRs from " + path.getCanonicalPath());
-            AdrToolsImporter adrToolsImporter = new AdrToolsImporter(workspace, path);
-            adrToolsImporter.importArchitectureDecisionRecords();
-        }
+        addDefaultViewsAndStyles(workspace);
 
         if (archive) {
             structurizrClient.setWorkspaceArchiveLocation(archivePath);
