@@ -1,14 +1,18 @@
 # Changelog
 
-## 1.19.0 (unreleased)
+## 1.19.0 (30th March 2022)
 
-- CLI: Removes the ability to push documentation/ADRs via the `push` command - please use the Structurizr DSL instead.
+- CLI: Removes the ability to push documentation/ADRs via the `push` command - please use the Structurizr DSL `!docs` and `!adrs` features instead.
+- Core: Updated to 1.12.2 - [changelog](https://github.com/structurizr/java/releases).
+- DSL: Updated to 1.19.1 - [changelog](https://github.com/structurizr/dsl/releases).
+- Documentation: Adds new customisable documentation importers; v1.0.1 - [changelog](https://github.com/structurizr/documentation/releases).
+- Export: Updated to 1.5.0 - [changelog](https://github.com/structurizr/export/releases).
 
 ## 1.18.0 (20th February 2022)
 
-- Core: Updated to 1.11.0 - [changelog](https://github.com/structurizr/java/releases/tag/v1.11.0).
-- DSL: Updated to 1.18.0 - [changelog](https://github.com/structurizr/dsl/releases/tag/v1.18.0).
-- Export: Updated to 1.4.0 - [changelog](https://github.com/structurizr/export/releases/tag/v1.4.0).
+- Core: Updated to 1.11.0 - [changelog](https://github.com/structurizr/java/releases).
+- DSL: Updated to 1.18.0 - [changelog](https://github.com/structurizr/dsl/releases).
+- Export: Updated to 1.4.0 - [changelog](https://github.com/structurizr/export/releases).
 
 ## 1.17.0 (4th January 2022)
 
