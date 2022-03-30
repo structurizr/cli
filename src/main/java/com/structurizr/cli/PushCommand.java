@@ -38,14 +38,6 @@ class PushCommand extends AbstractCommand {
         option.setRequired(false);
         options.addOption(option);
 
-        option = new Option("docs", "documentation", true, "Path to documentation");
-        option.setRequired(false);
-        options.addOption(option);
-
-        option = new Option("adrs", "decisions", true, "Path to decisions");
-        option.setRequired(false);
-        options.addOption(option);
-
         option = new Option("passphrase", "passphrase", true, "Client-side encryption passphrase");
         option.setRequired(false);
         options.addOption(option);
