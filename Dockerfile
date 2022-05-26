@@ -1,8 +1,9 @@
 FROM openjdk:17
 
-COPY build/distributions/structurizr-cli-*.zip /usr/local/structurizr-cli/
 WORKDIR /usr/local/structurizr-cli/
-RUN jar xf /usr/local/structurizr-cli/structurizr-cli-*.zip
+ENV PATH /usr/local/structurizr-cli/:$PATH
+COPY build/distributions/structurizr-cli-*.zip ./
+RUN jar xf structurizr-cli-*.zip && chmod +x structurizr.sh
 WORKDIR /usr/local/structurizr/
 
-ENTRYPOINT ["java","-cp", "/usr/local/structurizr-cli:/usr/local/structurizr-cli/lib/*", "com.structurizr.cli.StructurizrCliApplication"]
+ENTRYPOINT ["structurizr.sh"]
