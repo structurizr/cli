@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.20.0 (unreleased)
+
+- Adds support for running `structurizr.sh` as a symlink (#43).
+
 ## 1.19.0 (30th March 2022)
 
 - CLI: Removes the ability to push documentation/ADRs via the `push` command - please use the Structurizr DSL `!docs` and `!adrs` features instead.
