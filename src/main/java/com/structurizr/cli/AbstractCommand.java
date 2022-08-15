@@ -12,11 +12,11 @@ import org.apache.hc.core5.http.io.entity.EntityUtils;
 
 import java.io.File;
 
-abstract class AbstractCommand {
+public abstract class AbstractCommand {
 
     private static final int HTTP_OK_STATUS = 200;
 
-    AbstractCommand() {
+    protected AbstractCommand() {
     }
 
     String getAgent() {
@@ -24,7 +24,7 @@ abstract class AbstractCommand {
 
     }
 
-    void addDefaultViewsAndStyles(Workspace workspace) {
+    protected void addDefaultViewsAndStyles(Workspace workspace) {
         if (workspace.getViews().isEmpty()) {
             System.out.println(" - no views defined; creating default views");
             workspace.getViews().createDefaultViews();

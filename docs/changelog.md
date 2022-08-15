@@ -3,6 +3,9 @@
 ## 1.20.0 (unreleased)
 
 - Adds support for running `structurizr.sh` as a symlink (#43).
+- Core: Updated to 1.14.1 - [changelog](https://github.com/structurizr/java/releases).
+- DSL: Updated to 1.20.0 - [changelog](https://github.com/structurizr/dsl/releases).
+- Export: Updated to 1.6.0 - [changelog](https://github.com/structurizr/export/releases).
 
 ## 1.19.0 (30th March 2022)
 

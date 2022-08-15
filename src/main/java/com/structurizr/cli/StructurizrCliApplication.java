@@ -1,5 +1,6 @@
 package com.structurizr.cli;
 
+import com.structurizr.cli.export.ExportCommand;
 import com.structurizr.dsl.StructurizrDslParser;
 
 import java.util.Arrays;

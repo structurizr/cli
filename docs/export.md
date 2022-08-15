@@ -9,7 +9,7 @@ Please note that some export formats do not support all of the available shapes/
 ## Options
 
 - __-workspace__: The path or URL to the workspace JSON file/DSL file(s) (required)
-- __-format__: plantuml | mermaid | websequencediagrams | dot | ilograph | json | dsl | theme (required)
+- __-format__: plantuml | mermaid | websequencediagrams | dot | ilograph | json | dsl | theme | fqcn (required)
 - __-animation__: Export animation frames (optional; default false)
 - __-output__: Relative or absolute path to an output directory (optional)
 
@@ -18,6 +18,7 @@ Please note that some export formats do not support all of the available shapes/
 
 - PlantUML: The PlantUML export format can also be specified with a sub-format: `plantuml/structurizr` (default) or `plantuml/c4plantuml`.
 - Mermaid: Your Mermaid configuration will need to include `"securityLevel": "loose"` to render the diagrams correctly. See [Mermaid - Configuration - securityLevel](https://mermaid-js.github.io/mermaid/#/./Setup?id=securitylevel) for more details.
+- fqcn: This should be the fully qualified class name of a class that extends `com.structurizr.export.DiagramExporter` or `com.structurizr.export.WorkspaceExporter`, and is available on the classpath of the CLI application.
 
 ## Examples
 
