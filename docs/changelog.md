@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.20.0 (unreleased)
+## 1.20.0 (15th August 2022)
 
 - Adds support for running `structurizr.sh` as a symlink (#43).
 - Core: Updated to 1.14.1 - [changelog](https://github.com/structurizr/java/releases).
