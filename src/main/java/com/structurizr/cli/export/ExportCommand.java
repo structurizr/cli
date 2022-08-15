@@ -34,6 +34,7 @@ public class ExportCommand extends AbstractCommand {
     private static final String MERMAID_FORMAT = "mermaid";
     private static final String DOT_FORMAT = "dot";
     private static final String ILOGRAPH_FORMAT = "ilograph";
+    private static final String CUSTOM_FORMAT = "fqcn";
 
     private static final Map<String,Exporter> EXPORTERS = new HashMap<>();
 
@@ -60,7 +61,7 @@ public class ExportCommand extends AbstractCommand {
         option.setRequired(true);
         options.addOption(option);
 
-        option = new Option("f", "format", true, String.format("Export format: %s[/%s|%s]|%s|%s|%s|%s|%s|%s|%s", PLANTUML_FORMAT, PLANTUML_STRUCTURIZR_SUBFORMAT, PLANTUML_C4PLANTUML_SUBFORMAT, WEBSEQUENCEDIAGRAMS_FORMAT, MERMAID_FORMAT, DOT_FORMAT, ILOGRAPH_FORMAT, JSON_FORMAT, DSL_FORMAT, THEME_FORMAT));
+        option = new Option("f", "format", true, String.format("Export format: %s[/%s|%s]|%s|%s|%s|%s|%s|%s|%s|%s", PLANTUML_FORMAT, PLANTUML_STRUCTURIZR_SUBFORMAT, PLANTUML_C4PLANTUML_SUBFORMAT, WEBSEQUENCEDIAGRAMS_FORMAT, MERMAID_FORMAT, DOT_FORMAT, ILOGRAPH_FORMAT, JSON_FORMAT, DSL_FORMAT, THEME_FORMAT, CUSTOM_FORMAT));
         option.setRequired(true);
         options.addOption(option);
 
