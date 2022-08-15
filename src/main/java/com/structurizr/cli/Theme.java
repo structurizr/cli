@@ -1,6 +1,5 @@
 package com.structurizr.cli;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
 import com.structurizr.view.ElementStyle;
 import com.structurizr.view.RelationshipStyle;
 
