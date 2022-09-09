@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.20.1 (9th September 2022)
+
+- Fixes #83 (export to json feature is changed/broken?)
+
 ## 1.20.0 (15th August 2022)
 
 - Adds support for running `structurizr.sh` as a symlink (#43).

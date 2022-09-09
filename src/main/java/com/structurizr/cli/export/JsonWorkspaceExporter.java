@@ -10,7 +10,7 @@ public class JsonWorkspaceExporter implements WorkspaceExporter {
     @Override
     public WorkspaceExport export(Workspace workspace) {
         try {
-            return new JsonWorkspaceExport(WorkspaceUtils.toJson(workspace, false));
+            return new JsonWorkspaceExport(WorkspaceUtils.toJson(workspace, true));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -171,7 +171,16 @@ public class ExportCommand extends AbstractCommand {
             } else if (exporter instanceof WorkspaceExporter) {
                 WorkspaceExporter workspaceExporter = (WorkspaceExporter) exporter;
                 WorkspaceExport export = workspaceExporter.export(workspace);
-                File file = new File(outputPath, String.format("%s.%s", prefix(workspaceId), export.getFileExtension()));
+
+                String filename;
+
+                if (THEME_FORMAT.equalsIgnoreCase(format)) {
+                    filename = workspacePath.getName().substring(0, workspacePath.getName().lastIndexOf('.')) + "-theme";
+                } else {
+                    filename = workspacePath.getName().substring(0, workspacePath.getName().lastIndexOf('.'));
+                }
+
+                File file = new File(outputPath, String.format("%s.%s", filename, export.getFileExtension()));
                 writeToFile(file, export.getDefinition());
             }
         }
@@ -212,6 +221,7 @@ public class ExportCommand extends AbstractCommand {
 
         BufferedWriter writer = Files.newBufferedWriter(file.toPath(), StandardCharsets.UTF_8);
         writer.write(content);
+        writer.flush();
         writer.close();
     }
 
