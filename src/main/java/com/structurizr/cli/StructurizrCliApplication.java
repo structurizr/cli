@@ -50,7 +50,7 @@ public class StructurizrCliApplication {
 
 	private void printUsageMessageAndExit() {
 		String version = getClass().getPackage().getImplementationVersion();
-		System.out.println("Structurizr CLI v" + version);
+		System.out.println("Structurizr CLI build " + version);
 		try {
 			System.out.println("Structurizr DSL v" + Class.forName(StructurizrDslParser.class.getCanonicalName()).getPackage().getImplementationVersion());
 		} catch (Exception e) {

@@ -6,7 +6,6 @@ defaultTasks 'clean', 'build', 'getDeps', 'buildZip'
 
 description = 'Structurizr CLI'
 group = 'com.structurizr'
-version = '1.20.1'
 
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
@@ -17,11 +16,18 @@ repositories {
 
 dependencies {
 
-	implementation 'com.structurizr:structurizr-dsl:1.20.0'
-	implementation 'com.structurizr:structurizr-export:1.6.1'
-	implementation 'com.structurizr:structurizr-graphviz:1.6.1'
+	if (project.hasProperty("local")) {
+		implementation fileTree(dir: 'lib', include: ['*.jar'])
+		implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.4'
+		implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.4'
+		implementation 'javax.xml.bind:jaxb-api:2.3.1'
+	} else {
+		implementation 'com.structurizr:structurizr-dsl:1.20.0'
+		implementation 'com.structurizr:structurizr-export:1.6.1'
+		implementation 'com.structurizr:structurizr-graphviz:1.6.1'
+	}
 
-	implementation 'commons-cli:commons-cli:1.4'
+	implementation 'commons-cli:commons-cli:1.5.0'
 	implementation 'org.apache.httpcomponents.client5:httpclient5:5.1.3'
 	implementation 'org.codehaus.groovy:groovy-jsr223:3.0.12'
     implementation 'org.jetbrains.kotlin:kotlin-scripting-jsr223:1.7.10'
