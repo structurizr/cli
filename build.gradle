@@ -33,6 +33,9 @@ dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-scripting-jsr223:1.7.10'
     implementation 'org.jruby:jruby-core:9.3.6.0'
 
+	implementation 'org.apache.logging.log4j:log4j-core:2.19.0'
+	implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.19.0'
+
 	testImplementation 'org.junit.jupiter:junit-jupiter:5.9.0'
 
 }
