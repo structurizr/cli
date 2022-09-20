@@ -21,6 +21,7 @@ dependencies {
 		implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.4'
 		implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.4'
 		implementation 'javax.xml.bind:jaxb-api:2.3.1'
+		implementation 'commons-logging:commons-logging:1.2'
 	} else {
 		implementation 'com.structurizr:structurizr-dsl:1.20.0'
 		implementation 'com.structurizr:structurizr-export:1.6.1'
