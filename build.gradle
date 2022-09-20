@@ -21,7 +21,6 @@ dependencies {
 		implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.4'
 		implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.4'
 		implementation 'javax.xml.bind:jaxb-api:2.3.1'
-		implementation 'commons-logging:commons-logging:1.2'
 	} else {
 		implementation 'com.structurizr:structurizr-dsl:1.20.0'
 		implementation 'com.structurizr:structurizr-export:1.6.1'
@@ -34,7 +33,10 @@ dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-scripting-jsr223:1.7.10'
     implementation 'org.jruby:jruby-core:9.3.6.0'
 
+	implementation 'commons-logging:commons-logging:1.2'
+	implementation 'org.apache.logging.log4j:log4j-api:2.19.0'
 	implementation 'org.apache.logging.log4j:log4j-core:2.19.0'
+	implementation 'org.apache.logging.log4j:log4j-jcl:2.19.0'
 	implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.19.0'
 
 	testImplementation 'org.junit.jupiter:junit-jupiter:5.9.0'

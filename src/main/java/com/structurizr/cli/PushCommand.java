@@ -7,10 +7,14 @@ import com.structurizr.encryption.AesEncryptionStrategy;
 import com.structurizr.util.StringUtils;
 import com.structurizr.util.WorkspaceUtils;
 import org.apache.commons.cli.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.io.File;
 
 class PushCommand extends AbstractCommand {
+
+    private static final Log log = LogFactory.getLog(PushCommand.class);
 
     PushCommand() {
     }
@@ -75,24 +79,24 @@ class PushCommand extends AbstractCommand {
             archive = Boolean.parseBoolean(cmd.getOptionValue("archive", "true"));
 
             if (StringUtils.isNullOrEmpty(workspacePath)) {
-                System.out.println("-workspace must be specified");
+                log.error("-workspace must be specified");
                 formatter.printHelp("push", options);
                 System.exit(1);
             }
         } catch (ParseException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
             formatter.printHelp("push", options);
             System.exit(1);
         }
 
-        System.out.println("Pushing workspace " + workspaceId + " to " + apiUrl);
+        log.info("Pushing workspace " + workspaceId + " to " + apiUrl);
 
         StructurizrClient structurizrClient = new StructurizrClient(apiUrl, apiKey, apiSecret);
         structurizrClient.setAgent(getAgent());
         structurizrClient.setWorkspaceArchiveLocation(null);
 
         if (!StringUtils.isNullOrEmpty(passphrase)) {
-            System.out.println(" - using client-side encryption");
+            log.info(" - using client-side encryption");
             structurizrClient.setEncryptionStrategy(new AesEncryptionStrategy(passphrase));
         }
 
@@ -102,12 +106,12 @@ class PushCommand extends AbstractCommand {
         File path = new File(workspacePath);
         archivePath = path.getParentFile();
         if (!path.exists()) {
-            System.out.println(" - workspace path " + workspacePath + " does not exist");
+            log.error(" - workspace path " + workspacePath + " does not exist");
             System.exit(1);
         }
 
-        System.out.println(" - creating new workspace");
-        System.out.println(" - parsing model and views from " + path.getCanonicalPath());
+        log.info(" - creating new workspace");
+        log.info(" - parsing model and views from " + path.getCanonicalPath());
 
         if (workspacePath.endsWith(".json")) {
             workspace = WorkspaceUtils.loadWorkspaceFromJson(path);
@@ -119,20 +123,20 @@ class PushCommand extends AbstractCommand {
             workspace = structurizrDslParser.getWorkspace();
         }
 
-        System.out.println(" - merge layout from remote: " + mergeFromRemote);
+        log.info(" - merge layout from remote: " + mergeFromRemote);
         structurizrClient.setMergeFromRemote(mergeFromRemote);
 
         addDefaultViewsAndStyles(workspace);
 
         if (archive) {
             structurizrClient.setWorkspaceArchiveLocation(archivePath);
-            System.out.println(" - storing previous version of workspace in " + structurizrClient.getWorkspaceArchiveLocation());
+            log.info(" - storing previous version of workspace in " + structurizrClient.getWorkspaceArchiveLocation());
         }
 
-        System.out.println(" - pushing workspace");
+        log.info(" - pushing workspace");
         structurizrClient.putWorkspace(workspaceId, workspace);
 
-        System.out.println(" - finished");
+        log.info(" - finished");
     }
 
 }

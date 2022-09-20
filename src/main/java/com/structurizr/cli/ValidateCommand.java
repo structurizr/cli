@@ -3,10 +3,12 @@ package com.structurizr.cli;
 import com.structurizr.Workspace;
 import com.structurizr.util.WorkspaceUtils;
 import org.apache.commons.cli.*;
-
-import java.io.File;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 class ValidateCommand extends AbstractCommand {
+
+    private static final Log log = LogFactory.getLog(ValidateCommand.class);
 
     ValidateCommand() {
     }
@@ -28,19 +30,19 @@ class ValidateCommand extends AbstractCommand {
 
             workspacePathAsString = cmd.getOptionValue("workspace");
         } catch (ParseException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
             formatter.printHelp("validate", options);
 
             System.exit(1);
         }
 
-        System.out.println("Validating workspace at " + workspacePathAsString);
+        log.info("Validating workspace at " + workspacePathAsString);
 
         Workspace workspace = loadWorkspace(workspacePathAsString);
         WorkspaceUtils.fromJson(WorkspaceUtils.toJson(workspace, false)); // this will trigger the deserialization validation
 
-        System.out.println(" - validated");
-        System.out.println(" - finished");
+        log.info(" - validated");
+        log.info(" - finished");
     }
 
 }

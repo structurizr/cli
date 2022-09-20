@@ -13,6 +13,8 @@ import com.structurizr.export.websequencediagrams.WebSequenceDiagramsExporter;
 import com.structurizr.util.WorkspaceUtils;
 import com.structurizr.view.ThemeUtils;
 import org.apache.commons.cli.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -23,6 +25,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ExportCommand extends AbstractCommand {
+
+    private static final Log log = LogFactory.getLog(ExportCommand.class);
 
     private static final String JSON_FORMAT = "json";
     private static final String THEME_FORMAT = "theme";
@@ -86,7 +90,7 @@ public class ExportCommand extends AbstractCommand {
             outputPath = cmd.getOptionValue("output");
 
         } catch (ParseException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
             formatter.setWidth(150);
             formatter.printHelp("export", options);
 
@@ -95,10 +99,10 @@ public class ExportCommand extends AbstractCommand {
 
         Workspace workspace;
 
-        System.out.println("Exporting workspace from " + workspacePathAsString);
+        log.info("Exporting workspace from " + workspacePathAsString);
 
         if (workspacePathAsString.endsWith(".json")) {
-            System.out.println(" - loading workspace from JSON");
+            log.info(" - loading workspace from JSON");
 
             if (workspacePathAsString.startsWith("http://") || workspacePathAsString.startsWith("https")) {
                 String json = readFromUrl(workspacePathAsString);
@@ -110,7 +114,7 @@ public class ExportCommand extends AbstractCommand {
             }
             
         } else {
-            System.out.println(" - loading workspace from DSL");
+            log.info(" - loading workspace from DSL");
             StructurizrDslParser structurizrDslParser = new StructurizrDslParser();
 
             if (workspacePathAsString.startsWith("http://") || workspacePathAsString.startsWith("https")) {
@@ -142,15 +146,15 @@ public class ExportCommand extends AbstractCommand {
 
        Exporter exporter = findExporter(format);
         if (exporter == null) {
-            System.out.println(" - unknown export format: " + format);
+            log.info(" - unknown export format: " + format);
         } else {
-            System.out.println(" - exporting with " + exporter.getClass().getSimpleName());
+            log.info(" - exporting with " + exporter.getClass().getSimpleName());
 
             if (exporter instanceof DiagramExporter) {
                 DiagramExporter diagramExporter = (DiagramExporter) exporter;
 
                 if (workspace.getViews().isEmpty()) {
-                    System.out.println(" - the workspace contains no views");
+                    log.info(" - the workspace contains no views");
                 } else {
                     Collection<Diagram> diagrams = diagramExporter.export(workspace);
 
@@ -185,7 +189,7 @@ public class ExportCommand extends AbstractCommand {
             }
         }
 
-        System.out.println(" - finished");
+        log.info(" - finished");
     }
 
     private Exporter findExporter(String format) {
@@ -199,10 +203,9 @@ public class ExportCommand extends AbstractCommand {
                 return (Exporter) clazz.getDeclaredConstructor().newInstance();
             }
         } catch (ClassNotFoundException e) {
-            System.out.println(" - unknown export format: " + format);
+            log.error(" - unknown export format: " + format);
         } catch (Exception e) {
-            System.out.println(" - error creating instance of " + format);
-            e.printStackTrace();
+            log.error(" - error creating instance of " + format, e);
         }
 
         return null;
@@ -217,7 +220,7 @@ public class ExportCommand extends AbstractCommand {
     }
 
     private void writeToFile(File file, String content) throws Exception {
-        System.out.println(" - writing " + file.getCanonicalPath());
+        log.info(" - writing " + file.getCanonicalPath());
 
         BufferedWriter writer = Files.newBufferedWriter(file.toPath(), StandardCharsets.UTF_8);
         writer.write(content);

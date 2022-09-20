@@ -2,8 +2,12 @@ package com.structurizr.cli;
 
 import com.structurizr.api.StructurizrClient;
 import org.apache.commons.cli.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 class UnlockCommand extends AbstractCommand {
+
+    private static final Log log = LogFactory.getLog(UnlockCommand.class);
 
     UnlockCommand() {
     }
@@ -43,19 +47,19 @@ class UnlockCommand extends AbstractCommand {
             apiKey = cmd.getOptionValue("apiKey");
             apiSecret = cmd.getOptionValue("apiSecret");
         } catch (ParseException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
             formatter.printHelp("pull", options);
 
             System.exit(1);
         }
 
-        System.out.println("Unlocking workspace " + workspaceId + " at " + apiUrl);
+        log.info("Unlocking workspace " + workspaceId + " at " + apiUrl);
         StructurizrClient structurizrClient = new StructurizrClient(apiUrl, apiKey, apiSecret);
         structurizrClient.setAgent(getAgent());
         boolean locked = structurizrClient.unlockWorkspace(workspaceId);
 
-        System.out.println(" - unlocked " + locked);
-        System.out.println(" - finished");
+        log.info(" - unlocked " + locked);
+        log.info(" - finished");
 
         System.exit(locked ? 0 : 1);
     }

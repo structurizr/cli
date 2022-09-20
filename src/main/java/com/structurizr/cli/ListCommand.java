@@ -5,10 +5,14 @@ import com.structurizr.model.DeploymentNode;
 import com.structurizr.model.Element;
 import com.structurizr.model.ModelItem;
 import org.apache.commons.cli.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.util.Comparator;
 
 class ListCommand extends AbstractCommand {
+
+    private static final Log log = LogFactory.getLog(ListCommand.class);
 
     private static final String ELEMENT_TYPE = "element";
     private static final Comparator<Element> ELEMENT_COMPARATOR = Comparator.comparing(Element::getName);
@@ -39,7 +43,7 @@ class ListCommand extends AbstractCommand {
             workspacePathAsString = cmd.getOptionValue("workspace");
             type = ELEMENT_TYPE; // cmd.getOptionValue("type", "element");
         } catch (ParseException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
             formatter.printHelp("list", options);
 
             System.exit(1);
@@ -81,7 +85,7 @@ class ListCommand extends AbstractCommand {
             buf.append("  ");
         }
 
-        System.out.println(buf.toString() + " - " + modelItem.getCanonicalName());
+        log.info(buf.toString() + " - " + modelItem.getCanonicalName());
     }
 
 }

@@ -4,10 +4,14 @@ import com.structurizr.Workspace;
 import com.structurizr.api.StructurizrClient;
 import com.structurizr.util.WorkspaceUtils;
 import org.apache.commons.cli.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.io.File;
 
 class PullCommand extends AbstractCommand {
+
+    private static final Log log = LogFactory.getLog(PullCommand.class);
 
     PullCommand() {
     }
@@ -47,21 +51,21 @@ class PullCommand extends AbstractCommand {
             apiKey = cmd.getOptionValue("apiKey");
             apiSecret = cmd.getOptionValue("apiSecret");
         } catch (ParseException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
             formatter.printHelp("pull", options);
 
             System.exit(1);
         }
 
-        System.out.println("Pulling workspace " + workspaceId + " from " + apiUrl);
+        log.info("Pulling workspace " + workspaceId + " from " + apiUrl);
         StructurizrClient structurizrClient = new StructurizrClient(apiUrl, apiKey, apiSecret);
         structurizrClient.setAgent(getAgent());
         Workspace workspace = structurizrClient.getWorkspace(workspaceId);
 
         File file = new File("structurizr-" + workspaceId + "-workspace.json");
         WorkspaceUtils.saveWorkspaceToJson(workspace, file);
-        System.out.println(" - workspace saved as " + file.getCanonicalPath());
-        System.out.println(" - finished");
+        log.info(" - workspace saved as " + file.getCanonicalPath());
+        log.info(" - finished");
     }
 
 }

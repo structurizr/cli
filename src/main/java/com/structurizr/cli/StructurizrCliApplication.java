@@ -2,12 +2,22 @@ package com.structurizr.cli;
 
 import com.structurizr.cli.export.ExportCommand;
 import com.structurizr.dsl.StructurizrDslParser;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.core.config.Configurator;
+import org.apache.logging.log4j.core.config.builder.api.ConfigurationBuilder;
+import org.apache.logging.log4j.core.config.builder.api.ConfigurationBuilderFactory;
+import org.apache.logging.log4j.core.config.builder.impl.BuiltConfiguration;
+import org.apache.logging.log4j.core.layout.PatternLayout;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 public class StructurizrCliApplication {
+
+	private static Log log;
 
 	private static final String PUSH_COMMAND = "push";
 	private static final String PULL_COMMAND = "pull";
@@ -16,6 +26,34 @@ public class StructurizrCliApplication {
 	private static final String EXPORT_COMMAND = "export";
 	private static final String VALIDATE_COMMAND = "validate";
 	private static final String LIST_COMMAND = "list";
+
+	static {
+		ConfigurationBuilder<BuiltConfiguration> builder =
+				ConfigurationBuilderFactory.newConfigurationBuilder();
+
+		// configure a console appender
+		builder.add(
+				builder.newAppender("stdout", "Console")
+						.add(
+								builder.newLayout(PatternLayout.class.getSimpleName())
+										.addAttribute(
+												"pattern",
+												"%msg%n"
+										)
+						)
+		);
+
+		// configure the root logger
+		builder.add(
+				builder.newRootLogger(Level.INFO)
+						.add(builder.newAppenderRef("stdout"))
+		);
+
+		// apply the configuration
+		Configurator.initialize(builder.build());
+
+		log = LogFactory.getLog(StructurizrCliApplication.class);
+	}
 
 	public void run(String... args) {
 		try {
@@ -50,14 +88,14 @@ public class StructurizrCliApplication {
 
 	private void printUsageMessageAndExit() {
 		String version = getClass().getPackage().getImplementationVersion();
-		System.out.println("Structurizr CLI build " + version);
+		log.info("Structurizr CLI build " + version);
 		try {
-			System.out.println("Structurizr DSL v" + Class.forName(StructurizrDslParser.class.getCanonicalName()).getPackage().getImplementationVersion());
+			log.info("Structurizr DSL v" + Class.forName(StructurizrDslParser.class.getCanonicalName()).getPackage().getImplementationVersion());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		System.out.println("Usage: structurizr push|pull|lock|unlock|export|validate|list [options]");
+		log.info("Usage: structurizr push|pull|lock|unlock|export|validate|list [options]");
 		System.exit(1);
 	}
 
@@ -72,7 +110,7 @@ public class StructurizrCliApplication {
 		String version = System.getProperty("java.version");
 
 		if (versions.contains(version)) {
-			System.out.println("Error: the Structurizr CLI does not work with Java versions 11.0.0-11.0.3 - please upgrade your Java installation");
+			log.error("The Structurizr CLI does not work with Java versions 11.0.0-11.0.3 - please upgrade your Java installation");
 			System.exit(1);
 		}
 

@@ -4,6 +4,8 @@ import com.structurizr.Workspace;
 import com.structurizr.dsl.StructurizrDslParser;
 import com.structurizr.util.WorkspaceUtils;
 import com.structurizr.view.Styles;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
@@ -13,6 +15,8 @@ import org.apache.hc.core5.http.io.entity.EntityUtils;
 import java.io.File;
 
 public abstract class AbstractCommand {
+
+    private static final Log log = LogFactory.getLog(AbstractCommand.class);
 
     private static final int HTTP_OK_STATUS = 200;
 
@@ -26,13 +30,13 @@ public abstract class AbstractCommand {
 
     protected void addDefaultViewsAndStyles(Workspace workspace) {
         if (workspace.getViews().isEmpty()) {
-            System.out.println(" - no views defined; creating default views");
+            log.info(" - no views defined; creating default views");
             workspace.getViews().createDefaultViews();
         }
 
         Styles styles = workspace.getViews().getConfiguration().getStyles();
         if (styles.getElements().isEmpty() && styles.getRelationships().isEmpty() && workspace.getViews().getConfiguration().getThemes() == null) {
-            System.out.println(" - no styles or themes defined; use the \"default\" theme to add some default styles");
+            log.info(" - no styles or themes defined; use the \"default\" theme to add some default styles");
         }
     }
 
@@ -78,7 +82,7 @@ public abstract class AbstractCommand {
                 return EntityUtils.toString(response.getEntity());
             }
         } catch (Exception ioe) {
-            ioe.printStackTrace();
+            log.error(ioe);
         }
 
         return "";
