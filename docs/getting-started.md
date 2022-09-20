@@ -25,7 +25,7 @@ Alternative containers are available via:
 
 ### Local installation
 
-Download the Structurizr CLI from the [releases page](https://github.com/structurizr/cli/releases), and unzip. You will need Java (version 8+) installed, and available to use from your command line (__please note that the CLI does not work with Java versions 11.0.0-11.0.3__).
+Download the Structurizr CLI from [https://static.structurizr.com/download/structurizr-cli.zip](https://static.structurizr.com/download/structurizr-cli.zip), and unzip. You will need Java (version 11+) installed, and available to use from your command line (__please note that the CLI does not work with Java versions 11.0.0-11.0.3__).
 
 ### Homebrew (MacOS only)
 
