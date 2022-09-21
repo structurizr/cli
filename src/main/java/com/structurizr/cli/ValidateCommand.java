@@ -2,6 +2,7 @@ package com.structurizr.cli;
 
 import com.structurizr.Workspace;
 import com.structurizr.util.WorkspaceUtils;
+import com.structurizr.view.ThemeUtils;
 import org.apache.commons.cli.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -40,6 +41,7 @@ class ValidateCommand extends AbstractCommand {
 
         Workspace workspace = loadWorkspace(workspacePathAsString);
         WorkspaceUtils.fromJson(WorkspaceUtils.toJson(workspace, false)); // this will trigger the deserialization validation
+        ThemeUtils.loadThemes(workspace); // this will test the themes are accessible
 
         log.info(" - validated");
         log.info(" - finished");
