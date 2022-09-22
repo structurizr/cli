@@ -48,7 +48,7 @@ class UnlockCommand extends AbstractCommand {
             apiSecret = cmd.getOptionValue("apiSecret");
         } catch (ParseException e) {
             log.error(e.getMessage());
-            formatter.printHelp("pull", options);
+            formatter.printHelp("unlock", options);
 
             System.exit(1);
         }
