@@ -14,7 +14,7 @@ class ValidateCommand extends AbstractCommand {
     ValidateCommand() {
     }
 
-    void run(String... args) throws Exception {
+    public void run(String... args) throws Exception {
         Options options = new Options();
 
         Option option = new Option("w", "workspace", true, "Path or URL to the workspace JSON file/DSL file(s)");

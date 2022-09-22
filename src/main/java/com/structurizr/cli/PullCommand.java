@@ -16,7 +16,7 @@ class PullCommand extends AbstractCommand {
     PullCommand() {
     }
 
-    void run(String... args) throws Exception {
+    public void run(String... args) throws Exception {
         Options options = new Options();
 
         Option option = new Option("url", "structurizrApiUrl", true, "Structurizr API URL (default: https://api.structurizr.com");

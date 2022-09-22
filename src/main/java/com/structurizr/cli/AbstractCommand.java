@@ -23,6 +23,8 @@ public abstract class AbstractCommand {
     protected AbstractCommand() {
     }
 
+    public abstract void run(String... args) throws Exception;
+
     String getAgent() {
         return "structurizr-cli/" + getClass().getPackage().getImplementationVersion();
 

@@ -1,7 +1,6 @@
 package com.structurizr.cli;
 
 import com.structurizr.cli.export.ExportCommand;
-import com.structurizr.dsl.StructurizrDslParser;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.logging.log4j.Level;
@@ -11,9 +10,7 @@ import org.apache.logging.log4j.core.config.builder.api.ConfigurationBuilderFact
 import org.apache.logging.log4j.core.config.builder.impl.BuiltConfiguration;
 import org.apache.logging.log4j.core.layout.PatternLayout;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class StructurizrCliApplication {
 
@@ -26,6 +23,9 @@ public class StructurizrCliApplication {
 	private static final String EXPORT_COMMAND = "export";
 	private static final String VALIDATE_COMMAND = "validate";
 	private static final String LIST_COMMAND = "list";
+	private static final String HELP_COMMAND = "help";
+
+	private static final Map<String,AbstractCommand> COMMANDS = new HashMap<>();
 
 	static {
 		ConfigurationBuilder<BuiltConfiguration> builder =
@@ -53,6 +53,15 @@ public class StructurizrCliApplication {
 		Configurator.initialize(builder.build());
 
 		log = LogFactory.getLog(StructurizrCliApplication.class);
+
+		COMMANDS.put(PUSH_COMMAND, new PushCommand());
+		COMMANDS.put(PULL_COMMAND, new PullCommand());
+		COMMANDS.put(LOCK_COMMAND, new LockCommand());
+		COMMANDS.put(UNLOCK_COMMAND, new UnlockCommand());
+		COMMANDS.put(EXPORT_COMMAND, new ExportCommand());
+		COMMANDS.put(VALIDATE_COMMAND, new ValidateCommand());
+		COMMANDS.put(LIST_COMMAND, new ListCommand());
+		COMMANDS.put(HELP_COMMAND, new HelpCommand());
 	}
 
 	public void run(String... args) {
@@ -63,20 +72,9 @@ public class StructurizrCliApplication {
 				printUsageMessageAndExit();
 			}
 
-			if (PUSH_COMMAND.equalsIgnoreCase(args[0])) {
-				new PushCommand().run(Arrays.copyOfRange(args, 1, args.length));
-			} else if (PULL_COMMAND.equalsIgnoreCase(args[0])) {
-				new PullCommand().run(Arrays.copyOfRange(args, 1, args.length));
-			} else if (LOCK_COMMAND.equalsIgnoreCase(args[0])) {
-				new LockCommand().run(Arrays.copyOfRange(args, 1, args.length));
-			} else if (UNLOCK_COMMAND.equalsIgnoreCase(args[0])) {
-				new UnlockCommand().run(Arrays.copyOfRange(args, 1, args.length));
-			} else if (EXPORT_COMMAND.equalsIgnoreCase(args[0])) {
-				new ExportCommand().run(Arrays.copyOfRange(args, 1, args.length));
-			} else if (VALIDATE_COMMAND.equalsIgnoreCase(args[0])) {
-				new ValidateCommand().run(Arrays.copyOfRange(args, 1, args.length));
-			} else if (LIST_COMMAND.equalsIgnoreCase(args[0])) {
-				new ListCommand().run(Arrays.copyOfRange(args, 1, args.length));
+			AbstractCommand command = COMMANDS.get(args[0]);
+			if (command != null) {
+				command.run(Arrays.copyOfRange(args, 1, args.length));
 			} else {
 				printUsageMessageAndExit();
 			}
@@ -88,14 +86,8 @@ public class StructurizrCliApplication {
 
 	private void printUsageMessageAndExit() {
 		String version = getClass().getPackage().getImplementationVersion();
-		log.info("Structurizr CLI build " + version);
-		try {
-			log.info("Structurizr DSL v" + Class.forName(StructurizrDslParser.class.getCanonicalName()).getPackage().getImplementationVersion());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		log.info("Usage: structurizr push|pull|lock|unlock|export|validate|list [options]");
+		log.info("structurizr-cli: " + version);
+		log.info("Usage: structurizr push|pull|lock|unlock|export|validate|list|help [options]");
 		System.exit(1);
 	}
 
