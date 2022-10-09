@@ -1,5 +1,9 @@
 # Changelog
 
+## 2829 (9th October 2022) 
+
+- Diagram keys are now created when using the PlantUML exporter. 
+
 ## 1.20.1 (9th September 2022)
 
 - Fixes #83 (export to json feature is changed/broken?)

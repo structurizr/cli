@@ -162,6 +162,11 @@ public class ExportCommand extends AbstractCommand {
                         File file = new File(outputPath, String.format("%s-%s.%s", prefix(workspaceId), diagram.getKey(), diagram.getFileExtension()));
                         writeToFile(file, diagram.getDefinition());
 
+                        if (diagram.getLegend() != null) {
+                            file = new File(outputPath, String.format("%s-%s-key.%s", prefix(workspaceId), diagram.getKey(), diagram.getFileExtension()));
+                            writeToFile(file, diagram.getLegend().getDefinition());
+                        }
+
                         if (!diagram.getFrames().isEmpty()) {
                             int index = 1;
                             for (Diagram frame : diagram.getFrames()) {
