@@ -9,10 +9,19 @@ Please note that some export formats do not support all of the available shapes/
 ## Options
 
 - __-workspace__: The path or URL to the workspace JSON file/DSL file(s) (required)
-- __-format__: plantuml | mermaid | websequencediagrams | dot | ilograph | json | dsl | theme | fqcn (required)
-- __-animation__: Export animation frames (optional; default false)
+- __-format__ (required):
+  - plantuml: the same as `plantuml/structurizr`
+  - plantuml/structurizr: exports views to PlantUML using the [StructurizrPlantUMLExporter](https://github.com/structurizr/export/tree/main/src/main/java/com/structurizr/export/plantuml#structurizrplantumlexporter)
+  - plantuml/c4plantuml: exports views to PlantUML using the [C4PlantUMLExporter](https://github.com/structurizr/export/tree/main/src/main/java/com/structurizr/export/plantuml#c4plantumlexporter)
+  - mermaid: exports views to Mermaid using the [MermaidExporter](https://github.com/structurizr/export/tree/main/src/main/java/com/structurizr/export/mermaid)
+  - websequencediagrams: exports dynamic views to WebSequenceDiagrams using the [WebSequenceDiagramsExporter](https://github.com/structurizr/export/tree/main/src/main/java/com/structurizr/export/websequencediagrams)
+  - dot: exports views to DOT format (for use with Graphviz) using the [DOTExporter](https://github.com/structurizr/export/tree/main/src/main/java/com/structurizr/export/dot)
+  - ilograph: exports the workspace to a YAML format for use with Ilograph using the [IlographExporter](https://github.com/structurizr/export/tree/main/src/main/java/com/structurizr/export/ilograph)
+  - json: exports the workspace to the Structurizr JSON format
+  - dsl: extracts the DSL that was used to create a JSON workspace
+  - theme: creates a JSON theme based upon the styles and tags defined in the workspace
+  - fully qualified class name: provides a way to use a custom exporter; this needs to implement [WorkspaceExporter](https://github.com/structurizr/export/blob/main/src/main/java/com/structurizr/export/WorkspaceExporter.java) or [DiagramExporter](https://github.com/structurizr/export/blob/main/src/main/java/com/structurizr/export/DiagramExporter.java), with the compiled class(es) being available on the CLI classpath
 - __-output__: Relative or absolute path to an output directory (optional)
-
 
 ## Notes
 
