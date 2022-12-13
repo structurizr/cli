@@ -17,6 +17,7 @@ Please note that some export formats do not support all of the available shapes/
   - websequencediagrams: exports dynamic views to WebSequenceDiagrams using the [WebSequenceDiagramsExporter](https://github.com/structurizr/export/tree/main/src/main/java/com/structurizr/export/websequencediagrams)
   - dot: exports views to DOT format (for use with Graphviz) using the [DOTExporter](https://github.com/structurizr/export/tree/main/src/main/java/com/structurizr/export/dot)
   - ilograph: exports the workspace to a YAML format for use with Ilograph using the [IlographExporter](https://github.com/structurizr/export/tree/main/src/main/java/com/structurizr/export/ilograph)
+  - d2: export views to D2 format using the [D2Exporter](https://github.com/goto1134/structurizr-d2-exporter)
   - json: exports the workspace to the Structurizr JSON format
   - dsl: extracts the DSL that was used to create a JSON workspace
   - theme: creates a JSON theme based upon the styles and tags defined in the workspace
