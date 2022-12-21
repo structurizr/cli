@@ -21,11 +21,9 @@ dependencies {
 		implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.4'
 		implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.4'
 		implementation 'javax.xml.bind:jaxb-api:2.3.1'
-		implementation 'io.github.goto1134:structurizr-d2-exporter:1.0.1'
 	} else {
 		implementation 'com.structurizr:structurizr-dsl:1.20.0'
 		implementation 'com.structurizr:structurizr-export:1.7.0'
-		implementation 'io.github.goto1134:structurizr-d2-exporter:1.0.1'
 		implementation 'com.structurizr:structurizr-graphviz:1.6.1'
 	}
 
@@ -34,6 +32,7 @@ dependencies {
 	implementation 'org.codehaus.groovy:groovy-jsr223:3.0.12'
     implementation 'org.jetbrains.kotlin:kotlin-scripting-jsr223:1.7.10'
     implementation 'org.jruby:jruby-core:9.3.6.0'
+	implementation 'io.github.goto1134:structurizr-d2-exporter:1.0.1'
 
 	implementation 'commons-logging:commons-logging:1.2'
 	implementation 'org.apache.logging.log4j:log4j-api:2.19.0'
@@ -59,6 +58,8 @@ jar {
 }
 
 task getDeps(type: Copy) {
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+	
 	from configurations.default
 	into 'build/dependencies'
 }
