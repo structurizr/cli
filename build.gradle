@@ -16,8 +16,8 @@ repositories {
 
 dependencies {
 
-	implementation 'com.structurizr:structurizr-dsl:1.21.1'
-	implementation 'com.structurizr:structurizr-export:1.8.1'
+	implementation 'com.structurizr:structurizr-dsl:1.22.0'
+	implementation 'com.structurizr:structurizr-export:1.8.2'
 	implementation 'io.github.goto1134:structurizr-d2-exporter:1.0.1'
 	implementation 'com.structurizr:structurizr-graphviz:1.6.1'
 
