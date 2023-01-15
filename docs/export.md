@@ -32,13 +32,13 @@ the [Structurizr cloud service/on-premises installation/Lite](https://structuriz
 
 ## Examples
 
-To export all views in a JSON workspace to PlantUML format under folder named 'diagrams':
+To export all views in a JSON workspace to PlantUML format under folder named `diagrams`:
 
 ```
 ./structurizr.sh export -workspace workspace.json -format plantuml -output diagrams
 ```
 
-To export all views in a JSON workspace to PlantUML format, using C4-PlantUML, under folder named 'diagrams':
+To export all views in a JSON workspace to PlantUML format, using C4-PlantUML, under folder named `diagrams`:
 
 ```
 ./structurizr.sh export -workspace workspace.json -format plantuml/c4plantuml -output diagrams
