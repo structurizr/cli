@@ -12,11 +12,18 @@ This GitHub repository contains the Structurizr CLI - a command line utility for
 - [__list__](docs/list.md) elements within a workspace
 - [__validate__](docs/validate.md) a JSON/DSL workspace definition
 
-## Binaries
+## Installing the CLI
 
-- [https://static.structurizr.com/download/structurizr-cli.zip](https://static.structurizr.com/download/structurizr-cli.zip)
-- [Docker Hub](https://hub.docker.com/r/structurizr/cli)
+- [Local installation](docs/local-installation.md)
+- [Pre-built containers](docs/containers.md) (Docker, dev containers, etc)
+- [Package managers](docs/package-managers.md)
+- [GitLab](docs/gitlab.md) (e.g. GitLab CI/CD)
 
 ## Getting started
 
-See the [getting started](docs/getting-started.md) guide for details of how to download, install, and use the Structurizr CLI.
+See the [getting started](docs/getting-started.md) guide for details of how to use the Structurizr CLI.
+
+## Links
+
+- [structurizr-cli.zip](https://static.structurizr.com/download/structurizr-cli.zip) (requires Java 11+)
+- [Docker Hub](https://hub.docker.com/r/structurizr/cli)
