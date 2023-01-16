@@ -19,6 +19,8 @@ import org.apache.commons.logging.LogFactory;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Collection;
@@ -26,6 +28,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ExportCommand extends AbstractCommand {
+
+    private static final String PLUGINS_DIRECTORY_NAME = "plugins";
 
     private static final Log log = LogFactory.getLog(ExportCommand.class);
 
@@ -147,7 +151,7 @@ public class ExportCommand extends AbstractCommand {
         File outputDir = new File(outputPath);
         outputDir.mkdirs();
 
-       Exporter exporter = findExporter(format);
+       Exporter exporter = findExporter(format, workspacePath);
         if (exporter == null) {
             log.info(" - unknown export format: " + format);
         } else {
@@ -200,13 +204,13 @@ public class ExportCommand extends AbstractCommand {
         log.info(" - finished");
     }
 
-    private Exporter findExporter(String format) {
+    private Exporter findExporter(String format, File workspacePath) {
         if (EXPORTERS.containsKey(format.toLowerCase())) {
             return EXPORTERS.get(format.toLowerCase());
         }
 
         try {
-            Class<?> clazz = Class.forName(format);
+            Class<?> clazz = loadClass(format, workspacePath);
             if (Exporter.class.isAssignableFrom(clazz)) {
                 return (Exporter) clazz.getDeclaredConstructor().newInstance();
             }
@@ -217,6 +221,29 @@ public class ExportCommand extends AbstractCommand {
         }
 
         return null;
+    }
+
+    private Class loadClass(String fqn, File workspaceFile) throws Exception {
+        File pluginsDirectory = new File(workspaceFile.getParent(), PLUGINS_DIRECTORY_NAME);
+        URL[] urls = new URL[0];
+
+        if (pluginsDirectory.exists()) {
+            File[] jarFiles = pluginsDirectory.listFiles((dir, name) -> name.endsWith(".jar"));
+            if (jarFiles != null) {
+                urls = new URL[jarFiles.length];
+                for (int i = 0; i < jarFiles.length; i++) {
+                    System.out.println(jarFiles[i].getAbsolutePath());
+                    try {
+                        urls[i] = jarFiles[i].toURI().toURL();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+
+        URLClassLoader childClassLoader = new URLClassLoader(urls, getClass().getClassLoader());
+        return childClassLoader.loadClass(fqn);
     }
 
     private String prefix(long workspaceId) {
