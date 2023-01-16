@@ -27,3 +27,4 @@ See the [getting started](docs/getting-started.md) guide for details of how to u
 
 - [structurizr-cli.zip](https://static.structurizr.com/download/structurizr-cli.zip) (requires Java 11+)
 - [Docker Hub](https://hub.docker.com/r/structurizr/cli)
+- [Changelog](docs/changelog.md)
