@@ -6,6 +6,7 @@ defaultTasks 'clean', 'build', 'getDeps', 'buildZip'
 
 description = 'Structurizr CLI'
 group = 'com.structurizr'
+version = '1.24.0'
 
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
