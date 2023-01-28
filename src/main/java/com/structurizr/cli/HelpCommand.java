@@ -1,6 +1,7 @@
 package com.structurizr.cli;
 
 import com.structurizr.Workspace;
+import com.structurizr.documentation.importer.DefaultDocumentationImporter;
 import com.structurizr.dsl.StructurizrDslParser;
 import com.structurizr.export.plantuml.StructurizrPlantUMLExporter;
 import org.apache.commons.logging.Log;
@@ -31,6 +32,12 @@ class HelpCommand extends AbstractCommand {
 
         try {
             log.info("structurizr-export: " + Class.forName(StructurizrPlantUMLExporter.class.getCanonicalName()).getPackage().getImplementationVersion());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            log.info("structurizr-documentation: v" + Class.forName(DefaultDocumentationImporter.class.getCanonicalName()).getPackage().getImplementationVersion());
         } catch (Exception e) {
             e.printStackTrace();
         }
