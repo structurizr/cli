@@ -6,7 +6,7 @@ defaultTasks 'clean', 'build', 'getDeps', 'buildZip'
 
 description = 'Structurizr CLI'
 group = 'com.structurizr'
-version = '1.24.0'
+version = '1.25.0'
 
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
@@ -17,8 +17,8 @@ repositories {
 
 dependencies {
 
-	implementation 'com.structurizr:structurizr-dsl:1.24.0'
-	implementation 'com.structurizr:structurizr-export:1.8.2'
+	implementation 'com.structurizr:structurizr-dsl:1.25.0'
+	implementation 'com.structurizr:structurizr-export:1.8.4'
 	implementation 'io.github.goto1134:structurizr-d2-exporter:1.1.1'
 	implementation 'com.structurizr:structurizr-graphviz:1.6.1'
 
