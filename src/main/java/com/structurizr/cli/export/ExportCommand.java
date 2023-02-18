@@ -35,7 +35,6 @@ public class ExportCommand extends AbstractCommand {
 
     private static final String JSON_FORMAT = "json";
     private static final String THEME_FORMAT = "theme";
-    private static final String DSL_FORMAT = "dsl";
     private static final String PLANTUML_FORMAT = "plantuml";
     private static final String PLANTUML_C4PLANTUML_SUBFORMAT = "c4plantuml";
     private static final String PLANTUML_STRUCTURIZR_SUBFORMAT = "structurizr";
@@ -51,7 +50,6 @@ public class ExportCommand extends AbstractCommand {
     static {
         EXPORTERS.put(JSON_FORMAT, new JsonWorkspaceExporter());
         EXPORTERS.put(THEME_FORMAT, new JsonWorkspaceThemeExporter());
-        EXPORTERS.put(DSL_FORMAT, new DslWorkspaceExporter());
         EXPORTERS.put(PLANTUML_FORMAT, new StructurizrPlantUMLExporter());
         EXPORTERS.put(PLANTUML_FORMAT + "/" + PLANTUML_STRUCTURIZR_SUBFORMAT, new StructurizrPlantUMLExporter());
         EXPORTERS.put(PLANTUML_FORMAT + "/" + PLANTUML_C4PLANTUML_SUBFORMAT, new C4PlantUMLExporter());
@@ -72,7 +70,7 @@ public class ExportCommand extends AbstractCommand {
         option.setRequired(true);
         options.addOption(option);
 
-        option = new Option("f", "format", true, String.format("Export format: %s[/%s|%s]|%s|%s|%s|%s|%s|%s|%s|%s", PLANTUML_FORMAT, PLANTUML_STRUCTURIZR_SUBFORMAT, PLANTUML_C4PLANTUML_SUBFORMAT, WEBSEQUENCEDIAGRAMS_FORMAT, MERMAID_FORMAT, DOT_FORMAT, ILOGRAPH_FORMAT, JSON_FORMAT, DSL_FORMAT, THEME_FORMAT, CUSTOM_FORMAT));
+        option = new Option("f", "format", true, String.format("Export format: %s[/%s|%s]|%s|%s|%s|%s|%s|%s|%s", PLANTUML_FORMAT, PLANTUML_STRUCTURIZR_SUBFORMAT, PLANTUML_C4PLANTUML_SUBFORMAT, WEBSEQUENCEDIAGRAMS_FORMAT, MERMAID_FORMAT, DOT_FORMAT, ILOGRAPH_FORMAT, JSON_FORMAT, THEME_FORMAT, CUSTOM_FORMAT));
         option.setRequired(true);
         options.addOption(option);
 
@@ -138,7 +136,7 @@ public class ExportCommand extends AbstractCommand {
 
         workspaceId = workspace.getId();
 
-        if (!JSON_FORMAT.equalsIgnoreCase(format) && !DSL_FORMAT.equalsIgnoreCase(format)) {
+        if (!JSON_FORMAT.equalsIgnoreCase(format)) {
             // only inline the theme amd create default views if the user wants a diagram export
             ThemeUtils.loadThemes(workspace);
             addDefaultViewsAndStyles(workspace);
