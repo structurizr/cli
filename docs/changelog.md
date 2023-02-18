@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.26.0 (unreleased)
+## 1.26.0 (18th February 2023)
 
 - structurizr/java: Updated to 1.20.1 - [changelog](https://github.com/structurizr/java/releases).
 - structurizr/dsl: Updated to 1.26.1 - [changelog](https://github.com/structurizr/dsl/releases).
