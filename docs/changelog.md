@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.28.0 (5th March 2023)
+
+- structurizr/dsl: Updated to 1.28.0 - [changelog](https://github.com/structurizr/dsl/releases).
+
 ## 1.27.0 (27th February 2023)
 
 - structurizr/dsl: Updated to 1.27.1 - [changelog](https://github.com/structurizr/dsl/releases).
