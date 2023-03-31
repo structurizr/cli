@@ -6,10 +6,10 @@ defaultTasks 'clean', 'build', 'getDeps', 'buildZip'
 
 description = 'Structurizr CLI'
 group = 'com.structurizr'
-version = '1.29.0'
+version = '1.30.0'
 
-sourceCompatibility = '1.8'
-targetCompatibility = '1.8'
+sourceCompatibility = '11'
+targetCompatibility = '11'
 
 repositories {
 	mavenCentral()
@@ -17,10 +17,10 @@ repositories {
 
 dependencies {
 
-	implementation 'com.structurizr:structurizr-dsl:1.29.1'
-	implementation 'com.structurizr:structurizr-export:1.13.0'
+	implementation 'com.structurizr:structurizr-dsl:1.30.0'
+	implementation 'com.structurizr:structurizr-export:1.14.0'
 	implementation 'io.github.goto1134:structurizr-d2-exporter:1.2.0'
-	implementation 'com.structurizr:structurizr-graphviz:1.8.1'
+	implementation 'com.structurizr:structurizr-graphviz:2.0.0'
 
 	implementation 'commons-cli:commons-cli:1.5.0'
 	implementation 'org.codehaus.groovy:groovy-jsr223:3.0.13'
