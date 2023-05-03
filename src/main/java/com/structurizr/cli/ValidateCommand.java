@@ -37,14 +37,19 @@ class ValidateCommand extends AbstractCommand {
             System.exit(1);
         }
 
-        log.info("Validating workspace at " + workspacePathAsString);
+        log.debug("Validating workspace at " + workspacePathAsString);
 
-        Workspace workspace = loadWorkspace(workspacePathAsString);
-        WorkspaceUtils.fromJson(WorkspaceUtils.toJson(workspace, false)); // this will trigger the deserialization validation
-        ThemeUtils.loadThemes(workspace); // this will test the themes are accessible
+        try {
+            Workspace workspace = loadWorkspace(workspacePathAsString);
+            WorkspaceUtils.fromJson(WorkspaceUtils.toJson(workspace, false)); // this will trigger the deserialization validation
+            ThemeUtils.loadThemes(workspace); // this will test the themes are accessible
+        } catch (Exception e) {
+            // no nothing, just print the error
+            log.error(e.getMessage());
+        }
 
-        log.info(" - validated");
-        log.info(" - finished");
+        log.debug(" - validated");
+        log.debug(" - finished");
     }
 
 }
