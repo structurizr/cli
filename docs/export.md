@@ -19,7 +19,6 @@ the [Structurizr cloud service/on-premises installation/Lite](https://structuriz
   - ilograph: exports the workspace to a YAML format for use with Ilograph using the [IlographExporter](https://github.com/structurizr/export/tree/main/src/main/java/com/structurizr/export/ilograph)
   - d2: export views to D2 format using the [D2Exporter](https://github.com/goto1134/structurizr-d2-exporter)
   - json: exports the workspace to the Structurizr JSON format
-  - dsl: extracts the DSL that was used to create a JSON workspace
   - theme: creates a JSON theme based upon the styles and tags defined in the workspace
   - fully qualified class name: provides a way to use a custom exporter; this needs to implement [WorkspaceExporter](https://github.com/structurizr/export/blob/main/src/main/java/com/structurizr/export/WorkspaceExporter.java) or [DiagramExporter](https://github.com/structurizr/export/blob/main/src/main/java/com/structurizr/export/DiagramExporter.java), with the compiled class(es) being available on the CLI classpath or packaged as a JAR file in a directory named `plugins` next to your workspace file
 - __-output__: Relative or absolute path to an output directory (optional)
