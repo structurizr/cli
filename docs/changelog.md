@@ -2,7 +2,7 @@
 
 ## (unreleased)
 
-- goto1134/structurizr-d2-exporter: Updated to 1.4.0 - [changelog](https://github.com/goto1134/structurizr-d2-exporter/releases).
+- goto1134/structurizr-d2-exporter: Updated to 1.5.1 - [changelog](https://github.com/goto1134/structurizr-d2-exporter/releases).
 
 ## 1.30.0 (31st March 2023)
 
