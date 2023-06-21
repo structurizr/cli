@@ -1,6 +1,7 @@
 package com.structurizr.cli;
 
 import com.structurizr.cli.export.ExportCommand;
+import com.structurizr.util.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.logging.log4j.Level;
@@ -14,7 +15,7 @@ import java.util.*;
 
 public class StructurizrCliApplication {
 
-	private static Log log;
+	private static final Log log;
 
 	private static final String PUSH_COMMAND = "push";
 	private static final String PULL_COMMAND = "pull";
@@ -23,6 +24,7 @@ public class StructurizrCliApplication {
 	private static final String EXPORT_COMMAND = "export";
 	private static final String VALIDATE_COMMAND = "validate";
 	private static final String LIST_COMMAND = "list";
+	private static final String VERSION_COMMAND = "version";
 	private static final String HELP_COMMAND = "help";
 
 	private static final Map<String,AbstractCommand> COMMANDS = new HashMap<>();
@@ -61,6 +63,7 @@ public class StructurizrCliApplication {
 		COMMANDS.put(EXPORT_COMMAND, new ExportCommand());
 		COMMANDS.put(VALIDATE_COMMAND, new ValidateCommand());
 		COMMANDS.put(LIST_COMMAND, new ListCommand());
+		COMMANDS.put(VERSION_COMMAND, new VersionCommand());
 		COMMANDS.put(HELP_COMMAND, new HelpCommand());
 	}
 
@@ -69,14 +72,16 @@ public class StructurizrCliApplication {
 			checkJavaVersion();
 
 			if (args == null || args.length == 0) {
-				printUsageMessageAndExit();
+				printUsageMessageAndExit(null);
 			}
 
-			AbstractCommand command = COMMANDS.get(args[0]);
+			String commandName = args[0];
+			AbstractCommand command = COMMANDS.get(commandName);
 			if (command != null) {
 				command.run(Arrays.copyOfRange(args, 1, args.length));
+				System.exit(0);
 			} else {
-				printUsageMessageAndExit();
+				printUsageMessageAndExit(commandName);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -84,10 +89,14 @@ public class StructurizrCliApplication {
 		}
 	}
 
-	private void printUsageMessageAndExit() {
+	private void printUsageMessageAndExit(String commandName) {
+		if (!StringUtils.isNullOrEmpty(commandName)) {
+			log.error("Error: " + commandName + " not recognised");
+		}
+
 		String version = getClass().getPackage().getImplementationVersion();
-		log.info("structurizr-cli: " + version);
-		log.info("Usage: structurizr push|pull|lock|unlock|export|validate|list|help [options]");
+		log.error("structurizr-cli: " + version);
+		log.error("Usage: structurizr push|pull|lock|unlock|export|validate|list|version|help [options]");
 		System.exit(1);
 	}
 
