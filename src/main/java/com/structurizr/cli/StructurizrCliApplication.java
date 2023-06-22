@@ -94,8 +94,6 @@ public class StructurizrCliApplication {
 			log.error("Error: " + commandName + " not recognised");
 		}
 
-		String version = getClass().getPackage().getImplementationVersion();
-		log.error("structurizr-cli: " + version);
 		log.error("Usage: structurizr push|pull|lock|unlock|export|validate|list|version|help [options]");
 		System.exit(1);
 	}
