@@ -41,6 +41,9 @@ class VersionCommand extends AbstractCommand {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        log.info("Java: " + System.getProperty("java.version") + "/"  + System.getProperty("java.vendor") + " (" + System.getProperty("java.home") + ")");
+        log.info("OS: " + System.getProperty("os.name") + " "  + System.getProperty("os.version") + " (" + System.getProperty("os.arch") + ")");
     }
 
 }
