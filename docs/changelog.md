@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.31.1 (21st July 2023)
+
+- Fixes validate command returning 0 (success) on error (https://github.com/structurizr/cli/issues/134).
+
 ## 1.31.0 (17th July 2023)
 
 - Adds a `version` command (https://github.com/structurizr/cli/issues/122).

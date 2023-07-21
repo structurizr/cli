@@ -44,8 +44,9 @@ class ValidateCommand extends AbstractCommand {
             WorkspaceUtils.fromJson(WorkspaceUtils.toJson(workspace, false)); // this will trigger the deserialization validation
             ThemeUtils.loadThemes(workspace); // this will test the themes are accessible
         } catch (Exception e) {
-            // no nothing, just print the error
+            // print the error and exit
             log.error(e.getMessage());
+            System.exit(1);
         }
 
         log.debug(" - validated");
