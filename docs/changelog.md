@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.33.0 (29th July 2023)
+
+- structurizr/dsl: Updated to 1.32.0 - [changelog](https://github.com/structurizr/dsl/releases/tag/v1.32.0).
+- goto1134/structurizr-d2-exporter: Updated to 1.5.2 - [changelog](https://github.com/goto1134/structurizr-d2-exporter/releases/tag/v1.5.2).
+
 ## 1.32.1 (27th July 2023)
 
 - structurizr/dsl: Updated to 1.31.1 - [changelog](https://github.com/structurizr/dsl/releases/tag/v1.31.1).
