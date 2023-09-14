@@ -1,0 +1,90 @@
+{
+  "id" : 0,
+  "name" : "Name",
+  "description" : "Description",
+  "properties" : {
+    "structurizr.dsl" : "d29ya3NwYWNlIHsKCiAgICBtb2RlbCB7CiAgICAgICAgc3MgPSBzb2Z0d2FyZVN5c3RlbSAiU29mdHdhcmUgU3lzdGVtIiB7CiAgICAgICAgICAgICFkb2NzIGRvY3MKICAgICAgICAgICAgIWFkcnMgYWRycwogICAgICAgIH0KCiAgICAgICAgcCA9IHBlcnNvbiAiUGVyc29uIiB7CgogICAgICAgIH0KCiAgICAgICAgcCAtPiBzcyAiQ2FsbHMiCgogICAgfQoKICAgIHZpZXdzIHsKICAgICAgICBzeXN0ZW1MYW5kc2NhcGUgIlN5c3RlbUxhbmRzY2FwZSIgewogICAgICAgICAgICBpbmNsdWRlICoKICAgICAgICAgICAgYXV0b2xheW91dAogICAgICAgIH0KCiAgICAgICAgdGhlbWUgZGVmYXVsdAogICAgfQoKfQo="
+  },
+  "configuration" : { },
+  "model" : {
+    "people" : [ {
+      "id" : "2",
+      "tags" : "Element,Person",
+      "properties" : {
+        "structurizr.dsl.identifier" : "p"
+      },
+      "name" : "Person",
+      "relationships" : [ {
+        "id" : "3",
+        "tags" : "Relationship",
+        "properties" : {
+          "structurizr.dsl.identifier" : "47a284c7-e195-4287-a7e8-649a9c6c7add"
+        },
+        "sourceId" : "2",
+        "destinationId" : "1",
+        "description" : "Calls"
+      } ],
+      "location" : "Unspecified"
+    } ],
+    "softwareSystems" : [ {
+      "id" : "1",
+      "tags" : "Element,Software System",
+      "properties" : {
+        "structurizr.dsl.identifier" : "ss"
+      },
+      "name" : "Software System",
+      "location" : "Unspecified",
+      "documentation" : {
+        "sections" : [ {
+          "content" : "## Context\n\n...",
+          "format" : "Markdown",
+          "filename" : "01-context.md",
+          "order" : 1,
+          "title" : ""
+        } ],
+        "decisions" : [ {
+          "content" : "# 1. Record architecture decisions\n\nDate: 2020-06-05\n\n## Status\n\nAccepted\n\n## Context\n\nWe need to record the architectural decisions made on this project.\n\n## Decision\n\nWe will use Architecture Decision Records, as described by Michael Nygard in this article: [http://thinkrelevance.com/blog/2011/11/15/documenting-architecture-decisions](http://thinkrelevance.com/blog/2011/11/15/documenting-architecture-decisions)\n\n## Consequences\n\nSee Michael Nygard's article, linked above.",
+          "format" : "Markdown",
+          "id" : "1",
+          "title" : "Record architecture decisions",
+          "date" : "2020-06-05T00:00:00Z",
+          "status" : "Accepted"
+        } ]
+      }
+    } ]
+  },
+  "documentation" : { },
+  "views" : {
+    "systemLandscapeViews" : [ {
+      "key" : "SystemLandscape",
+      "order" : 1,
+      "automaticLayout" : {
+        "implementation" : "Graphviz",
+        "rankDirection" : "TopBottom",
+        "rankSeparation" : 300,
+        "nodeSeparation" : 300,
+        "edgeSeparation" : 0,
+        "vertices" : false
+      },
+      "enterpriseBoundaryVisible" : true,
+      "elements" : [ {
+        "id" : "1",
+        "x" : 250,
+        "y" : 200
+      }, {
+        "id" : "2",
+        "x" : 100,
+        "y" : 100
+      } ],
+      "relationships" : [ {
+        "id" : "3"
+      } ]
+    } ],
+    "configuration" : {
+      "branding" : { },
+      "styles" : { },
+      "themes" : [ "https://static.structurizr.com/themes/default/theme.json" ],
+      "terminology" : { }
+    }
+  }
+}

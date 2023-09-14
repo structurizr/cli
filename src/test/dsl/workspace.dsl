@@ -1,10 +1,17 @@
 workspace {
 
     model {
-        softwareSystem "Software System" {
+        ss = softwareSystem "Software System" {
             !docs docs
             !adrs adrs
         }
+
+        p = person "Person" {
+
+        }
+
+        p -> ss "Calls"
+
     }
 
     views {

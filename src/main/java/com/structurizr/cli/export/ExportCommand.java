@@ -1,5 +1,6 @@
 package com.structurizr.cli.export;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.structurizr.Workspace;
 import com.structurizr.cli.AbstractCommand;
 import com.structurizr.dsl.StructurizrDslParser;
@@ -11,7 +12,7 @@ import com.structurizr.export.plantuml.C4PlantUMLExporter;
 import com.structurizr.export.plantuml.StructurizrPlantUMLExporter;
 import com.structurizr.export.websequencediagrams.WebSequenceDiagramsExporter;
 import com.structurizr.util.WorkspaceUtils;
-import com.structurizr.view.ThemeUtils;
+import com.structurizr.view.*;
 import io.github.goto1134.structurizr.export.d2.D2Exporter;
 import org.apache.commons.cli.*;
 import org.apache.commons.logging.Log;
@@ -78,6 +79,10 @@ public class ExportCommand extends AbstractCommand {
         option.setRequired(false);
         options.addOption(option);
 
+        option = new Option("m", "merge", true, "Path to workspace file to merge layouts from");
+        option.setRequired(false);
+        options.addOption(option);
+
         CommandLineParser commandLineParser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
 
@@ -86,6 +91,8 @@ public class ExportCommand extends AbstractCommand {
         long workspaceId = 1;
         String format = "";
         String outputPath = null;
+        String mergePathAsString = null;
+        File mergePath = null;
 
         try {
             CommandLine cmd = commandLineParser.parse(options, args);
@@ -93,6 +100,7 @@ public class ExportCommand extends AbstractCommand {
             workspacePathAsString = cmd.getOptionValue("workspace");
             format = cmd.getOptionValue("format");
             outputPath = cmd.getOptionValue("output");
+            mergePathAsString = cmd.getOptionValue("merge");
 
         } catch (ParseException e) {
             log.error(e.getMessage());
@@ -103,6 +111,7 @@ public class ExportCommand extends AbstractCommand {
         }
 
         Workspace workspace;
+        Workspace mergeWorkspace;
 
         log.info("Exporting workspace from " + workspacePathAsString);
 
@@ -117,7 +126,7 @@ public class ExportCommand extends AbstractCommand {
                 workspacePath = new File(workspacePathAsString);
                 workspace = WorkspaceUtils.loadWorkspaceFromJson(workspacePath);
             }
-            
+
         } else {
             log.info(" - loading workspace from DSL");
             StructurizrDslParser structurizrDslParser = new StructurizrDslParser();
@@ -134,6 +143,16 @@ public class ExportCommand extends AbstractCommand {
             workspace = structurizrDslParser.getWorkspace();
         }
 
+        if (mergePathAsString!=null) {
+            if (mergePathAsString.endsWith(".json")) {
+                mergePath = new File(mergePathAsString);
+                mergeWorkspace = WorkspaceUtils.loadWorkspaceFromJson(mergePath);
+                mergeWorkspaceViews(mergeWorkspace,workspace);
+            } else {
+                log.error("Merge file must be in JSON format");
+            }
+        }
+
         workspaceId = workspace.getId();
 
         if (!JSON_FORMAT.equalsIgnoreCase(format)) {
@@ -145,7 +164,7 @@ public class ExportCommand extends AbstractCommand {
         if (outputPath == null) {
             outputPath = new File(workspacePath.getCanonicalPath()).getParent();
         }
-        
+
         File outputDir = new File(outputPath);
         outputDir.mkdirs();
 
@@ -259,6 +278,17 @@ public class ExportCommand extends AbstractCommand {
         writer.write(content);
         writer.flush();
         writer.close();
+    }
+
+    private void mergeWorkspaceViews(Workspace source, Workspace output) {
+        output.getViews().getViews().stream().forEach(view -> {
+            View existingLayout = source.getViews().getViewWithKey(view.getKey());
+            if (existingLayout!=null) {
+                ((ModelView) view).setMergeFromRemote(true);
+                ((ModelView) view).disableAutomaticLayout();
+            }
+        });
+        output.getViews().copyLayoutInformationFrom(source.getViews());
     }
 
 }

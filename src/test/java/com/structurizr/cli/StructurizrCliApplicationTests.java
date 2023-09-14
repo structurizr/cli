@@ -33,4 +33,21 @@ public class StructurizrCliApplicationTests {
         assertTrue(new File(tmpDir, "structurizr-SystemLandscape.puml").exists());
     }
 
+    @Test
+    public void exportWorkspaceToJSONAndMerge() throws Exception {
+        File tmpDir = Files.createTempDirectory("structurizr").toFile();
+
+        String[] args = {
+                "export",
+                "-workspace", "src/test/dsl/workspace.dsl",
+                "-output", tmpDir.getCanonicalPath(),
+                "-format", "json",
+                "-merge", "src/test/dsl/workspace_layout.json"
+
+        };
+        StructurizrCliApplication.main(args);
+
+        assertTrue(new File(tmpDir, "workspace.json").exists());
+    }
+
 }
