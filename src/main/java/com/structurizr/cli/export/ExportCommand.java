@@ -143,14 +143,18 @@ public class ExportCommand extends AbstractCommand {
             workspace = structurizrDslParser.getWorkspace();
         }
 
-        if (mergePathAsString!=null) {
-            if (mergePathAsString.endsWith(".json")) {
-                mergePath = new File(mergePathAsString);
-                mergeWorkspace = WorkspaceUtils.loadWorkspaceFromJson(mergePath);
-                mergeWorkspaceViews(mergeWorkspace,workspace);
-            } else {
-                log.error("Merge file must be in JSON format");
+        try {
+            if (mergePathAsString != null) {
+                if (mergePathAsString.endsWith(".json")) {
+                    mergePath = new File(mergePathAsString);
+                    mergeWorkspace = WorkspaceUtils.loadWorkspaceFromJson(mergePath);
+                    mergeWorkspaceViews(mergeWorkspace, workspace);
+                } else {
+                    log.error("Merge file must be in JSON format");
+                }
             }
+        } catch (IllegalArgumentException e) {
+            log.error("The source file to merge from cannot be found, skipping merge operation");
         }
 
         workspaceId = workspace.getId();
