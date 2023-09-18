@@ -288,8 +288,10 @@ public class ExportCommand extends AbstractCommand {
         output.getViews().getViews().stream().forEach(view -> {
             View existingLayout = source.getViews().getViewWithKey(view.getKey());
             if (existingLayout!=null) {
-                ((ModelView) view).setMergeFromRemote(true);
-                ((ModelView) view).disableAutomaticLayout();
+                ((ModelView) view).setMergeFromRemote(true); //required to allow merge to happen
+                ((ModelView) view).disableAutomaticLayout(); //remove auto layout
+                ((ModelView) view).setDimensions(null); //null dimensions to force copy from source
+                ((ModelView) view).setPaperSize(null); //null paper size to force copy from source
             }
         });
         output.getViews().copyLayoutInformationFrom(source.getViews());

@@ -58,6 +58,11 @@
     "systemLandscapeViews" : [ {
       "key" : "SystemLandscape",
       "order" : 1,
+      "paperSize" : "A2_Portrait",
+      "dimensions" : {
+        "width" : 3954,
+        "height" : 5208
+      },
       "automaticLayout" : {
         "implementation" : "Graphviz",
         "rankDirection" : "TopBottom",
