@@ -69,8 +69,6 @@ public class StructurizrCliApplication {
 
 	public void run(String... args) {
 		try {
-			checkJavaVersion();
-
 			if (args == null || args.length == 0) {
 				printUsageMessageAndExit(null);
 			}
@@ -96,23 +94,6 @@ public class StructurizrCliApplication {
 
 		log.error("Usage: structurizr push|pull|lock|unlock|export|validate|list|version|help [options]");
 		System.exit(1);
-	}
-
-	private void checkJavaVersion() {
-		Set<String> versions = new HashSet<>();
-		versions.add("11");
-		versions.add("11.0.0");
-		versions.add("11.0.1");
-		versions.add("11.0.2");
-		versions.add("11.0.3");
-
-		String version = System.getProperty("java.version");
-
-		if (versions.contains(version)) {
-			log.error("The Structurizr CLI does not work with Java versions 11.0.0-11.0.3 - please upgrade your Java installation");
-			System.exit(1);
-		}
-
 	}
 
 	public static void main(String[] args) {

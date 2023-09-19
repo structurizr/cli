@@ -6,10 +6,10 @@ defaultTasks 'clean', 'build', 'getDeps', 'buildZip'
 
 description = 'Structurizr CLI'
 group = 'com.structurizr'
-version = '1.33.1'
+version = '1.34.0'
 
-sourceCompatibility = '11'
-targetCompatibility = '11'
+sourceCompatibility = 17
+targetCompatibility = 17
 
 repositories {
 	mavenCentral()
@@ -33,7 +33,7 @@ dependencies {
 	implementation 'org.apache.logging.log4j:log4j-jcl:2.20.0'
 	implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.20.0'
 
-	testImplementation 'org.junit.jupiter:junit-jupiter:5.9.0'
+	testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
 
 }
 
