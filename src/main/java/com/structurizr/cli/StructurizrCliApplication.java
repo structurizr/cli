@@ -22,6 +22,7 @@ public class StructurizrCliApplication {
 	private static final String LOCK_COMMAND = "lock";
 	private static final String UNLOCK_COMMAND = "unlock";
 	private static final String EXPORT_COMMAND = "export";
+	private static final String MERGE_COMMAND = "merge";
 	private static final String VALIDATE_COMMAND = "validate";
 	private static final String LIST_COMMAND = "list";
 	private static final String VERSION_COMMAND = "version";
@@ -61,6 +62,7 @@ public class StructurizrCliApplication {
 		COMMANDS.put(LOCK_COMMAND, new LockCommand());
 		COMMANDS.put(UNLOCK_COMMAND, new UnlockCommand());
 		COMMANDS.put(EXPORT_COMMAND, new ExportCommand());
+		COMMANDS.put(MERGE_COMMAND, new MergeCommand());
 		COMMANDS.put(VALIDATE_COMMAND, new ValidateCommand());
 		COMMANDS.put(LIST_COMMAND, new ListCommand());
 		COMMANDS.put(VERSION_COMMAND, new VersionCommand());
