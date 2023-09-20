@@ -100,7 +100,6 @@ class PushCommand extends AbstractCommand {
             structurizrClient.setEncryptionStrategy(new AesEncryptionStrategy(passphrase));
         }
 
-        Workspace workspace;
         File archivePath = new File(".");
 
         File path = new File(workspacePath);
@@ -113,15 +112,8 @@ class PushCommand extends AbstractCommand {
         log.info(" - creating new workspace");
         log.info(" - parsing model and views from " + path.getCanonicalPath());
 
-        if (workspacePath.endsWith(".json")) {
-            workspace = WorkspaceUtils.loadWorkspaceFromJson(path);
-            workspace.setRevision(null);
-        } else {
-            StructurizrDslParser structurizrDslParser = new StructurizrDslParser();
-            structurizrDslParser.parse(path);
-
-            workspace = structurizrDslParser.getWorkspace();
-        }
+        Workspace workspace = loadWorkspace(workspacePath);
+        workspace.setRevision(null);
 
         log.info(" - merge layout from remote: " + mergeFromRemote);
         structurizrClient.setMergeFromRemote(mergeFromRemote);

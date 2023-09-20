@@ -102,36 +102,14 @@ public class ExportCommand extends AbstractCommand {
             System.exit(1);
         }
 
-        Workspace workspace;
-
         log.info("Exporting workspace from " + workspacePathAsString);
 
-        if (workspacePathAsString.endsWith(".json")) {
-            log.info(" - loading workspace from JSON");
+        Workspace workspace = loadWorkspace(workspacePathAsString);
 
-            if (workspacePathAsString.startsWith("http://") || workspacePathAsString.startsWith("https")) {
-                String json = readFromUrl(workspacePathAsString);
-                workspace = WorkspaceUtils.fromJson(json);
-                workspacePath = new File(".");
-            } else {
-                workspacePath = new File(workspacePathAsString);
-                workspace = WorkspaceUtils.loadWorkspaceFromJson(workspacePath);
-            }
-            
+        if (workspacePathAsString.startsWith("http://") || workspacePathAsString.startsWith("https://")) {
+            workspacePath = new File(".");
         } else {
-            log.info(" - loading workspace from DSL");
-            StructurizrDslParser structurizrDslParser = new StructurizrDslParser();
-
-            if (workspacePathAsString.startsWith("http://") || workspacePathAsString.startsWith("https")) {
-                String dsl = readFromUrl(workspacePathAsString);
-                structurizrDslParser.parse(dsl);
-                workspacePath = new File(".");
-            } else {
-                workspacePath = new File(workspacePathAsString);
-                structurizrDslParser.parse(workspacePath);
-            }
-
-            workspace = structurizrDslParser.getWorkspace();
+            workspacePath = new File(workspacePathAsString);
         }
 
         workspaceId = workspace.getId();
