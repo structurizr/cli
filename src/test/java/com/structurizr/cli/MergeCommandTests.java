@@ -20,8 +20,8 @@ public class MergeCommandTests {
 
         String[] args = {
                 "merge",
-                "-workspace", "src/test/mergeLayout/workspace.dsl",
-                "-layout", "src/test/mergeLayout/workspace.json",
+                "-workspace", "src/test/merge/workspace.dsl",
+                "-layout", "src/test/merge/workspace.json",
                 "-output", new File(tmpDir, "merged.json").getCanonicalPath()
         };
         new MergeCommand().run(args);
