@@ -13,6 +13,7 @@ import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
 
 import java.io.File;
+import java.nio.charset.Charset;
 
 public abstract class AbstractCommand {
 
@@ -64,6 +65,7 @@ public abstract class AbstractCommand {
 
         } else {
             StructurizrDslParser structurizrDslParser = new StructurizrDslParser();
+            structurizrDslParser.setCharacterEncoding(Charset.defaultCharset());
 
             if (workspacePathAsString.startsWith("http://") || workspacePathAsString.startsWith("https://")) {
                 String dsl = readFromUrl(workspacePathAsString);
