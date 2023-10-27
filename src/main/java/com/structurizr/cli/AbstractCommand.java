@@ -50,8 +50,16 @@ public abstract class AbstractCommand {
                 String json = readFromUrl(workspacePathAsString);
                 workspace = WorkspaceUtils.fromJson(json);
             } else {
-                File workspacePath = new File(workspacePathAsString);
-                workspace = WorkspaceUtils.loadWorkspaceFromJson(workspacePath);
+                File workspaceFile = new File(workspacePathAsString);
+                if (!workspaceFile.exists()) {
+                    throw new StructurizrCliException(workspaceFile.getAbsolutePath() + " does not exist");
+                }
+
+                if (!workspaceFile.isFile()) {
+                    throw new StructurizrCliException(workspaceFile.getAbsolutePath() + " is not a JSON or DSL file");
+                }
+
+                workspace = WorkspaceUtils.loadWorkspaceFromJson(workspaceFile);
             }
 
         } else {
@@ -61,8 +69,16 @@ public abstract class AbstractCommand {
                 String dsl = readFromUrl(workspacePathAsString);
                 structurizrDslParser.parse(dsl);
             } else {
-                File workspacePath = new File(workspacePathAsString);
-                structurizrDslParser.parse(workspacePath);
+                File workspaceFile = new File(workspacePathAsString);
+                if (!workspaceFile.exists()) {
+                    throw new StructurizrCliException(workspaceFile.getAbsolutePath() + " does not exist");
+                }
+
+                if (!workspaceFile.isFile()) {
+                    throw new StructurizrCliException(workspaceFile.getAbsolutePath() + " is not a JSON or DSL file");
+                }
+
+                structurizrDslParser.parse(workspaceFile);
             }
 
             workspace = structurizrDslParser.getWorkspace();

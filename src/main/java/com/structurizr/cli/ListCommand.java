@@ -23,7 +23,7 @@ class ListCommand extends AbstractCommand {
     public void run(String... args) throws Exception {
         Options options = new Options();
 
-        Option option = new Option("w", "workspace", true, "Path or URL to the workspace JSON file/DSL file(s)");
+        Option option = new Option("w", "workspace", true, "Path or URL to the workspace JSON/DSL file");
         option.setRequired(true);
         options.addOption(option);
 
