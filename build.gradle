@@ -17,15 +17,16 @@ repositories {
 
 dependencies {
 
-	implementation 'com.structurizr:structurizr-dsl:1.32.0'
-	implementation 'com.structurizr:structurizr-export:1.16.1'
+	implementation 'com.structurizr:structurizr-dsl:1.33.0'
+	implementation 'com.structurizr:structurizr-export:1.17.0'
 	implementation 'io.github.goto1134:structurizr-d2-exporter:1.5.2'
-	implementation 'com.structurizr:structurizr-graphviz:2.2.0'
+	implementation 'com.structurizr:structurizr-graphviz:2.2.2'
 
 	implementation 'commons-cli:commons-cli:1.5.0'
-	implementation 'org.apache.groovy:groovy-jsr223:4.0.12'
-	implementation 'org.jetbrains.kotlin:kotlin-scripting-jsr223:1.7.22'
-    implementation 'org.jruby:jruby-core:9.4.2.0'
+
+	implementation 'org.codehaus.groovy:groovy-jsr223:3.0.19'
+	implementation 'org.jetbrains.kotlin:kotlin-scripting-jsr223:1.8.10'
+	implementation 'org.jruby:jruby-core:9.4.4.0'
 
 	implementation 'commons-logging:commons-logging:1.2'
 	implementation 'org.apache.logging.log4j:log4j-api:2.20.0'

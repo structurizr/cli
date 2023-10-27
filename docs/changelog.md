@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.34.0 (27th October 2023)
+
+- structurizr/dsl: Updated to 1.33.0 - [changelog](https://github.com/structurizr/dsl/releases/tag/v1.33.0).
+- structurizr/export: Updated to 1.17.0 - [changelog](https://github.com/structurizr/export/releases/tag/v1.17.0).
+- structurizr/graphviz: Updated to 2.2.2 - [changelog](https://github.com/structurizr/graphviz/releases/tag/v2.2.2).
+
 ## 1.33.1 (11th August 2023)
 
 - structurizr/export: Updated to 1.16.1 - [changelog](https://github.com/structurizr/export/releases/tag/v1.16.1).
