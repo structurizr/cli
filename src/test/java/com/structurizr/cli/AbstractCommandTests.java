@@ -2,8 +2,7 @@ package com.structurizr.cli;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AbstractCommandTests {
 
@@ -17,5 +16,14 @@ public class AbstractCommandTests {
         }
     }
 
+    @Test
+    public void loadWorkspace_ThrowsAnException_WhenWorkspaceScopeValidationFails() {
+        try {
+            new ValidateCommand().loadWorkspace("src/test/dsl/workspace-scope.dsl");
+            fail();
+        } catch (Exception e) {
+            assertEquals("Workspace is software system scoped, but multiple software systems have containers and/or documentation defined.", e.getMessage());
+        }
+    }
 
 }

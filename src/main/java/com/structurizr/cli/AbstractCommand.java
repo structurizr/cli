@@ -3,6 +3,7 @@ package com.structurizr.cli;
 import com.structurizr.Workspace;
 import com.structurizr.dsl.StructurizrDslParser;
 import com.structurizr.util.WorkspaceUtils;
+import com.structurizr.validation.WorkspaceScopeValidatorFactory;
 import com.structurizr.view.Styles;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -89,6 +90,9 @@ public abstract class AbstractCommand {
                 throw new StructurizrCliException("No workspace definition was found - please check your DSL");
             }
         }
+
+        // validate workspace scope
+        WorkspaceScopeValidatorFactory.getValidator(workspace).validate(workspace);
 
         return workspace;
     }
