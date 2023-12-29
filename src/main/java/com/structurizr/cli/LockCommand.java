@@ -1,6 +1,6 @@
 package com.structurizr.cli;
 
-import com.structurizr.api.StructurizrClient;
+import com.structurizr.api.WorkspaceApiClient;
 import org.apache.commons.cli.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -54,9 +54,9 @@ class LockCommand extends AbstractCommand {
         }
 
         log.info("Locking workspace " + workspaceId + " at " + apiUrl);
-        StructurizrClient structurizrClient = new StructurizrClient(apiUrl, apiKey, apiSecret);
-        structurizrClient.setAgent(getAgent());
-        boolean locked = structurizrClient.lockWorkspace(workspaceId);
+        WorkspaceApiClient client = new WorkspaceApiClient(apiUrl, apiKey, apiSecret);
+        client.setAgent(getAgent());
+        boolean locked = client.lockWorkspace(workspaceId);
 
         log.info(" - locked " + locked);
         log.info(" - finished");

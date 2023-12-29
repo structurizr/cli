@@ -1,7 +1,7 @@
 package com.structurizr.cli;
 
 import com.structurizr.Workspace;
-import com.structurizr.api.StructurizrClient;
+import com.structurizr.api.WorkspaceApiClient;
 import com.structurizr.util.WorkspaceUtils;
 import org.apache.commons.cli.*;
 import org.apache.commons.logging.Log;
@@ -58,9 +58,9 @@ class PullCommand extends AbstractCommand {
         }
 
         log.info("Pulling workspace " + workspaceId + " from " + apiUrl);
-        StructurizrClient structurizrClient = new StructurizrClient(apiUrl, apiKey, apiSecret);
-        structurizrClient.setAgent(getAgent());
-        Workspace workspace = structurizrClient.getWorkspace(workspaceId);
+        WorkspaceApiClient client = new WorkspaceApiClient(apiUrl, apiKey, apiSecret);
+        client.setAgent(getAgent());
+        Workspace workspace = client.getWorkspace(workspaceId);
 
         File file = new File("structurizr-" + workspaceId + "-workspace.json");
         WorkspaceUtils.saveWorkspaceToJson(workspace, file);

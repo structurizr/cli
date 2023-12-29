@@ -1,5 +1,10 @@
 # Changelog
 
+## unreleased
+
+- structurizr/dsl: Updated to 1.35.0 - [changelog](https://github.com/structurizr/dsl/releases/tag/v1.35.0).
+- structurizr/export: Updated to 1.19.0 - [changelog](https://github.com/structurizr/export/releases/tag/v1.19.0).
+
 ## 1.35.0 (26th November 2023)
 
 - Adds workspace scope validation - see https://docs.structurizr.com/workspaces for details.

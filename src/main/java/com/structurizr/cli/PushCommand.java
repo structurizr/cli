@@ -1,11 +1,9 @@
 package com.structurizr.cli;
 
 import com.structurizr.Workspace;
-import com.structurizr.api.StructurizrClient;
-import com.structurizr.dsl.StructurizrDslParser;
+import com.structurizr.api.WorkspaceApiClient;
 import com.structurizr.encryption.AesEncryptionStrategy;
 import com.structurizr.util.StringUtils;
-import com.structurizr.util.WorkspaceUtils;
 import org.apache.commons.cli.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -91,13 +89,13 @@ class PushCommand extends AbstractCommand {
 
         log.info("Pushing workspace " + workspaceId + " to " + apiUrl);
 
-        StructurizrClient structurizrClient = new StructurizrClient(apiUrl, apiKey, apiSecret);
-        structurizrClient.setAgent(getAgent());
-        structurizrClient.setWorkspaceArchiveLocation(null);
+        WorkspaceApiClient client = new WorkspaceApiClient(apiUrl, apiKey, apiSecret);
+        client.setAgent(getAgent());
+        client.setWorkspaceArchiveLocation(null);
 
         if (!StringUtils.isNullOrEmpty(passphrase)) {
             log.info(" - using client-side encryption");
-            structurizrClient.setEncryptionStrategy(new AesEncryptionStrategy(passphrase));
+            client.setEncryptionStrategy(new AesEncryptionStrategy(passphrase));
         }
 
         File archivePath = new File(".");
@@ -116,17 +114,17 @@ class PushCommand extends AbstractCommand {
         workspace.setRevision(null);
 
         log.info(" - merge layout from remote: " + mergeFromRemote);
-        structurizrClient.setMergeFromRemote(mergeFromRemote);
+        client.setMergeFromRemote(mergeFromRemote);
 
         addDefaultViewsAndStyles(workspace);
 
         if (archive) {
-            structurizrClient.setWorkspaceArchiveLocation(archivePath);
-            log.info(" - storing previous version of workspace in " + structurizrClient.getWorkspaceArchiveLocation());
+            client.setWorkspaceArchiveLocation(archivePath);
+            log.info(" - storing previous version of workspace in " + client.getWorkspaceArchiveLocation());
         }
 
         log.info(" - pushing workspace");
-        structurizrClient.putWorkspace(workspaceId, workspace);
+        client.putWorkspace(workspaceId, workspace);
 
         log.info(" - finished");
     }
