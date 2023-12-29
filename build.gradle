@@ -6,7 +6,7 @@ defaultTasks 'clean', 'build', 'getDeps', 'buildZip'
 
 description = 'Structurizr CLI'
 group = 'com.structurizr'
-version = '1.35.0'
+version = ''
 
 sourceCompatibility = 17
 targetCompatibility = 17
@@ -40,6 +40,11 @@ dependencies {
 
 test {
 	useJUnitPlatform()
+}
+
+sourceSets.main.resources {
+	srcDirs = ['src/main/resources']
+	include 'build.properties'
 }
 
 jar {
