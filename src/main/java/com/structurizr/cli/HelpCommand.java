@@ -11,7 +11,7 @@ class HelpCommand extends AbstractCommand {
     }
 
     public void run(String... args) throws Exception {
-        log.info("Usage: structurizr push|pull|lock|unlock|export|validate|list|version|help [options]");
+        log.info("Usage: structurizr push|pull|lock|unlock|export|validate|inspect|list|version|help [options]");
     }
 
 }

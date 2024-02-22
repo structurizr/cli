@@ -13,14 +13,16 @@ targetCompatibility = 17
 
 repositories {
 	mavenCentral()
+//	mavenLocal()
 }
 
 dependencies {
 
-	implementation 'com.structurizr:structurizr-dsl:1.35.0'
-	implementation 'com.structurizr:structurizr-export:1.19.0'
+	implementation 'com.structurizr:structurizr-dsl:2.0.0'
+	implementation 'com.structurizr:structurizr-export:2.0.0'
 	implementation 'io.github.goto1134:structurizr-d2-exporter:1.5.2'
-	implementation 'com.structurizr:structurizr-graphviz:2.2.2'
+	implementation 'com.structurizr:structurizr-autolayout:2.0.0'
+	implementation 'com.structurizr:structurizr-inspection:2.0.0'
 
 	implementation 'commons-cli:commons-cli:1.5.0'
 
@@ -29,10 +31,10 @@ dependencies {
 	implementation 'org.jruby:jruby-core:9.4.4.0'
 
 	implementation 'commons-logging:commons-logging:1.2'
-	implementation 'org.apache.logging.log4j:log4j-api:2.20.0'
-	implementation 'org.apache.logging.log4j:log4j-core:2.20.0'
-	implementation 'org.apache.logging.log4j:log4j-jcl:2.20.0'
-	implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.20.0'
+	implementation 'org.apache.logging.log4j:log4j-api:2.23.0'
+	implementation 'org.apache.logging.log4j:log4j-core:2.23.0'
+	implementation 'org.apache.logging.log4j:log4j-jcl:2.23.0'
+	implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.23.0'
 
 	testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
 

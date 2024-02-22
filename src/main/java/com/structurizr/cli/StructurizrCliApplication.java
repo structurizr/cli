@@ -24,6 +24,7 @@ public class StructurizrCliApplication {
 	private static final String EXPORT_COMMAND = "export";
 	private static final String MERGE_COMMAND = "merge";
 	private static final String VALIDATE_COMMAND = "validate";
+	private static final String INSPECT_COMMAND = "inspect";
 	private static final String LIST_COMMAND = "list";
 	private static final String VERSION_COMMAND = "version";
 	private static final String HELP_COMMAND = "help";
@@ -64,6 +65,7 @@ public class StructurizrCliApplication {
 		COMMANDS.put(EXPORT_COMMAND, new ExportCommand());
 		COMMANDS.put(MERGE_COMMAND, new MergeCommand());
 		COMMANDS.put(VALIDATE_COMMAND, new ValidateCommand());
+		COMMANDS.put(INSPECT_COMMAND, new InspectCommand());
 		COMMANDS.put(LIST_COMMAND, new ListCommand());
 		COMMANDS.put(VERSION_COMMAND, new VersionCommand());
 		COMMANDS.put(HELP_COMMAND, new HelpCommand());
@@ -94,7 +96,7 @@ public class StructurizrCliApplication {
 			log.error("Error: " + commandName + " not recognised");
 		}
 
-		log.error("Usage: structurizr push|pull|lock|unlock|export|validate|list|version|help [options]");
+		log.error("Usage: structurizr push|pull|lock|unlock|export|validate|inspect|list|version|help [options]");
 		System.exit(1);
 	}
 

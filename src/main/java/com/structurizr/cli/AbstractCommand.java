@@ -14,12 +14,15 @@ import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
 
 import java.io.File;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.nio.charset.Charset;
 
 public abstract class AbstractCommand {
 
     private static final Log log = LogFactory.getLog(AbstractCommand.class);
 
+    private static final String PLUGINS_DIRECTORY_NAME = "plugins";
     private static final int HTTP_OK_STATUS = 200;
 
     protected AbstractCommand() {
@@ -110,6 +113,29 @@ public abstract class AbstractCommand {
         }
 
         return "";
+    }
+
+    protected Class loadClass(String fqn, File workspaceFile) throws Exception {
+        File pluginsDirectory = new File(workspaceFile.getParent(), PLUGINS_DIRECTORY_NAME);
+        URL[] urls = new URL[0];
+
+        if (pluginsDirectory.exists()) {
+            File[] jarFiles = pluginsDirectory.listFiles((dir, name) -> name.endsWith(".jar"));
+            if (jarFiles != null) {
+                urls = new URL[jarFiles.length];
+                for (int i = 0; i < jarFiles.length; i++) {
+                    System.out.println(jarFiles[i].getAbsolutePath());
+                    try {
+                        urls[i] = jarFiles[i].toURI().toURL();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+
+        URLClassLoader childClassLoader = new URLClassLoader(urls, getClass().getClassLoader());
+        return childClassLoader.loadClass(fqn);
     }
 
 }

@@ -29,8 +29,6 @@ import java.util.Map;
 
 public class ExportCommand extends AbstractCommand {
 
-    private static final String PLUGINS_DIRECTORY_NAME = "plugins";
-
     private static final Log log = LogFactory.getLog(ExportCommand.class);
 
     private static final String JSON_FORMAT = "json";
@@ -197,29 +195,6 @@ public class ExportCommand extends AbstractCommand {
         }
 
         return null;
-    }
-
-    private Class loadClass(String fqn, File workspaceFile) throws Exception {
-        File pluginsDirectory = new File(workspaceFile.getParent(), PLUGINS_DIRECTORY_NAME);
-        URL[] urls = new URL[0];
-
-        if (pluginsDirectory.exists()) {
-            File[] jarFiles = pluginsDirectory.listFiles((dir, name) -> name.endsWith(".jar"));
-            if (jarFiles != null) {
-                urls = new URL[jarFiles.length];
-                for (int i = 0; i < jarFiles.length; i++) {
-                    System.out.println(jarFiles[i].getAbsolutePath());
-                    try {
-                        urls[i] = jarFiles[i].toURI().toURL();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
-
-        URLClassLoader childClassLoader = new URLClassLoader(urls, getClass().getClassLoader());
-        return childClassLoader.loadClass(fqn);
     }
 
     private String prefix(long workspaceId) {
