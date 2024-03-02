@@ -18,11 +18,11 @@ repositories {
 
 dependencies {
 
-	implementation 'com.structurizr:structurizr-dsl:2.0.0'
-	implementation 'com.structurizr:structurizr-export:2.0.0'
+	implementation 'com.structurizr:structurizr-dsl:2.1.0'
+	implementation 'com.structurizr:structurizr-export:2.1.0'
 	implementation 'io.github.goto1134:structurizr-d2-exporter:1.5.2'
-	implementation 'com.structurizr:structurizr-autolayout:2.0.0'
-	implementation 'com.structurizr:structurizr-inspection:2.0.0'
+	implementation 'com.structurizr:structurizr-autolayout:2.1.0'
+	implementation 'com.structurizr:structurizr-inspection:2.1.0'
 
 	implementation 'commons-cli:commons-cli:1.5.0'
 
