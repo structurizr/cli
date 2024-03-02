@@ -25,7 +25,7 @@ class MergeCommand extends AbstractCommand {
         option.setRequired(true);
         options.addOption(option);
 
-        option = new Option("v", "view", true, "Key of the view to merge layout information for");
+        option = new Option("v", "view", true, "Key of the view to merge layout information for (optional)");
         option.setRequired(false);
         options.addOption(option);
 

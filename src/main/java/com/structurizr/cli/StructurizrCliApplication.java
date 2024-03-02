@@ -91,12 +91,12 @@ public class StructurizrCliApplication {
 		}
 	}
 
-	private void printUsageMessageAndExit(String commandName) {
+	private void printUsageMessageAndExit(String commandName) throws Exception {
 		if (!StringUtils.isNullOrEmpty(commandName)) {
 			log.error("Error: " + commandName + " not recognised");
 		}
 
-		log.error("Usage: structurizr push|pull|lock|unlock|export|validate|inspect|list|version|help [options]");
+		new HelpCommand().run();
 		System.exit(1);
 	}
 
