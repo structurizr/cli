@@ -1,0 +1,14 @@
+<configuration >
+    <import class="ch.qos.logback.core.ConsoleAppender" />
+    <import class="ch.qos.logback.classic.encoder.PatternLayoutEncoder" />
+
+    <appender name="STDOUT" class="ConsoleAppender">
+        <encoder class="PatternLayoutEncoder">
+            <pattern>%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>

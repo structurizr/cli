@@ -4,18 +4,12 @@ import com.structurizr.cli.export.ExportCommand;
 import com.structurizr.util.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.core.config.Configurator;
-import org.apache.logging.log4j.core.config.builder.api.ConfigurationBuilder;
-import org.apache.logging.log4j.core.config.builder.api.ConfigurationBuilderFactory;
-import org.apache.logging.log4j.core.config.builder.impl.BuiltConfiguration;
-import org.apache.logging.log4j.core.layout.PatternLayout;
 
 import java.util.*;
 
 public class StructurizrCliApplication {
 
-	private static final Log log;
+	private static final Log log = LogFactory.getLog(StructurizrCliApplication.class);
 
 	private static final String PUSH_COMMAND = "push";
 	private static final String PULL_COMMAND = "pull";
@@ -32,32 +26,6 @@ public class StructurizrCliApplication {
 	private static final Map<String,AbstractCommand> COMMANDS = new HashMap<>();
 
 	static {
-		ConfigurationBuilder<BuiltConfiguration> builder =
-				ConfigurationBuilderFactory.newConfigurationBuilder();
-
-		// configure a console appender
-		builder.add(
-				builder.newAppender("stdout", "Console")
-						.add(
-								builder.newLayout(PatternLayout.class.getSimpleName())
-										.addAttribute(
-												"pattern",
-												"%msg%n"
-										)
-						)
-		);
-
-		// configure the root logger
-		builder.add(
-				builder.newRootLogger(Level.INFO)
-						.add(builder.newAppenderRef("stdout"))
-		);
-
-		// apply the configuration
-		Configurator.initialize(builder.build());
-
-		log = LogFactory.getLog(StructurizrCliApplication.class);
-
 		COMMANDS.put(PUSH_COMMAND, new PushCommand());
 		COMMANDS.put(PULL_COMMAND, new PullCommand());
 		COMMANDS.put(LOCK_COMMAND, new LockCommand());

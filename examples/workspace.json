@@ -1,0 +1,101 @@
+{
+  "name": "Workspace JSON",
+  "description": "Managed Workspace by JSON",
+  "model": {
+    "people": [
+      {
+        "description": "A user of my software system.",
+        "id": "1",
+        "location": "Unspecified",
+        "name": "User",
+        "properties": {
+          "structurizr.dsl.identifier": "user"
+        },
+        "relationships": [
+          {
+            "description": "Uses",
+            "destinationId": "2",
+            "id": "3",
+            "properties": {
+              "structurizr.dsl.identifier": "1996bfad-bad1-4b38-ad25-24f3df30b68c"
+            },
+            "sourceId": "1",
+            "tags": "Relationship"
+          }
+        ],
+        "tags": "Element,Person"
+      }
+    ],
+    "softwareSystems": [
+      {
+        "description": "My software system.",
+        "documentation": {},
+        "id": "2",
+        "location": "Unspecified",
+        "name": "Software System",
+        "properties": {
+          "structurizr.dsl.identifier": "softwaresystem"
+        },
+        "tags": "Element,Software System"
+      }
+    ]
+  },
+  "properties": {
+    "structurizr.dsl": "d29ya3NwYWNlICJXb3Jrc3BhY2UgRFNMIiAiTWFuYWdlZCBXb3Jrc3BhY2UgYnkgRFNMIiB7CgogICAgbW9kZWwgewogICAgICAgIHVzZXIgPSBwZXJzb24gIlVzZXIiICJBIHVzZXIgb2YgbXkgc29mdHdhcmUgc3lzdGVtLiIKICAgICAgICBzb2Z0d2FyZVN5c3RlbSA9IHNvZnR3YXJlU3lzdGVtICJTb2Z0d2FyZSBTeXN0ZW0iICJNeSBzb2Z0d2FyZSBzeXN0ZW0uIgoKICAgICAgICB1c2VyIC0+IHNvZnR3YXJlU3lzdGVtICJVc2VzIgogICAgfQoKICAgIHZpZXdzIHsKICAgICAgICBzeXN0ZW1Db250ZXh0IHNvZnR3YXJlU3lzdGVtICJTeXN0ZW1Db250ZXh0IiB7CiAgICAgICAgICAgIGluY2x1ZGUgKgogICAgICAgICAgICBhdXRvTGF5b3V0CiAgICAgICAgfQoKICAgICAgICBzdHlsZXMgewogICAgICAgICAgICBlbGVtZW50ICJTb2Z0d2FyZSBTeXN0ZW0iIHsKICAgICAgICAgICAgICAgIGJhY2tncm91bmQgIzExNjhiZAogICAgICAgICAgICAgICAgY29sb3IgI2ZmZmZmZgogICAgICAgICAgICB9CiAgICAgICAgICAgIGVsZW1lbnQgIlBlcnNvbiIgewogICAgICAgICAgICAgICAgc2hhcGUgcGVyc29uCiAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kICMwODQyN2IKICAgICAgICAgICAgICAgIGNvbG9yICNmZmZmZmYKICAgICAgICAgICAgfQogICAgICAgIH0KICAgIH0KCn0K"
+  },
+  "views": {
+    "configuration": {
+      "branding": {},
+      "styles": {
+        "elements": [
+          {
+            "background": "#1168bd",
+            "color": "#ffffff",
+            "tag": "Software System"
+          },
+          {
+            "background": "#08427b",
+            "color": "#ffffff",
+            "shape": "Person",
+            "tag": "Person"
+          }
+        ]
+      },
+      "terminology": {}
+    },
+    "systemContextViews": [
+      {
+        "automaticLayout": {
+          "applied": false,
+          "edgeSeparation": 0,
+          "implementation": "Graphviz",
+          "nodeSeparation": 300,
+          "rankDirection": "TopBottom",
+          "rankSeparation": 300,
+          "vertices": false
+        },
+        "elements": [
+          {
+            "id": "1",
+            "x": 0,
+            "y": 0
+          },
+          {
+            "id": "2",
+            "x": 0,
+            "y": 0
+          }
+        ],
+        "enterpriseBoundaryVisible": true,
+        "key": "SystemContext",
+        "order": 1,
+        "relationships": [
+          {
+            "id": "3"
+          }
+        ],
+        "softwareSystemId": "2"
+      }
+    ]
+  }
+}

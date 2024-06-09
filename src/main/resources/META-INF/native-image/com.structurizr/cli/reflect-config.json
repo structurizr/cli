@@ -1,0 +1,748 @@
+[
+{
+  "name":"[Ljava.lang.String;"
+},
+{
+  "name":"ch.qos.logback.classic.BasicConfigurator",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"ch.qos.logback.classic.joran.SerializedModelConfigurator",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"ch.qos.logback.classic.util.DefaultJoranConfigurator",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.fasterxml.jackson.databind.ext.Java7SupportImpl",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.structurizr.AbstractWorkspace",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"getConfiguration","parameterTypes":[] }, {"name":"getDescription","parameterTypes":[] }, {"name":"getId","parameterTypes":[] }, {"name":"getLastModifiedAgent","parameterTypes":[] }, {"name":"getLastModifiedDate","parameterTypes":[] }, {"name":"getLastModifiedUser","parameterTypes":[] }, {"name":"getName","parameterTypes":[] }, {"name":"getProperties","parameterTypes":[] }, {"name":"getRevision","parameterTypes":[] }, {"name":"getThumbnail","parameterTypes":[] }, {"name":"getVersion","parameterTypes":[] }, {"name":"setConfiguration","parameterTypes":["com.structurizr.configuration.WorkspaceConfiguration"] }, {"name":"setDescription","parameterTypes":["java.lang.String"] }, {"name":"setId","parameterTypes":["long"] }, {"name":"setLastModifiedAgent","parameterTypes":["java.lang.String"] }, {"name":"setLastModifiedDate","parameterTypes":["java.util.Date"] }, {"name":"setLastModifiedUser","parameterTypes":["java.lang.String"] }, {"name":"setName","parameterTypes":["java.lang.String"] }, {"name":"setProperties","parameterTypes":["java.util.Map"] }, {"name":"setRevision","parameterTypes":["java.lang.Long"] }]
+},
+{
+  "name":"com.structurizr.PropertyHolder",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"com.structurizr.Workspace",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"getDocumentation","parameterTypes":[] }, {"name":"getModel","parameterTypes":[] }, {"name":"getViews","parameterTypes":[] }, {"name":"setDocumentation","parameterTypes":["com.structurizr.documentation.Documentation"] }, {"name":"setModel","parameterTypes":["com.structurizr.model.Model"] }, {"name":"setViews","parameterTypes":["com.structurizr.view.ViewSet"] }]
+},
+{
+  "name":"com.structurizr.api.ApiResponse",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"setMessage","parameterTypes":["java.lang.String"] }, {"name":"setSuccess","parameterTypes":["boolean"] }]
+},
+{
+  "name":"com.structurizr.configuration.Role",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"com.structurizr.configuration.User",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+},
+{
+  "name":"com.structurizr.configuration.Visibility",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"com.structurizr.configuration.WorkspaceConfiguration",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"getScope","parameterTypes":[] }, {"name":"getUsers","parameterTypes":[] }, {"name":"getVisibility","parameterTypes":[] }]
+},
+{
+  "name":"com.structurizr.configuration.WorkspaceScope",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"com.structurizr.documentation.Decision",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+},
+{
+  "name":"com.structurizr.documentation.Decision$Link",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+},
+{
+  "name":"com.structurizr.documentation.Documentable",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"com.structurizr.documentation.Documentation",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"getDecisions","parameterTypes":[] }, {"name":"getImages","parameterTypes":[] }, {"name":"getSections","parameterTypes":[] }]
+},
+{
+  "name":"com.structurizr.documentation.DocumentationContent",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"com.structurizr.documentation.Format",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"com.structurizr.documentation.Image",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+},
+{
+  "name":"com.structurizr.documentation.Section",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+},
+{
+  "name":"com.structurizr.encryption.AesEncryptionStrategy",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"getIterationCount","parameterTypes":[] }, {"name":"getIv","parameterTypes":[] }, {"name":"getKeySize","parameterTypes":[] }, {"name":"getSalt","parameterTypes":[] }]
+},
+{
+  "name":"com.structurizr.encryption.EncryptedWorkspace",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"getCiphertext","parameterTypes":[] }, {"name":"getEncryptionStrategy","parameterTypes":[] }, {"name":"setCiphertext","parameterTypes":["java.lang.String"] }, {"name":"setEncryptionStrategy","parameterTypes":["com.structurizr.encryption.EncryptionStrategy"] }]
+},
+{
+  "name":"com.structurizr.encryption.EncryptionLocation",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"com.structurizr.encryption.EncryptionStrategy",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"getLocation","parameterTypes":[] }, {"name":"setLocation","parameterTypes":["com.structurizr.encryption.EncryptionLocation"] }]
+},
+{
+  "name":"com.structurizr.inspection.DefaultInspector",
+  "methods":[{"name":"<init>","parameterTypes":["com.structurizr.Workspace"] }]
+},
+{
+  "name":"com.structurizr.model.Component",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+},
+{
+  "name":"com.structurizr.model.Container",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+},
+{
+  "name":"com.structurizr.model.ContainerInstance",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+},
+{
+  "name":"com.structurizr.model.CustomElement",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+},
+{
+  "name":"com.structurizr.model.DeploymentElement",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"com.structurizr.model.DeploymentNode",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+},
+{
+  "name":"com.structurizr.model.Element",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"getDescription","parameterTypes":[] }, {"name":"getName","parameterTypes":[] }, {"name":"getRelationships","parameterTypes":[] }, {"name":"setDescription","parameterTypes":["java.lang.String"] }, {"name":"setName","parameterTypes":["java.lang.String"] }, {"name":"setRelationships","parameterTypes":["java.util.Set"] }]
+},
+{
+  "name":"com.structurizr.model.Enterprise",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+},
+{
+  "name":"com.structurizr.model.GroupableElement",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"getGroup","parameterTypes":[] }]
+},
+{
+  "name":"com.structurizr.model.HttpHealthCheck",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+},
+{
+  "name":"com.structurizr.model.IdGenerator",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"com.structurizr.model.InfrastructureNode",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+},
+{
+  "name":"com.structurizr.model.InteractionStyle",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"com.structurizr.model.Location",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"com.structurizr.model.Model",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"getCustomElements","parameterTypes":[] }, {"name":"getDeploymentNodes","parameterTypes":[] }, {"name":"getEnterprise","parameterTypes":[] }, {"name":"getPeople","parameterTypes":[] }, {"name":"getProperties","parameterTypes":[] }, {"name":"getSoftwareSystems","parameterTypes":[] }, {"name":"hydrate","parameterTypes":[] }, {"name":"setPeople","parameterTypes":["java.util.Set"] }, {"name":"setSoftwareSystems","parameterTypes":["java.util.Set"] }]
+},
+{
+  "name":"com.structurizr.model.ModelItem",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"getId","parameterTypes":[] }, {"name":"getPerspectives","parameterTypes":[] }, {"name":"getProperties","parameterTypes":[] }, {"name":"getTags","parameterTypes":[] }, {"name":"getUrl","parameterTypes":[] }, {"name":"setId","parameterTypes":["java.lang.String"] }, {"name":"setProperties","parameterTypes":["java.util.Map"] }, {"name":"setTags","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"com.structurizr.model.Person",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"getLocation","parameterTypes":[] }, {"name":"setLocation","parameterTypes":["com.structurizr.model.Location"] }]
+},
+{
+  "name":"com.structurizr.model.Perspective",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+},
+{
+  "name":"com.structurizr.model.Relationship",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"getDescription","parameterTypes":[] }, {"name":"getDestinationId","parameterTypes":[] }, {"name":"getInteractionStyle","parameterTypes":[] }, {"name":"getLinkedRelationshipId","parameterTypes":[] }, {"name":"getSourceId","parameterTypes":[] }, {"name":"getTechnology","parameterTypes":[] }, {"name":"setDescription","parameterTypes":["java.lang.String"] }, {"name":"setDestinationId","parameterTypes":["java.lang.String"] }, {"name":"setSourceId","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"com.structurizr.model.SoftwareSystem",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"getContainers","parameterTypes":[] }, {"name":"getDocumentation","parameterTypes":[] }, {"name":"getLocation","parameterTypes":[] }, {"name":"setDocumentation","parameterTypes":["com.structurizr.documentation.Documentation"] }, {"name":"setLocation","parameterTypes":["com.structurizr.model.Location"] }]
+},
+{
+  "name":"com.structurizr.model.SoftwareSystemInstance",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+},
+{
+  "name":"com.structurizr.model.StaticStructureElement",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"com.structurizr.model.StaticStructureElementInstance",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"com.structurizr.view.AbstractStyle",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"getProperties","parameterTypes":[] }]
+},
+{
+  "name":"com.structurizr.view.AnimatedView",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"com.structurizr.view.Animation",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+},
+{
+  "name":"com.structurizr.view.AutomaticLayout",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"getEdgeSeparation","parameterTypes":[] }, {"name":"getImplementation","parameterTypes":[] }, {"name":"getNodeSeparation","parameterTypes":[] }, {"name":"getRankDirection","parameterTypes":[] }, {"name":"getRankSeparation","parameterTypes":[] }, {"name":"isApplied","parameterTypes":[] }, {"name":"isVertices","parameterTypes":[] }, {"name":"setApplied","parameterTypes":["boolean"] }, {"name":"setEdgeSeparation","parameterTypes":["int"] }, {"name":"setImplementation","parameterTypes":["com.structurizr.view.AutomaticLayout$Implementation"] }, {"name":"setNodeSeparation","parameterTypes":["int"] }, {"name":"setRankDirection","parameterTypes":["com.structurizr.view.AutomaticLayout$RankDirection"] }, {"name":"setRankSeparation","parameterTypes":["int"] }, {"name":"setVertices","parameterTypes":["boolean"] }]
+},
+{
+  "name":"com.structurizr.view.AutomaticLayout$Implementation",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"com.structurizr.view.AutomaticLayout$RankDirection",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"com.structurizr.view.Border",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"com.structurizr.view.Branding",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"getFont","parameterTypes":[] }, {"name":"getLogo","parameterTypes":[] }]
+},
+{
+  "name":"com.structurizr.view.ComponentView",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+},
+{
+  "name":"com.structurizr.view.Configuration",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"getBranding","parameterTypes":[] }, {"name":"getDefaultView","parameterTypes":[] }, {"name":"getLastSavedView","parameterTypes":[] }, {"name":"getMetadataSymbols","parameterTypes":[] }, {"name":"getProperties","parameterTypes":[] }, {"name":"getStyles","parameterTypes":[] }, {"name":"getTerminology","parameterTypes":[] }, {"name":"getThemes","parameterTypes":[] }, {"name":"getViewSortOrder","parameterTypes":[] }, {"name":"setBranding","parameterTypes":["com.structurizr.view.Branding"] }, {"name":"setTerminology","parameterTypes":["com.structurizr.view.Terminology"] }]
+},
+{
+  "name":"com.structurizr.view.ContainerView",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+},
+{
+  "name":"com.structurizr.view.CustomView",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+},
+{
+  "name":"com.structurizr.view.DeploymentView",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+},
+{
+  "name":"com.structurizr.view.Dimensions",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+},
+{
+  "name":"com.structurizr.view.DynamicView",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+},
+{
+  "name":"com.structurizr.view.ElementStyle",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"getBackground","parameterTypes":[] }, {"name":"getBorder","parameterTypes":[] }, {"name":"getColor","parameterTypes":[] }, {"name":"getDescription","parameterTypes":[] }, {"name":"getFontSize","parameterTypes":[] }, {"name":"getHeight","parameterTypes":[] }, {"name":"getIcon","parameterTypes":[] }, {"name":"getMetadata","parameterTypes":[] }, {"name":"getOpacity","parameterTypes":[] }, {"name":"getShape","parameterTypes":[] }, {"name":"getStroke","parameterTypes":[] }, {"name":"getStrokeWidth","parameterTypes":[] }, {"name":"getTag","parameterTypes":[] }, {"name":"getWidth","parameterTypes":[] }, {"name":"setBackground","parameterTypes":["java.lang.String"] }, {"name":"setColor","parameterTypes":["java.lang.String"] }, {"name":"setShape","parameterTypes":["com.structurizr.view.Shape"] }, {"name":"setTag","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"com.structurizr.view.ElementView",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"getId","parameterTypes":[] }, {"name":"getX","parameterTypes":[] }, {"name":"getY","parameterTypes":[] }, {"name":"setId","parameterTypes":["java.lang.String"] }, {"name":"setX","parameterTypes":["int"] }, {"name":"setY","parameterTypes":["int"] }]
+},
+{
+  "name":"com.structurizr.view.FilterMode",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"com.structurizr.view.FilteredView",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+},
+{
+  "name":"com.structurizr.view.Font",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+},
+{
+  "name":"com.structurizr.view.ImageView",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+},
+{
+  "name":"com.structurizr.view.LayoutMergeStrategy",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"com.structurizr.view.LineStyle",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"com.structurizr.view.MetadataSymbols",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"com.structurizr.view.ModelView",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"getAutomaticLayout","parameterTypes":[] }, {"name":"getDimensions","parameterTypes":[] }, {"name":"getElements","parameterTypes":[] }, {"name":"getPaperSize","parameterTypes":[] }, {"name":"getRelationships","parameterTypes":[] }, {"name":"getSoftwareSystemId","parameterTypes":[] }, {"name":"setAutomaticLayout","parameterTypes":["com.structurizr.view.AutomaticLayout"] }, {"name":"setElements","parameterTypes":["java.util.Set"] }, {"name":"setRelationships","parameterTypes":["java.util.Set"] }, {"name":"setSoftwareSystemId","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"com.structurizr.view.PaperSize",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"com.structurizr.view.RelationshipStyle",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+},
+{
+  "name":"com.structurizr.view.RelationshipView",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"getDescription","parameterTypes":[] }, {"name":"getId","parameterTypes":[] }, {"name":"getOrder","parameterTypes":[] }, {"name":"getPosition","parameterTypes":[] }, {"name":"getRouting","parameterTypes":[] }, {"name":"getUrl","parameterTypes":[] }, {"name":"getVertices","parameterTypes":[] }, {"name":"isResponse","parameterTypes":[] }, {"name":"setId","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"com.structurizr.view.Routing",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"com.structurizr.view.Shape",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"com.structurizr.view.StaticView",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"getAnimations","parameterTypes":[] }]
+},
+{
+  "name":"com.structurizr.view.Styles",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"getElements","parameterTypes":[] }, {"name":"getRelationships","parameterTypes":[] }]
+},
+{
+  "name":"com.structurizr.view.SystemContextView",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"isEnterpriseBoundaryVisible","parameterTypes":[] }, {"name":"setEnterpriseBoundaryVisible","parameterTypes":["boolean"] }]
+},
+{
+  "name":"com.structurizr.view.SystemLandscapeView",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+},
+{
+  "name":"com.structurizr.view.Terminology",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"getCode","parameterTypes":[] }, {"name":"getComponent","parameterTypes":[] }, {"name":"getContainer","parameterTypes":[] }, {"name":"getDeploymentNode","parameterTypes":[] }, {"name":"getEnterprise","parameterTypes":[] }, {"name":"getInfrastructureNode","parameterTypes":[] }, {"name":"getPerson","parameterTypes":[] }, {"name":"getRelationship","parameterTypes":[] }, {"name":"getSoftwareSystem","parameterTypes":[] }]
+},
+{
+  "name":"com.structurizr.view.Vertex",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+},
+{
+  "name":"com.structurizr.view.View",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"getDescription","parameterTypes":[] }, {"name":"getKey","parameterTypes":[] }, {"name":"getOrder","parameterTypes":[] }, {"name":"getProperties","parameterTypes":[] }, {"name":"getTitle","parameterTypes":[] }, {"name":"isGeneratedKey","parameterTypes":[] }, {"name":"setKey","parameterTypes":["java.lang.String"] }, {"name":"setOrder","parameterTypes":["int"] }]
+},
+{
+  "name":"com.structurizr.view.ViewSet",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"<init>","parameterTypes":["com.structurizr.model.Model"] }, {"name":"getComponentViews","parameterTypes":[] }, {"name":"getConfiguration","parameterTypes":[] }, {"name":"getContainerViews","parameterTypes":[] }, {"name":"getCustomViews","parameterTypes":[] }, {"name":"getDeploymentViews","parameterTypes":[] }, {"name":"getDynamicViews","parameterTypes":[] }, {"name":"getFilteredViews","parameterTypes":[] }, {"name":"getImageViews","parameterTypes":[] }, {"name":"getSystemContextViews","parameterTypes":[] }, {"name":"getSystemLandscapeViews","parameterTypes":[] }, {"name":"hydrate","parameterTypes":["com.structurizr.model.Model"] }, {"name":"setSystemContextViews","parameterTypes":["java.util.Set"] }]
+},
+{
+  "name":"com.structurizr.view.ViewSortOrder",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"com.sun.crypto.provider.AESCipher$General",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.crypto.provider.ARCFOURCipher",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.crypto.provider.ChaCha20Cipher$ChaCha20Poly1305",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.crypto.provider.DESCipher",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.crypto.provider.DESedeCipher",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.crypto.provider.GaloisCounterMode$AESGCM",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.crypto.provider.HmacCore$HmacSHA256",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.crypto.provider.HmacSHA1",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.crypto.provider.PBKDF2Core$HmacSHA1",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.org.apache.xerces.internal.jaxp.datatype.DatatypeFactoryImpl",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"java.io.FilePermission"
+},
+{
+  "name":"java.io.Serializable",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"java.lang.Cloneable",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"java.lang.Comparable",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"java.lang.RuntimePermission"
+},
+{
+  "name":"java.lang.String"
+},
+{
+  "name":"java.lang.Thread",
+  "fields":[{"name":"threadLocalRandomProbe"}]
+},
+{
+  "name":"java.net.NetPermission"
+},
+{
+  "name":"java.net.SocketPermission"
+},
+{
+  "name":"java.net.URLPermission",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.String","java.lang.String"] }]
+},
+{
+  "name":"java.security.AlgorithmParametersSpi"
+},
+{
+  "name":"java.security.AllPermission"
+},
+{
+  "name":"java.security.KeyStoreSpi"
+},
+{
+  "name":"java.security.SecureRandomParameters"
+},
+{
+  "name":"java.security.SecurityPermission"
+},
+{
+  "name":"java.util.Date",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+},
+{
+  "name":"java.util.HashSet",
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"java.util.PropertyPermission"
+},
+{
+  "name":"java.util.concurrent.atomic.AtomicBoolean",
+  "fields":[{"name":"value"}]
+},
+{
+  "name":"java.util.concurrent.atomic.AtomicMarkableReference",
+  "fields":[{"name":"pair"}]
+},
+{
+  "name":"java.util.concurrent.atomic.AtomicReference",
+  "fields":[{"name":"value"}]
+},
+{
+  "name":"java.util.concurrent.atomic.Striped64",
+  "fields":[{"name":"base"}, {"name":"cellsBusy"}]
+},
+{
+  "name":"javax.security.auth.x500.X500Principal",
+  "fields":[{"name":"thisX500Name"}],
+  "methods":[{"name":"<init>","parameterTypes":["sun.security.x509.X500Name"] }]
+},
+{
+  "name":"javax.smartcardio.CardPermission"
+},
+{
+  "name":"org.apache.commons.logging.LogFactory"
+},
+{
+  "name":"org.apache.commons.logging.impl.SLF4JLogFactory",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.commons.logging.impl.WeakHashtable",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.brotli.dec.BrotliInputStream"
+},
+{
+  "name":"sun.security.pkcs12.PKCS12KeyStore",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.pkcs12.PKCS12KeyStore$DualFormatPKCS12",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.provider.JavaKeyStore$JKS",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.provider.MD5",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.provider.NativePRNG",
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"<init>","parameterTypes":["java.security.SecureRandomParameters"] }]
+},
+{
+  "name":"sun.security.provider.SHA",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.provider.SHA2$SHA256",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.provider.X509Factory",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.rsa.RSAKeyFactory$Legacy",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.ssl.SSLContextImpl$TLSContext",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.ssl.TrustManagerFactoryImpl$PKIXFactory",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.x509.AuthorityInfoAccessExtension",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Boolean","java.lang.Object"] }]
+},
+{
+  "name":"sun.security.x509.AuthorityKeyIdentifierExtension",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Boolean","java.lang.Object"] }]
+},
+{
+  "name":"sun.security.x509.BasicConstraintsExtension",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Boolean","java.lang.Object"] }]
+},
+{
+  "name":"sun.security.x509.CRLDistributionPointsExtension",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Boolean","java.lang.Object"] }]
+},
+{
+  "name":"sun.security.x509.CertificatePoliciesExtension",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Boolean","java.lang.Object"] }]
+},
+{
+  "name":"sun.security.x509.ExtendedKeyUsageExtension",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Boolean","java.lang.Object"] }]
+},
+{
+  "name":"sun.security.x509.IssuerAlternativeNameExtension",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Boolean","java.lang.Object"] }]
+},
+{
+  "name":"sun.security.x509.KeyUsageExtension",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Boolean","java.lang.Object"] }]
+},
+{
+  "name":"sun.security.x509.NetscapeCertTypeExtension",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Boolean","java.lang.Object"] }]
+},
+{
+  "name":"sun.security.x509.PrivateKeyUsageExtension",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Boolean","java.lang.Object"] }]
+},
+{
+  "name":"sun.security.x509.SubjectAlternativeNameExtension",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Boolean","java.lang.Object"] }]
+},
+{
+  "name":"sun.security.x509.SubjectKeyIdentifierExtension",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Boolean","java.lang.Object"] }]
+}
+]

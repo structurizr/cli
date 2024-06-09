@@ -1,30 +1,55 @@
-# This workflow will build a Java project with Gradle
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
-
-name: Java CI with Gradle
-
+name: Structurizr CI
 on:
   push:
-    branches: [ master ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ master ]
-
+    branches: [ "master" ]
 jobs:
   build:
-
-    runs-on: ubuntu-latest
+    name: Build on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        java: [ '17' ]
-
+        os: [macos-latest, windows-latest, ubuntu-latest]
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up Java
-        uses: actions/setup-java@v3
+      - uses: actions/checkout@v4
+
+      - name: Setup Graalvm
+        uses: graalvm/setup-graalvm@v1
         with:
-          java-version: ${{ matrix.java }}
-          distribution: 'temurin'
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-      - name: Build with Gradle
-        run: ./gradlew
+          java-version: '17'
+          distribution: 'graalvm'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+            -
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Prepare
+        run: ./gradlew clean build getDeps
+
+      - name: Build
+        run: native-image --no-server --no-fallback -cp "build/dependencies/*:build/libs/*" com.structurizr.cli.StructurizrCliApplication
+
+      - name: Verify Export Command
+        run: |
+          ./structurizr-cli-${{ matrix.os }} export -workspace ./examples/workspace.json -format plantuml -output ./build/diagrams
+          ./structurizr-cli-${{ matrix.os }} export -workspace ./examples/workspace.json -format websequencediagrams -output ./build/diagrams
+          ./structurizr-cli-${{ matrix.os }} export -workspace ./examples/workspace.json -format json -output ./build/diagrams
+          ./structurizr-cli-${{ matrix.os }} export -workspace ./examples/workspace.json -format mermaid -output ./build/diagrams
+          ./structurizr-cli-${{ matrix.os }} export -workspace ./examples/workspace.json -format plantuml/c4plantuml -output ./build/diagrams
+
+      - name: Verify List Command
+        run: ./structurizr-cli-${{ matrix.os }} list -workspace ./examples/workspace.json
+
+      - name: Verify Validate Command
+        run: ./structurizr-cli-${{ matrix.os }} validate -workspace ./examples/workspace.json
+
+      - name: Verify Inspect Command
+        run: ./structurizr-cli-${{ matrix.os }} inspect -workspace ./examples/workspace.json
+
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: structurizr-cli-${{ matrix.os }}
+          path: structurizr-cli*
