@@ -28,3 +28,5 @@ out
 *.puml
 *.wsd
 *.sh
+
+*.json

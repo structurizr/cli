@@ -13,15 +13,16 @@ targetCompatibility = 17
 
 repositories {
 	mavenCentral()
-//	mavenLocal()
 }
 
 dependencies {
+	def structurizrVersion = '3.0.0'
 
-	implementation 'com.structurizr:structurizr-dsl:2.2.0'
-	implementation 'com.structurizr:structurizr-export:2.2.0'
-	implementation 'com.structurizr:structurizr-autolayout:2.2.0'
-	implementation 'com.structurizr:structurizr-inspection:2.2.0'
+	implementation "com.structurizr:structurizr-dsl:${structurizrVersion}"
+	implementation "com.structurizr:structurizr-export:${structurizrVersion}"
+	implementation "com.structurizr:structurizr-autolayout:${structurizrVersion}"
+	implementation "com.structurizr:structurizr-inspection:${structurizrVersion}"
+
 	implementation 'io.github.goto1134:structurizr-d2-exporter:1.5.3'
 
 	implementation 'commons-cli:commons-cli:1.5.0'

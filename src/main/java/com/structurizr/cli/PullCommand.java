@@ -2,6 +2,7 @@ package com.structurizr.cli;
 
 import com.structurizr.Workspace;
 import com.structurizr.api.WorkspaceApiClient;
+import com.structurizr.util.StringUtils;
 import com.structurizr.util.WorkspaceUtils;
 import org.apache.commons.cli.*;
 import org.apache.commons.logging.Log;
@@ -35,6 +36,10 @@ class PullCommand extends AbstractCommand {
         option.setRequired(true);
         options.addOption(option);
 
+        option = new Option("branch", "branch", true, "Branch name");
+        option.setRequired(false);
+        options.addOption(option);
+
         CommandLineParser commandLineParser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
 
@@ -42,6 +47,7 @@ class PullCommand extends AbstractCommand {
         long workspaceId = 1;
         String apiKey = "";
         String apiSecret = "";
+        String branch = "";
 
         try {
             CommandLine cmd = commandLineParser.parse(options, args);
@@ -50,6 +56,7 @@ class PullCommand extends AbstractCommand {
             workspaceId = Long.parseLong(cmd.getOptionValue("workspaceId"));
             apiKey = cmd.getOptionValue("apiKey");
             apiSecret = cmd.getOptionValue("apiSecret");
+            branch = cmd.getOptionValue("branch");
         } catch (ParseException e) {
             log.error(e.getMessage());
             formatter.printHelp("pull", options);
@@ -57,12 +64,20 @@ class PullCommand extends AbstractCommand {
             System.exit(1);
         }
 
-        log.info("Pulling workspace " + workspaceId + " from " + apiUrl);
+        File file;
+        if (StringUtils.isNullOrEmpty(branch)) {
+            log.info("Pulling workspace " + workspaceId + " from " + apiUrl);
+            file = new File("structurizr-" + workspaceId + "-workspace.json");
+        } else {
+            log.info("Pulling workspace " + workspaceId + " from " + apiUrl + " (branch=" + branch + ")");
+            file = new File("structurizr-" + workspaceId + "-" + branch + "-workspace.json");
+        }
+
         WorkspaceApiClient client = new WorkspaceApiClient(apiUrl, apiKey, apiSecret);
+        client.setBranch(branch);
         client.setAgent(getAgent());
         Workspace workspace = client.getWorkspace(workspaceId);
 
-        File file = new File("structurizr-" + workspaceId + "-workspace.json");
         WorkspaceUtils.saveWorkspaceToJson(workspace, file);
         log.info(" - workspace saved as " + file.getCanonicalPath());
         log.info(" - finished");

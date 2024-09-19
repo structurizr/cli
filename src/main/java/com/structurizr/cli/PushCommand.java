@@ -36,6 +36,10 @@ class PushCommand extends AbstractCommand {
         option.setRequired(true);
         options.addOption(option);
 
+        option = new Option("branch", "branch", true, "Branch name");
+        option.setRequired(false);
+        options.addOption(option);
+
         option = new Option("w", "workspace", true, "Path or URL to the workspace JSON/DSL file");
         option.setRequired(false);
         options.addOption(option);
@@ -59,6 +63,7 @@ class PushCommand extends AbstractCommand {
         long workspaceId = 1;
         String apiKey = "";
         String apiSecret = "";
+        String branch = "";
         String workspacePath = "";
         String passphrase = "";
         boolean mergeFromRemote = true;
@@ -71,6 +76,7 @@ class PushCommand extends AbstractCommand {
             workspaceId = Long.parseLong(cmd.getOptionValue("workspaceId"));
             apiKey = cmd.getOptionValue("apiKey");
             apiSecret = cmd.getOptionValue("apiSecret");
+            branch = cmd.getOptionValue("branch");
             workspacePath = cmd.getOptionValue("workspace");
             passphrase = cmd.getOptionValue("passphrase");
             mergeFromRemote = Boolean.parseBoolean(cmd.getOptionValue("merge", "true"));
@@ -87,9 +93,14 @@ class PushCommand extends AbstractCommand {
             System.exit(1);
         }
 
-        log.info("Pushing workspace " + workspaceId + " to " + apiUrl);
+        if (StringUtils.isNullOrEmpty(branch)) {
+            log.info("Pushing workspace " + workspaceId + " to " + apiUrl);
+        } else {
+            log.info("Pushing workspace " + workspaceId + " to " + apiUrl + " (branch=" + branch + ")");
+        }
 
         WorkspaceApiClient client = new WorkspaceApiClient(apiUrl, apiKey, apiSecret);
+        client.setBranch(branch);
         client.setAgent(getAgent());
         client.setWorkspaceArchiveLocation(null);
 
@@ -111,7 +122,6 @@ class PushCommand extends AbstractCommand {
         log.info(" - parsing model and views from " + path.getCanonicalPath());
 
         Workspace workspace = loadWorkspace(workspacePath);
-        workspace.setRevision(null);
 
         log.info(" - merge layout from remote: " + mergeFromRemote);
         client.setMergeFromRemote(mergeFromRemote);
