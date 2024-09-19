@@ -20,7 +20,7 @@ class PullCommand extends AbstractCommand {
     public void run(String... args) throws Exception {
         Options options = new Options();
 
-        Option option = new Option("url", "structurizrApiUrl", true, "Structurizr API URL (default: https://api.structurizr.com");
+        Option option = new Option("url", "structurizrApiUrl", true, "Structurizr API URL (default: https://api.structurizr.com)");
         option.setRequired(false);
         options.addOption(option);
 

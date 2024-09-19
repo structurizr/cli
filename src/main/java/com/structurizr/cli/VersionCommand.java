@@ -54,24 +54,6 @@ class VersionCommand extends AbstractCommand {
             e.printStackTrace();
         }
 
-        try {
-            log.info("structurizr-dsl: " + Class.forName(StructurizrDslParser.class.getCanonicalName()).getPackage().getImplementationVersion());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        try {
-            log.info("structurizr-export: " + Class.forName(StructurizrPlantUMLExporter.class.getCanonicalName()).getPackage().getImplementationVersion());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        try {
-            log.info("structurizr-import: v" + Class.forName(DefaultDocumentationImporter.class.getCanonicalName()).getPackage().getImplementationVersion());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         log.info("Java: " + System.getProperty("java.version") + "/"  + System.getProperty("java.vendor") + " (" + System.getProperty("java.home") + ")");
         log.info("OS: " + System.getProperty("os.name") + " "  + System.getProperty("os.version") + " (" + System.getProperty("os.arch") + ")");
     }
