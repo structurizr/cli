@@ -2,17 +2,21 @@ package com.structurizr.cli;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AbstractCommandTests {
 
     @Test
     public void loadWorkspace_ThrowsAnException_WhenTheWorkspacePathIsADirectory() {
+        File file = new File("src/test/dsl");
         try {
-            new ValidateCommand().loadWorkspace("src/test/dsl");
+
+            new ValidateCommand().loadWorkspace(file.getAbsolutePath());
             fail();
         } catch (Exception e) {
-            assertTrue(e.getMessage().endsWith("/src/test/dsl is not a JSON or DSL file"));
+            assertTrue(e.getMessage().endsWith(file.getAbsolutePath() + " is not a JSON or DSL file"));
         }
     }
 
