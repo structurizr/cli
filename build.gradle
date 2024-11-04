@@ -13,12 +13,12 @@ targetCompatibility = 17
 
 repositories {
 	mavenCentral()
-//	mavenLocal()
+	//mavenLocal()
 }
 
 dependencies {
 
-	def structurizrVersion = '3.0.0'
+	def structurizrVersion = '3.1.0'
 	implementation "com.structurizr:structurizr-dsl:${structurizrVersion}"
 	implementation "com.structurizr:structurizr-export:${structurizrVersion}"
 	implementation "com.structurizr:structurizr-autolayout:${structurizrVersion}"
@@ -31,13 +31,13 @@ dependencies {
 	implementation 'org.jetbrains.kotlin:kotlin-scripting-jsr223:1.9.25'
 	implementation 'org.jruby:jruby-core:9.4.8.0'
 
-	def log4jVersion = '2.24.0'
+	def log4jVersion = '2.24.1'
 	implementation "org.apache.logging.log4j:log4j-api:${log4jVersion}"
 	implementation "org.apache.logging.log4j:log4j-core:${log4jVersion}"
 	implementation "org.apache.logging.log4j:log4j-jcl:${log4jVersion}"
 	implementation "org.apache.logging.log4j:log4j-slf4j-impl:${log4jVersion}"
 
-	testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.11.0'
+	testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.11.3'
 
 }
 
