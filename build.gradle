@@ -13,12 +13,11 @@ targetCompatibility = 17
 
 repositories {
 	mavenCentral()
-	//mavenLocal()
+	mavenLocal()
 }
 
 dependencies {
 
-	def structurizrVersion = '3.1.0'
 	implementation "com.structurizr:structurizr-dsl:${structurizrVersion}"
 	implementation "com.structurizr:structurizr-export:${structurizrVersion}"
 	implementation "com.structurizr:structurizr-autolayout:${structurizrVersion}"
