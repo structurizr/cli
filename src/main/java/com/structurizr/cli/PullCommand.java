@@ -2,6 +2,7 @@ package com.structurizr.cli;
 
 import com.structurizr.Workspace;
 import com.structurizr.api.WorkspaceApiClient;
+import com.structurizr.encryption.AesEncryptionStrategy;
 import com.structurizr.util.StringUtils;
 import com.structurizr.util.WorkspaceUtils;
 import org.apache.commons.cli.*;
@@ -40,6 +41,10 @@ class PullCommand extends AbstractCommand {
         option.setRequired(false);
         options.addOption(option);
 
+        option = new Option("passphrase", "passphrase", true, "Client-side encryption passphrase");
+        option.setRequired(false);
+        options.addOption(option);
+
         CommandLineParser commandLineParser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
 
@@ -48,6 +53,7 @@ class PullCommand extends AbstractCommand {
         String apiKey = "";
         String apiSecret = "";
         String branch = "";
+        String passphrase = "";
 
         try {
             CommandLine cmd = commandLineParser.parse(options, args);
@@ -57,6 +63,7 @@ class PullCommand extends AbstractCommand {
             apiKey = cmd.getOptionValue("apiKey");
             apiSecret = cmd.getOptionValue("apiSecret");
             branch = cmd.getOptionValue("branch");
+            passphrase = cmd.getOptionValue("passphrase");
         } catch (ParseException e) {
             log.error(e.getMessage());
             formatter.printHelp("pull", options);
@@ -76,6 +83,12 @@ class PullCommand extends AbstractCommand {
         WorkspaceApiClient client = new WorkspaceApiClient(apiUrl, apiKey, apiSecret);
         client.setBranch(branch);
         client.setAgent(getAgent());
+
+        if (!StringUtils.isNullOrEmpty(passphrase)) {
+            log.info(" - using client-side encryption");
+            client.setEncryptionStrategy(new AesEncryptionStrategy(passphrase));
+        }
+
         Workspace workspace = client.getWorkspace(workspaceId);
 
         WorkspaceUtils.saveWorkspaceToJson(workspace, file);
