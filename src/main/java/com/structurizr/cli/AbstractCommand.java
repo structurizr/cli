@@ -1,6 +1,7 @@
 package com.structurizr.cli;
 
 import com.structurizr.Workspace;
+import com.structurizr.dsl.Features;
 import com.structurizr.dsl.StructurizrDslParser;
 import com.structurizr.util.WorkspaceUtils;
 import com.structurizr.validation.WorkspaceScopeValidatorFactory;
@@ -69,6 +70,7 @@ public abstract class AbstractCommand {
 
         } else {
             StructurizrDslParser structurizrDslParser = new StructurizrDslParser();
+            structurizrDslParser.getFeatures().configure(Features.ARCHETYPES, Configuration.PREVIEW_FEATURES);
             structurizrDslParser.setCharacterEncoding(Charset.defaultCharset());
 
             if (workspacePathAsString.startsWith("http://") || workspacePathAsString.startsWith("https://")) {
