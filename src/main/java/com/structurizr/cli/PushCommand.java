@@ -56,6 +56,10 @@ class PushCommand extends AbstractCommand {
         option.setRequired(false);
         options.addOption(option);
 
+        option = new Option("debug", "debug", false, "Enable debug logging");
+        option.setRequired(false);
+        options.addOption(option);
+
         CommandLineParser commandLineParser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
 
@@ -68,6 +72,7 @@ class PushCommand extends AbstractCommand {
         String passphrase = "";
         boolean mergeFromRemote = true;
         boolean archive = true;
+        boolean debug = false;
 
         try {
             CommandLine cmd = commandLineParser.parse(options, args);
@@ -81,6 +86,7 @@ class PushCommand extends AbstractCommand {
             passphrase = cmd.getOptionValue("passphrase");
             mergeFromRemote = Boolean.parseBoolean(cmd.getOptionValue("merge", "true"));
             archive = Boolean.parseBoolean(cmd.getOptionValue("archive", "true"));
+            debug = cmd.hasOption("debug");
 
             if (StringUtils.isNullOrEmpty(workspacePath)) {
                 log.error("-workspace must be specified");
@@ -91,6 +97,10 @@ class PushCommand extends AbstractCommand {
             log.error(e.getMessage());
             formatter.printHelp("push", options);
             System.exit(1);
+        }
+
+        if (debug) {
+            configureDebugLogging();
         }
 
         if (StringUtils.isNullOrEmpty(branch)) {

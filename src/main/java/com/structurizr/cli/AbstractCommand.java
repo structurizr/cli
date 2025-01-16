@@ -13,6 +13,12 @@ import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.core.config.Configurator;
+import org.apache.logging.log4j.core.config.builder.api.ConfigurationBuilder;
+import org.apache.logging.log4j.core.config.builder.api.ConfigurationBuilderFactory;
+import org.apache.logging.log4j.core.config.builder.impl.BuiltConfiguration;
+import org.apache.logging.log4j.core.layout.PatternLayout;
 
 import java.io.File;
 import java.net.URL;
@@ -138,6 +144,25 @@ public abstract class AbstractCommand {
 
         URLClassLoader childClassLoader = new URLClassLoader(urls, getClass().getClassLoader());
         return childClassLoader.loadClass(fqn);
+    }
+
+    protected void configureDebugLogging() {
+        ConfigurationBuilder<BuiltConfiguration> builder = ConfigurationBuilderFactory.newConfigurationBuilder();
+
+        builder.add(
+            builder.newAppender("stdout", "Console")
+                .add(
+                    builder.newLayout(PatternLayout.class.getSimpleName())
+                        .addAttribute(
+                            "pattern",
+                            "%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
+                        )
+                )
+        );
+
+        builder.add(builder.newLogger("com.structurizr", Level.DEBUG));
+
+        Configurator.reconfigure(builder.build());
     }
 
 }

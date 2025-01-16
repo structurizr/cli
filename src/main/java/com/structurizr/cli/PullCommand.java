@@ -45,6 +45,10 @@ class PullCommand extends AbstractCommand {
         option.setRequired(false);
         options.addOption(option);
 
+        option = new Option("debug", "debug", false, "Enable debug logging");
+        option.setRequired(false);
+        options.addOption(option);
+
         CommandLineParser commandLineParser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
 
@@ -54,6 +58,7 @@ class PullCommand extends AbstractCommand {
         String apiSecret = "";
         String branch = "";
         String passphrase = "";
+        boolean debug = false;
 
         try {
             CommandLine cmd = commandLineParser.parse(options, args);
@@ -64,11 +69,16 @@ class PullCommand extends AbstractCommand {
             apiSecret = cmd.getOptionValue("apiSecret");
             branch = cmd.getOptionValue("branch");
             passphrase = cmd.getOptionValue("passphrase");
+            debug = cmd.hasOption("debug");
         } catch (ParseException e) {
             log.error(e.getMessage());
             formatter.printHelp("pull", options);
 
             System.exit(1);
+        }
+
+        if (debug) {
+            configureDebugLogging();
         }
 
         File file;
