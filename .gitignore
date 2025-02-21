@@ -28,5 +28,8 @@ out
 *.puml
 *.wsd
 *.sh
+!ui.sh
 
 *.json
+
+src/main/resources/static.zip

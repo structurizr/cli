@@ -47,6 +47,7 @@ test {
 sourceSets.main.resources {
 	srcDirs = ['src/main/resources']
 	include 'build.properties'
+	include 'static.zip'
 }
 
 jar {
