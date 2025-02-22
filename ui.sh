@@ -34,10 +34,6 @@ cp -a $STRUCTURIZR_UI_DIR/src/css/structurizr-diagram.css $STRUCTURIZR_CLI_DIR/s
 cp -a $STRUCTURIZR_UI_DIR/src/css/structurizr-static.css $STRUCTURIZR_CLI_DIR/src/main/resources/static/css
 cp -a $STRUCTURIZR_UI_DIR/src/css/structurizr-static-dark.css $STRUCTURIZR_CLI_DIR/src/main/resources/static/css
 
-# Bootstrap icons
-mkdir -p $STRUCTURIZR_CLI_DIR/src/main/resources/static/bootstrap-icons
-cp -a $STRUCTURIZR_UI_DIR/src/bootstrap-icons/* $STRUCTURIZR_CLI_DIR/src/main/resources/static/bootstrap-icons
-
 # HTML
 cp -a $STRUCTURIZR_UI_DIR/src/static.html $STRUCTURIZR_CLI_DIR/src/main/resources/static/index.html
 
