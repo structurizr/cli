@@ -3,6 +3,7 @@ package com.structurizr.cli.export;
 import com.structurizr.Workspace;
 import com.structurizr.autolayout.graphviz.GraphvizAutomaticLayout;
 import com.structurizr.cli.AbstractCommand;
+import com.structurizr.cli.Configuration;
 import com.structurizr.documentation.Documentable;
 import com.structurizr.export.*;
 import com.structurizr.export.dot.DOTExporter;
@@ -122,6 +123,10 @@ public class ExportCommand extends AbstractCommand {
         outputDir.mkdirs();
 
         if (STATIC_FORMAT.equals(format)) {
+            if (!Configuration.PREVIEW_FEATURES) {
+                throw new RuntimeException("Static site export is not available in this build - see https://docs.structurizr.com/cli for details of how to gain early access to new features");
+            }
+
             log.info(" - writing static site to " + outputDir.getAbsolutePath());
             unzip(getClass().getResourceAsStream("/static.zip"), outputPath);
 
