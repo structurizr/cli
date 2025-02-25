@@ -25,6 +25,7 @@ cp -a $STRUCTURIZR_UI_DIR/src/js/structurizr-diagram.js $STRUCTURIZR_CLI_DIR/src
 cp -a $STRUCTURIZR_UI_DIR/src/js/structurizr-quick-navigation.js $STRUCTURIZR_CLI_DIR/src/main/resources/static/js
 cp -a $STRUCTURIZR_UI_DIR/src/js/structurizr-navigation.js $STRUCTURIZR_CLI_DIR/src/main/resources/static/js
 cp -a $STRUCTURIZR_UI_DIR/src/js/structurizr-tooltip.js $STRUCTURIZR_CLI_DIR/src/main/resources/static/js
+cp -a $STRUCTURIZR_UI_DIR/src/js/structurizr-embed.js $STRUCTURIZR_CLI_DIR/src/main/resources/static/js
 
 # CSS
 mkdir -p $STRUCTURIZR_CLI_DIR/src/main/resources/static/css
