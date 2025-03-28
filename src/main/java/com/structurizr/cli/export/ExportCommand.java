@@ -123,10 +123,6 @@ public class ExportCommand extends AbstractCommand {
         outputDir.mkdirs();
 
         if (STATIC_FORMAT.equals(format)) {
-            if (!Configuration.PREVIEW_FEATURES) {
-                throw new RuntimeException("Static site export is not available in this build - see https://docs.structurizr.com/cli for details of how to gain early access to new features");
-            }
-
             log.info(" - writing static site to " + outputDir.getAbsolutePath());
             unzip(getClass().getResourceAsStream("/static.zip"), outputPath);
 

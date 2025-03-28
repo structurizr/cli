@@ -26,11 +26,11 @@ dependencies {
 
 	implementation 'commons-cli:commons-cli:1.9.0'
 
-	implementation 'org.codehaus.groovy:groovy-jsr223:3.0.22'
+	implementation 'org.codehaus.groovy:groovy-jsr223:3.0.24'
 	implementation 'org.jetbrains.kotlin:kotlin-scripting-jsr223:1.9.25'
-	implementation 'org.jruby:jruby-core:9.4.8.0'
+	implementation 'org.jruby:jruby-core:9.4.12.0'
 
-	def log4jVersion = '2.24.1'
+	def log4jVersion = '2.24.3'
 	implementation "org.apache.logging.log4j:log4j-api:${log4jVersion}"
 	implementation "org.apache.logging.log4j:log4j-core:${log4jVersion}"
 	implementation "org.apache.logging.log4j:log4j-jcl:${log4jVersion}"

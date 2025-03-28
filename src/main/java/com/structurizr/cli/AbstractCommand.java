@@ -76,7 +76,6 @@ public abstract class AbstractCommand {
 
         } else {
             StructurizrDslParser structurizrDslParser = new StructurizrDslParser();
-            structurizrDslParser.getFeatures().configure(Features.ARCHETYPES, Configuration.PREVIEW_FEATURES);
             structurizrDslParser.setCharacterEncoding(Charset.defaultCharset());
 
             if (workspacePathAsString.startsWith("http://") || workspacePathAsString.startsWith("https://")) {
