@@ -1,8 +1,9 @@
 plugins {
 	id 'java'
+	id 'application'
 }
 
-defaultTasks 'clean', 'build', 'getDeps', 'buildZip'
+defaultTasks 'clean', 'assemble', 'distZip'
 
 description = 'Structurizr CLI'
 group = 'com.structurizr'
@@ -50,6 +51,10 @@ sourceSets.main.resources {
 	include 'static.zip'
 }
 
+application {
+    mainClass = 'com.structurizr.cli.StructurizrCliApplication'
+}
+
 jar {
     manifest {
         attributes(
@@ -57,29 +62,4 @@ jar {
                 'Implementation-Version': version
         )
     }
-}
-
-task getDeps(type: Copy) {
-	from configurations.default
-	into 'build/dependencies'
-}
-
-task buildZip(type: Zip) {
-	from ('build/libs/') {
-		include 'structurizr-cli*.jar'
-		into 'lib'
-	}
-	from ('build/dependencies') {
-		include '*.jar'
-		into 'lib'
-	}
-	from ('.') {
-		include 'README.md'
-		include 'docs/*'
-		include 'docs/images/*'
-	}
-	from ('etc') {
-		include 'structurizr.sh'
-		include 'structurizr.bat'
-	}
 }
