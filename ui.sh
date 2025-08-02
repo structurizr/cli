@@ -12,8 +12,8 @@ mkdir -p $STRUCTURIZR_CLI_DIR/src/main/resources/static
 
 # JavaScript
 mkdir -p $STRUCTURIZR_CLI_DIR/src/main/resources/static/js
-cp -a $STRUCTURIZR_UI_DIR/src/js/jquery-3.6.3.min.js $STRUCTURIZR_CLI_DIR/src/main/resources/static/js
-cp -a $STRUCTURIZR_UI_DIR/src/js/bootstrap-3.3.7.min.js $STRUCTURIZR_CLI_DIR/src/main/resources/static/js
+cp -a $STRUCTURIZR_UI_DIR/src/js/jquery-3.7.1.min.js $STRUCTURIZR_CLI_DIR/src/main/resources/static/js
+cp -a $STRUCTURIZR_UI_DIR/src/js/bootstrap-5.3.7.min.js $STRUCTURIZR_CLI_DIR/src/main/resources/static/js
 cp -a $STRUCTURIZR_UI_DIR/src/js/lodash-4.17.21.js $STRUCTURIZR_CLI_DIR/src/main/resources/static/js
 cp -a $STRUCTURIZR_UI_DIR/src/js/backbone-1.4.1.js $STRUCTURIZR_CLI_DIR/src/main/resources/static/js
 cp -a $STRUCTURIZR_UI_DIR/src/js/joint-3.6.5.js $STRUCTURIZR_CLI_DIR/src/main/resources/static/js
@@ -29,7 +29,7 @@ cp -a $STRUCTURIZR_UI_DIR/src/js/structurizr-embed.js $STRUCTURIZR_CLI_DIR/src/m
 
 # CSS
 mkdir -p $STRUCTURIZR_CLI_DIR/src/main/resources/static/css
-cp -a $STRUCTURIZR_UI_DIR/src/css/bootstrap-3.3.7.min.css $STRUCTURIZR_CLI_DIR/src/main/resources/static/css
+cp -a $STRUCTURIZR_UI_DIR/src/css/bootstrap-5.3.7.min.css $STRUCTURIZR_CLI_DIR/src/main/resources/static/css
 cp -a $STRUCTURIZR_UI_DIR/src/css/joint-3.6.5.css $STRUCTURIZR_CLI_DIR/src/main/resources/static/css
 cp -a $STRUCTURIZR_UI_DIR/src/css/structurizr-diagram.css $STRUCTURIZR_CLI_DIR/src/main/resources/static/css
 cp -a $STRUCTURIZR_UI_DIR/src/css/structurizr-static.css $STRUCTURIZR_CLI_DIR/src/main/resources/static/css
