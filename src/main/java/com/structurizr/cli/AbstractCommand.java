@@ -3,6 +3,7 @@ package com.structurizr.cli;
 import com.structurizr.Workspace;
 import com.structurizr.dsl.Features;
 import com.structurizr.dsl.StructurizrDslParser;
+import com.structurizr.inspection.DefaultInspector;
 import com.structurizr.util.WorkspaceUtils;
 import com.structurizr.validation.WorkspaceScopeValidatorFactory;
 import com.structurizr.view.Styles;
@@ -103,6 +104,9 @@ public abstract class AbstractCommand {
 
         // validate workspace scope
         WorkspaceScopeValidatorFactory.getValidator(workspace).validate(workspace);
+
+        // run default inspections
+        new DefaultInspector(workspace);
 
         return workspace;
     }
