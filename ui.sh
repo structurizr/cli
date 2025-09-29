@@ -37,6 +37,11 @@ cp -a $STRUCTURIZR_UI_DIR/src/css/structurizr.css $STRUCTURIZR_CLI_DIR/src/main/
 cp -a $STRUCTURIZR_UI_DIR/src/css/structurizr-static.css $STRUCTURIZR_CLI_DIR/src/main/resources/static/css
 cp -a $STRUCTURIZR_UI_DIR/src/css/structurizr-static-dark.css $STRUCTURIZR_CLI_DIR/src/main/resources/static/css
 
+# images
+mkdir -p $STRUCTURIZR_CLI_DIR/src/main/resources/static/img
+cp -a $STRUCTURIZR_UI_DIR/src/img/structurizr-banner-light.png $STRUCTURIZR_CLI_DIR/src/main/resources/static/img
+cp -a $STRUCTURIZR_UI_DIR/src/img/structurizr-banner-dark.png $STRUCTURIZR_CLI_DIR/src/main/resources/static/img
+
 # HTML
 cp -a $STRUCTURIZR_UI_DIR/src/static.html $STRUCTURIZR_CLI_DIR/src/main/resources/static/index.html
 
