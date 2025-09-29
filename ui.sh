@@ -28,10 +28,12 @@ cp -a $STRUCTURIZR_UI_DIR/src/js/structurizr-tooltip.js $STRUCTURIZR_CLI_DIR/src
 cp -a $STRUCTURIZR_UI_DIR/src/js/structurizr-embed.js $STRUCTURIZR_CLI_DIR/src/main/resources/static/js
 
 # CSS
-mkdir -p $STRUCTURIZR_CLI_DIR/src/main/resources/static/css
+mkdir -p $STRUCTURIZR_CLI_DIR/src/main/resources/static/css/fonts/open-sans
 cp -a $STRUCTURIZR_UI_DIR/src/css/bootstrap-5.3.7.min.css $STRUCTURIZR_CLI_DIR/src/main/resources/static/css
 cp -a $STRUCTURIZR_UI_DIR/src/css/joint-3.6.5.css $STRUCTURIZR_CLI_DIR/src/main/resources/static/css
-cp -a $STRUCTURIZR_UI_DIR/src/css/structurizr-diagram.css $STRUCTURIZR_CLI_DIR/src/main/resources/static/css
+cp -a $STRUCTURIZR_UI_DIR/src/css/open-sans.css $STRUCTURIZR_CLI_DIR/src/main/resources/static/css
+cp -a $STRUCTURIZR_UI_DIR/src/css/fonts/open-sans/*.woff2 $STRUCTURIZR_CLI_DIR/src/main/resources/static/css/fonts/open-sans
+cp -a $STRUCTURIZR_UI_DIR/src/css/structurizr.css $STRUCTURIZR_CLI_DIR/src/main/resources/static/css
 cp -a $STRUCTURIZR_UI_DIR/src/css/structurizr-static.css $STRUCTURIZR_CLI_DIR/src/main/resources/static/css
 cp -a $STRUCTURIZR_UI_DIR/src/css/structurizr-static-dark.css $STRUCTURIZR_CLI_DIR/src/main/resources/static/css
 
