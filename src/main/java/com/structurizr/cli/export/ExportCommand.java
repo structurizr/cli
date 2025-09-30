@@ -13,6 +13,7 @@ import com.structurizr.export.plantuml.C4PlantUMLExporter;
 import com.structurizr.export.plantuml.StructurizrPlantUMLExporter;
 import com.structurizr.export.websequencediagrams.WebSequenceDiagramsExporter;
 import com.structurizr.util.WorkspaceUtils;
+import com.structurizr.view.ColorScheme;
 import com.structurizr.view.ThemeUtils;
 import io.github.goto1134.structurizr.export.d2.D2Exporter;
 import org.apache.commons.cli.*;
@@ -35,6 +36,8 @@ public class ExportCommand extends AbstractCommand {
 
     private static final String JSON_FORMAT = "json";
     private static final String THEME_FORMAT = "theme";
+    private static final String LIGHT = "light";
+    private static final String DARK = "dark";
     private static final String PLANTUML_FORMAT = "plantuml";
     private static final String PLANTUML_C4PLANTUML_SUBFORMAT = "c4plantuml";
     private static final String PLANTUML_STRUCTURIZR_SUBFORMAT = "structurizr";
@@ -50,10 +53,21 @@ public class ExportCommand extends AbstractCommand {
 
     static {
         EXPORTERS.put(JSON_FORMAT, new JsonWorkspaceExporter());
+
         EXPORTERS.put(THEME_FORMAT, new JsonWorkspaceThemeExporter());
+
         EXPORTERS.put(PLANTUML_FORMAT, new StructurizrPlantUMLExporter());
+        EXPORTERS.put(PLANTUML_FORMAT + "-" + LIGHT, new StructurizrPlantUMLExporter(ColorScheme.Light));
+        EXPORTERS.put(PLANTUML_FORMAT + "-" + DARK, new StructurizrPlantUMLExporter(ColorScheme.Dark));
+
         EXPORTERS.put(PLANTUML_FORMAT + "/" + PLANTUML_STRUCTURIZR_SUBFORMAT, new StructurizrPlantUMLExporter());
+        EXPORTERS.put(PLANTUML_FORMAT + "/" + PLANTUML_STRUCTURIZR_SUBFORMAT + "-" + LIGHT, new StructurizrPlantUMLExporter(ColorScheme.Light));
+        EXPORTERS.put(PLANTUML_FORMAT + "/" + PLANTUML_STRUCTURIZR_SUBFORMAT + "-" + DARK, new StructurizrPlantUMLExporter(ColorScheme.Dark));
+
         EXPORTERS.put(PLANTUML_FORMAT + "/" + PLANTUML_C4PLANTUML_SUBFORMAT, new C4PlantUMLExporter());
+        EXPORTERS.put(PLANTUML_FORMAT + "/" + PLANTUML_C4PLANTUML_SUBFORMAT + "-" + LIGHT, new C4PlantUMLExporter(ColorScheme.Light));
+        EXPORTERS.put(PLANTUML_FORMAT + "/" + PLANTUML_C4PLANTUML_SUBFORMAT + "-" + DARK, new C4PlantUMLExporter(ColorScheme.Dark));
+
         EXPORTERS.put(MERMAID_FORMAT, new MermaidDiagramExporter());
         EXPORTERS.put(DOT_FORMAT, new DOTExporter());
         EXPORTERS.put(WEBSEQUENCEDIAGRAMS_FORMAT, new WebSequenceDiagramsExporter());
