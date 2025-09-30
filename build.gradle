@@ -22,7 +22,7 @@ dependencies {
 	implementation "com.structurizr:structurizr-export:${structurizrVersion}"
 	implementation "com.structurizr:structurizr-autolayout:${structurizrVersion}"
 	implementation "com.structurizr:structurizr-inspection:${structurizrVersion}"
-	implementation 'io.github.goto1134:structurizr-d2-exporter:1.5.3'
+//	implementation 'io.github.goto1134:structurizr-d2-exporter:1.5.3'
 
 	implementation 'commons-cli:commons-cli:1.9.0'
 

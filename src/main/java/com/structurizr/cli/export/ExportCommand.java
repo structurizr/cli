@@ -3,7 +3,6 @@ package com.structurizr.cli.export;
 import com.structurizr.Workspace;
 import com.structurizr.autolayout.graphviz.GraphvizAutomaticLayout;
 import com.structurizr.cli.AbstractCommand;
-import com.structurizr.cli.Configuration;
 import com.structurizr.documentation.Documentable;
 import com.structurizr.export.*;
 import com.structurizr.export.dot.DOTExporter;
@@ -15,7 +14,6 @@ import com.structurizr.export.websequencediagrams.WebSequenceDiagramsExporter;
 import com.structurizr.util.WorkspaceUtils;
 import com.structurizr.view.ColorScheme;
 import com.structurizr.view.ThemeUtils;
-import io.github.goto1134.structurizr.export.d2.D2Exporter;
 import org.apache.commons.cli.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -72,7 +70,7 @@ public class ExportCommand extends AbstractCommand {
         EXPORTERS.put(DOT_FORMAT, new DOTExporter());
         EXPORTERS.put(WEBSEQUENCEDIAGRAMS_FORMAT, new WebSequenceDiagramsExporter());
         EXPORTERS.put(ILOGRAPH_FORMAT, new IlographExporter());
-        EXPORTERS.put(D2_FORMAT, new D2Exporter());
+//        EXPORTERS.put(D2_FORMAT, new D2Exporter());
     }
 
     public ExportCommand() {
