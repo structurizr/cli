@@ -11,6 +11,7 @@ import com.structurizr.export.mermaid.MermaidDiagramExporter;
 import com.structurizr.export.plantuml.C4PlantUMLExporter;
 import com.structurizr.export.plantuml.StructurizrPlantUMLExporter;
 import com.structurizr.export.websequencediagrams.WebSequenceDiagramsExporter;
+import com.structurizr.http.HttpClient;
 import com.structurizr.util.WorkspaceUtils;
 import com.structurizr.view.ColorScheme;
 import com.structurizr.view.ThemeUtils;
@@ -162,7 +163,9 @@ public class ExportCommand extends AbstractCommand {
         } else {
             if (!JSON_FORMAT.equalsIgnoreCase(format)) {
                 // only inline the theme amd create default views if the user wants a diagram export
-                ThemeUtils.loadThemes(workspace);
+                HttpClient httpClient = new HttpClient();
+                httpClient.allow(".*");
+                ThemeUtils.loadThemes(workspace, httpClient);
                 addDefaultViewsAndStyles(workspace);
             }
 
