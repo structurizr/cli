@@ -24,13 +24,13 @@ dependencies {
 	implementation "com.structurizr:structurizr-inspection:${structurizrVersion}"
 //	implementation 'io.github.goto1134:structurizr-d2-exporter:1.5.3'
 
-	implementation 'commons-cli:commons-cli:1.9.0'
+	implementation 'commons-cli:commons-cli:1.10.0'
 
 	implementation 'org.codehaus.groovy:groovy-jsr223:3.0.25'
 	implementation 'org.jetbrains.kotlin:kotlin-scripting-jsr223:1.9.25'
 	implementation 'org.jruby:jruby-core:9.4.12.1'
 
-	def log4jVersion = '2.24.3'
+	def log4jVersion = '2.25.2'
 	implementation "org.apache.logging.log4j:log4j-api:${log4jVersion}"
 	implementation "org.apache.logging.log4j:log4j-core:${log4jVersion}"
 	implementation "org.apache.logging.log4j:log4j-jcl:${log4jVersion}"

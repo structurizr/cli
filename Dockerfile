@@ -1,4 +1,4 @@
-FROM eclipse-temurin:21.0.7_6-jre-noble
+FROM eclipse-temurin:21.0.8_9-jre-noble
 
 RUN apt-get update && apt-get install -y unzip && apt install -y graphviz && rm -rf /var/lib/apt/lists/*
 
