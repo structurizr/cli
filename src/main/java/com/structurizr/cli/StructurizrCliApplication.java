@@ -19,6 +19,7 @@ public class StructurizrCliApplication {
 
 	private static final String PUSH_COMMAND = "push";
 	private static final String PULL_COMMAND = "pull";
+	private static final String BACKUP_COMMAND = "backup";
 	private static final String LOCK_COMMAND = "lock";
 	private static final String UNLOCK_COMMAND = "unlock";
 	private static final String EXPORT_COMMAND = "export";
@@ -60,6 +61,7 @@ public class StructurizrCliApplication {
 
 		COMMANDS.put(PUSH_COMMAND, new PushCommand());
 		COMMANDS.put(PULL_COMMAND, new PullCommand());
+		COMMANDS.put(BACKUP_COMMAND, new BackupCommand());
 		COMMANDS.put(LOCK_COMMAND, new LockCommand());
 		COMMANDS.put(UNLOCK_COMMAND, new UnlockCommand());
 		COMMANDS.put(EXPORT_COMMAND, new ExportCommand());
