@@ -11,6 +11,8 @@ import org.apache.commons.logging.LogFactory;
 import java.io.File;
 import java.io.FileWriter;
 import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
@@ -128,7 +130,13 @@ class CloudToOnPremisesCommand extends AbstractCommand {
                 properties.setProperty("clientSideEncrypted", "" + (json.contains("\"encryptionStrategy\"") && json.contains("\"ciphertext\"")));
 
                 properties.setProperty("owner", workspaceMetadata.getUsers().getOwner());
-                properties.setProperty("writeUsers", workspaceMetadata.getUsers().getOwner() + ", " + String.join(",", workspaceMetadata.getUsers().getWrite()));
+
+                List<String> writeUsers = new ArrayList<>();
+                writeUsers.add(workspaceMetadata.getUsers().getOwner());
+                Collections.addAll(writeUsers, workspaceMetadata.getUsers().getAdmin());
+                Collections.addAll(writeUsers, workspaceMetadata.getUsers().getWrite());
+
+                properties.setProperty("writeUsers", String.join(",", writeUsers.toArray(new String[0])));
                 properties.setProperty("readUsers", String.join(",", workspaceMetadata.getUsers().getWrite()));
 
                 File workspacePropertiesFile = new File(workspaceDirectory, "workspace.properties");
