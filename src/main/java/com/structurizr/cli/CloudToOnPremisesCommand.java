@@ -14,25 +14,22 @@ import java.nio.file.Files;
 import java.util.List;
 import java.util.Properties;
 
-class BackupCommand extends AbstractCommand {
+class CloudToOnPremisesCommand extends AbstractCommand {
 
-    private static final Log log = LogFactory.getLog(BackupCommand.class);
+    private static final Log log = LogFactory.getLog(CloudToOnPremisesCommand.class);
+    private static final String CLOUD_SERVICE_API_URL = "https://api.structurizr.com";
 
-    BackupCommand() {
+    CloudToOnPremisesCommand() {
     }
 
     public void run(String... args) throws Exception {
         Options options = new Options();
 
-        Option option = new Option("url", "structurizrApiUrl", true, "Structurizr API URL (default: https://api.structurizr.com)");
-        option.setRequired(false);
-        options.addOption(option);
-
-        option = new Option("key", "apiKey", true, "API key");
+        Option option = new Option("key", "apiKey", true, "API key");
         option.setRequired(true);
         options.addOption(option);
 
-        option = new Option("user", "username", true, "Username (only required for cloud service)");
+        option = new Option("user", "username", true, "Username");
         option.setRequired(false);
         options.addOption(option);
 
@@ -47,7 +44,6 @@ class BackupCommand extends AbstractCommand {
         CommandLineParser commandLineParser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
 
-        String apiUrl = "";
         String username = "";
         String apiKey = "";
         boolean debug = false;
@@ -56,14 +52,13 @@ class BackupCommand extends AbstractCommand {
         try {
             CommandLine cmd = commandLineParser.parse(options, args);
 
-            apiUrl = cmd.getOptionValue("structurizrApiUrl", "https://api.structurizr.com");
             apiKey = cmd.getOptionValue("apiKey");
             username = cmd.getOptionValue("username");
             outputPath = cmd.getOptionValue("output");
             debug = cmd.hasOption("debug");
         } catch (ParseException e) {
             log.error(e.getMessage());
-            formatter.printHelp("backup", options);
+            formatter.printHelp("cloud-to-onpremises", options);
 
             System.exit(1);
         }
@@ -77,27 +72,49 @@ class BackupCommand extends AbstractCommand {
             throw new RuntimeException("Output directory already exists: " + outputDir.getAbsolutePath());
         }
 
-        AdminApiClient adminApiClient = new AdminApiClient(apiUrl, username, apiKey);
+        AdminApiClient adminApiClient = new AdminApiClient(CLOUD_SERVICE_API_URL, username, apiKey);
         List<WorkspaceMetadata> workspaces = adminApiClient.getWorkspaces();
 
         if (!workspaces.isEmpty()) {
             outputDir.mkdirs();
 
             File structurizrPropertiesFile = new File(outputDir, "structurizr.properties");
-            Files.writeString(structurizrPropertiesFile.toPath(), "structurizr.workspaces=*");
+            Files.writeString(structurizrPropertiesFile.toPath(), "structurizr.feature.workspace.branches=true");
             log.info(" - " + structurizrPropertiesFile.getCanonicalPath());
+
+            File structurizrUsersFile = new File(outputDir, "structurizr.users");
+            Files.writeString(structurizrUsersFile.toPath(), username + "=$2a$06$uM5wM.eJwrPq1RM/gBXRr.d0bfyu9ABxdE56qYbRLSCZzqfR7xHcC");
+            log.info(" - " + structurizrUsersFile.getCanonicalPath());
 
             for (WorkspaceMetadata workspaceMetadata : workspaces) {
                 File workspaceDirectory = new File(outputDir, "" + workspaceMetadata.getId());
                 workspaceDirectory.mkdirs();
 
-                WorkspaceApiClient client = new WorkspaceApiClient(apiUrl, workspaceMetadata.getApiKey(), workspaceMetadata.getApiSecret());
+                WorkspaceApiClient client = new WorkspaceApiClient(CLOUD_SERVICE_API_URL, workspaceMetadata.getApiKey(), workspaceMetadata.getApiSecret());
                 client.setAgent(getAgent());
 
+                // main branch
                 String json = client.getWorkspaceAsJson(workspaceMetadata.getId());
                 File workspaceJsonFile = new File(workspaceDirectory, "workspace.json");
                 Files.writeString(workspaceJsonFile.toPath(), json);
                 log.info(" - " + workspaceJsonFile.getCanonicalPath());
+
+                // branches
+                if (workspaceMetadata.getBranches() != null) {
+                    File branchesDirectory = new File(workspaceDirectory, "branches");
+                    branchesDirectory.mkdirs();
+
+                    for (String branch : workspaceMetadata.getBranches()) {
+                        File branchDirectory = new File(branchesDirectory, branch);
+                        branchDirectory.mkdir();
+
+                        client.setBranch(branch);
+                        json = client.getWorkspaceAsJson(workspaceMetadata.getId());
+                        File branchJsonFile = new File(branchDirectory, "workspace.json");
+                        Files.writeString(branchJsonFile.toPath(), json);
+                        log.info(" - " + branchJsonFile.getCanonicalPath());
+                    }
+                }
 
                 Properties properties = new Properties();
                 properties.setProperty("name", workspaceMetadata.getName() != null ? workspaceMetadata.getName() : "");
@@ -109,6 +126,10 @@ class BackupCommand extends AbstractCommand {
                     properties.setProperty("sharingToken", workspaceMetadata.getShareableUrl().substring(workspaceMetadata.getShareableUrl().lastIndexOf("/") + 1));
                 }
                 properties.setProperty("clientSideEncrypted", "" + (json.contains("\"encryptionStrategy\"") && json.contains("\"ciphertext\"")));
+
+                properties.setProperty("owner", workspaceMetadata.getUsers().getOwner());
+                properties.setProperty("writeUsers", workspaceMetadata.getUsers().getOwner() + ", " + String.join(",", workspaceMetadata.getUsers().getWrite()));
+                properties.setProperty("readUsers", String.join(",", workspaceMetadata.getUsers().getWrite()));
 
                 File workspacePropertiesFile = new File(workspaceDirectory, "workspace.properties");
                 FileWriter fileWriter = new FileWriter(workspacePropertiesFile);
