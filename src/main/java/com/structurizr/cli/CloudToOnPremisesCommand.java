@@ -94,6 +94,7 @@ class CloudToOnPremisesCommand extends AbstractCommand {
 
                 WorkspaceApiClient client = new WorkspaceApiClient(CLOUD_SERVICE_API_URL, workspaceMetadata.getApiKey(), workspaceMetadata.getApiSecret());
                 client.setAgent(getAgent());
+                client.setWorkspaceArchiveLocation(null);
 
                 // main branch
                 String json = client.getWorkspaceAsJson(workspaceMetadata.getId());
