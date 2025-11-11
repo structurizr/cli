@@ -1,15 +1,18 @@
 plugins {
 	id 'java'
+	id 'application'
 }
 
-defaultTasks 'clean', 'build', 'getDeps', 'buildZip'
+defaultTasks 'clean', 'assemble', 'distZip'
 
 description = 'Structurizr CLI'
 group = 'com.structurizr'
 version = ''
 
-sourceCompatibility = 17
-targetCompatibility = 17
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
 
 repositories {
 	mavenCentral()
@@ -44,10 +47,43 @@ test {
 	useJUnitPlatform()
 }
 
+def command(String... command) {
+    try {
+        return providers.exec {
+            commandLine command
+        }.standardOutput.asText.get().trim()
+    }
+    catch (e) {
+        e.printStackTrace();
+        return "";
+    }
+}
+
+def getVersionName = { ->
+    command 'git', 'describe', '--tags', '--dirty'
+}
+
+def getTimestamp = { ->
+    command 'date', '--utc', '+%FT%H:%M:%SZ'
+}
+
 sourceSets.main.resources {
 	srcDirs = ['src/main/resources']
 	include 'build.properties'
 	include 'static.zip'
+}
+
+processResources {
+    filesMatching('**/*.properties') {
+        filter { line ->
+            line.replaceAll('@BUILD_NUMBER@', getVersionName())
+                .replaceAll('@BUILD_DATE@', getTimestamp())
+        }
+    }
+}
+
+application {
+    mainClass = 'com.structurizr.cli.StructurizrCliApplication'
 }
 
 jar {
@@ -57,29 +93,4 @@ jar {
                 'Implementation-Version': version
         )
     }
-}
-
-task getDeps(type: Copy) {
-	from configurations.default
-	into 'build/dependencies'
-}
-
-task buildZip(type: Zip) {
-	from ('build/libs/') {
-		include 'structurizr-cli*.jar'
-		into 'lib'
-	}
-	from ('build/dependencies') {
-		include '*.jar'
-		into 'lib'
-	}
-	from ('.') {
-		include 'README.md'
-		include 'docs/*'
-		include 'docs/images/*'
-	}
-	from ('etc') {
-		include 'structurizr.sh'
-		include 'structurizr.bat'
-	}
 }

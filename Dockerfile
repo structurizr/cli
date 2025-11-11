@@ -1,11 +1,16 @@
 FROM eclipse-temurin:21.0.8_9-jre-noble
 
-RUN apt-get update && apt-get install -y unzip && apt install -y graphviz && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y libarchive-tools && apt install -y graphviz && rm -rf /var/lib/apt/lists/*
 
 COPY build/distributions/structurizr-cli.zip /tmp
 
-RUN unzip /tmp/structurizr-cli.zip -d /usr/local/structurizr-cli && chmod +x /usr/local/structurizr-cli/structurizr.sh
+ARG APPDIR=/usr/local/structurizr-cli
 
-WORKDIR /usr/local/structurizr
+RUN <<EOF
+mkdir -p $APPDIR
+bsdtar -xf /tmp/structurizr-cli.zip -C $APPDIR --strip-components 1
+EOF
 
-ENTRYPOINT ["/usr/local/structurizr-cli/structurizr.sh"]
+WORKDIR "$APPDIR"
+
+ENTRYPOINT ["bin/structurizr-cli"]
